@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Menu Bar UI
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -35,27 +36,5 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-
-
-        FragmentManager fm = getSupportFragmentManager();
-           /*
-       setContentView(R.layout.activity_main);
-
-        // Create FooterFragment
-        FooterFragment footer = (FooterFragment) fm.findFragmentById(R.id.footerFragment);
-        if (footer == null) {
-            footer = FooterFragment.newInstance();
-            fm.beginTransaction().add(R.id.footerFragment, footer).commit();
-        }
-   */
-        // Create HeaderFragment
-        HeaderFragment header = (HeaderFragment) fm.findFragmentById(R.id.headerFragment);
-        if (header == null) {
-            header = HeaderFragment.newInstance();
-            fm.beginTransaction().add(R.id.headerFragment, header).commit();
-        }
-
-
     }
 }
