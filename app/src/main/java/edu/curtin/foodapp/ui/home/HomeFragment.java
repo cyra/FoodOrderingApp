@@ -8,14 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import edu.curtin.foodapp.AddDatabase;
-import edu.curtin.foodapp.FooterViewModel;
-import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -30,9 +24,6 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
-        //try to do fragment in a fragment
-        //
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
