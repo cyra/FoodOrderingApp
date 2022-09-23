@@ -7,7 +7,7 @@
     tools:context=".ui.account.AccountFragment">
 
     <TextView
-        android:id="@+id/text_account"
+        android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -19,4 +19,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/createUserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create User"
+        tools:layout_editor_absoluteX="103dp"
+        tools:layout_editor_absoluteY="186dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
