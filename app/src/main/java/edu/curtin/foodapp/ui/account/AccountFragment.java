@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import edu.curtin.foodapp.R;
-import edu.curtin.foodapp.User;
-import edu.curtin.foodapp.UserList;
+import edu.curtin.foodapp.model.User;
+import edu.curtin.foodapp.model.UserList;
 import edu.curtin.foodapp.databinding.FragmentAccountBinding;
 
 public class AccountFragment extends Fragment {

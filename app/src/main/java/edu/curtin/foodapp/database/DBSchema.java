@@ -20,19 +20,33 @@ public class DBSchema {
         public static class Cols {
             public static final String ID = "id";
             public static final String NAME = "name";
+            public static final String IMG = "img";
 
         }
     }
     // Food items Table
 
-    public static class FoodItemsTable {
+public static class FoodItemsTable {
         public static final String NAME = "fooditems";
         public static class Cols {
             public static final String ID = "id";
             public static final String NAME = "name";
-            public static final String DETAILS = "details";
+            public static final String DESCRIPTION = "description";
+            public static final String PRICE = "price";
+            public static final String IMG = "img";
+
+        }
+}
+    // Orders Table
+
+    public static class OrdersTable{
+        public static final String NAME = "orders";
+        public static class Cols {
+            public static final String ID = "id";
+            public static final String USERID = "userid";
+            public static final String DATE = "date";
+            public static final String DESCRIPTION = "description";
+
         }
     }
-
-    // Orders Table
 }

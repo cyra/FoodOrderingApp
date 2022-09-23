@@ -2,16 +2,35 @@ package edu.curtin.foodapp.model;
 
 import java.util.ArrayList;
 
-public class Order {
+public class Orders {
     int orderID;
+    String userID;
     String date;
+    String description;
     ArrayList<RestaurantOrder>orders;
-    String orderDescription;
 
-    public Order(int orderID, String date, ArrayList<RestaurantOrder> orders) {
+    public Orders(int orderID, String userID, String date, String description) {
         this.orderID = orderID;
+        this.userID = userID;
         this.date = date;
-        this.orders = orders;
+        this.description = description;
+    }
+
+    // Setters and Getters
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getOrderID() {

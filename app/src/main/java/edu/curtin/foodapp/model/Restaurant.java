@@ -3,43 +3,42 @@ package edu.curtin.foodapp.model;
 import java.util.ArrayList;
 
 public class Restaurant {
-    String restaurantName;
-
-    int restaurantID;
-    String restaurantImg;
+    int id;
+    String name;
+    String img;
     ArrayList<FoodItem>menu;
 
 
 
-    public Restaurant(String restaurantName, int restaurantID, String restaurantImg, ArrayList<FoodItem> menu) {
-        this.restaurantName = restaurantName;
-        this.restaurantID = restaurantID;
-        this.restaurantImg = restaurantImg;
-        this.menu = menu;
+    public Restaurant(int restaurantID, String restaurantName, String restaurantImg) {
+        this.id = restaurantID;
+        this.name = restaurantName;
+        this.img = restaurantImg;
+        // this.menu = menu;
     }
 
-    public String getRestaurantName() {
-        return restaurantName;
+    public String getName() {
+        return name;
     }
 
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getRestaurantID() {
-        return restaurantID;
+    public int getId() {
+        return id;
     }
 
-    public void setRestaurantID(int restaurantID) {
-        this.restaurantID = restaurantID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getRestaurantImg() {
-        return restaurantImg;
+    public String getImg() {
+        return img;
     }
 
-    public void setRestaurantImg(String restaurantImg) {
-        this.restaurantImg = restaurantImg;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public ArrayList<FoodItem> getMenu() {

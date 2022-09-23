@@ -1,13 +1,13 @@
-package edu.curtin.foodapp;
+package edu.curtin.foodapp.model;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+import edu.curtin.foodapp.database.DBSchema;
 import edu.curtin.foodapp.database.DBSchema.UsersTable;
 import edu.curtin.foodapp.database.users.UsersDBCursor;
 import edu.curtin.foodapp.database.users.UsersDBHelper;
