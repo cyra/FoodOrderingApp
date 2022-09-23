@@ -11,12 +11,12 @@ import edu.curtin.foodapp.database.DBSchema.FoodItemsTable;
 import edu.curtin.foodapp.database.fooditems.FoodItemsDBCursor;
 import edu.curtin.foodapp.database.fooditems.FoodItemsDBHelper;
 
-public class FoodItemsList {
+public class FoodItemList {
     private ArrayList<FoodItem> foodItems;
     // The database connection
     private SQLiteDatabase db;
 
-    public FoodItemsList() {
+    public FoodItemList() {
         foodItems = new ArrayList<>();
     }
 
@@ -24,20 +24,24 @@ public class FoodItemsList {
         // Open database
         this.db = new FoodItemsDBHelper(context.getApplicationContext())
                 .getWritableDatabase();
-        // Read database contents into users
+        // Read database contents into foodIterms
         foodItems = getAllFoodItems();
     }
 
     public int getSize() { return foodItems.size(); }
     public FoodItem getFoodItem(int index) { return foodItems.get(index); }
 
-    public void addUser(FoodItem newFoodItem) {
+    public void addFoodItem(FoodItem newFoodItem) {
         // Add foodItem to list
         foodItems.add(newFoodItem);
         // Add foodItem to database
         ContentValues cv = new ContentValues();
         cv.put(FoodItemsTable.Cols.ID, newFoodItem.getID());
         cv.put(FoodItemsTable.Cols.NAME, newFoodItem.getName());
+        cv.put(FoodItemsTable.Cols.DESCRIPTION, newFoodItem.getDescription());
+        cv.put(FoodItemsTable.Cols.PRICE, newFoodItem.getPrice());
+        cv.put(FoodItemsTable.Cols.IMG, newFoodItem.getImg());
+
         db.insert(FoodItemsTable.NAME, null, cv);
     }
 

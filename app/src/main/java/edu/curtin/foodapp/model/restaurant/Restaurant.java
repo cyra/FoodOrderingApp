@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import edu.curtin.foodapp.model.fooditems.FoodItem;
 
 public class Restaurant {
-    int id;
+    int ID;
     String name;
     String img;
     ArrayList<FoodItem>menu;
@@ -13,7 +13,7 @@ public class Restaurant {
 
 
     public Restaurant(int restaurantID, String restaurantName, String restaurantImg) {
-        this.id = restaurantID;
+        this.ID = restaurantID;
         this.name = restaurantName;
         this.img = restaurantImg;
         // this.menu = menu;
@@ -27,12 +27,12 @@ public class Restaurant {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getImg() {
