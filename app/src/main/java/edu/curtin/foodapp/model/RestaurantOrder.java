@@ -27,4 +27,14 @@ public class RestaurantOrder {
     public void setOrderItems(ArrayList<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
+
+    // Calculate order total
+    public float calculateTotal(ArrayList orderItems){
+        float total = 0;
+        for (OrderItem order: getOrderItems()) {
+            float orderPrice = order.getTotalPrice();
+            total += orderPrice;
+        }
+        return total;
+    }
 }
