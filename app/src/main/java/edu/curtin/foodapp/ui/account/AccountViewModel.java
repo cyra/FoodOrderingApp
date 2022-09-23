@@ -4,16 +4,20 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import edu.curtin.foodapp.User;
+
 public class AccountViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private final MutableLiveData<User> user;
 
     public AccountViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is the account fragment");
+        user = new MutableLiveData<User>();
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
+    public String getName() { return user.getValue().getName(); }
+    public String getEmail() { return user.getValue().getEmail(); }
+    public String getAddress() { return user.getValue().getAddress(); }
+    public String getPhone() { return user.getValue().getPhone(); }
+
+    public void setUser(User user) { this.user.setValue(user); }
 }
