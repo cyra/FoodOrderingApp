@@ -38,6 +38,14 @@ public class Order {
         this.orders = orders;
     }
 
-
+    // Calculate total of all restaurants in this order
+    public float getTotalOrderPrice(){
+        float total = 0;
+        for (RestaurantOrder order: getOrders()){
+            float restaurantTotal = order.getRestaurantTotal();
+            total += restaurantTotal;
+        }
+        return total;
+    }
 
 }

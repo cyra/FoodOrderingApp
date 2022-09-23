@@ -29,7 +29,7 @@ public class RestaurantOrder {
     }
 
     // Calculate order total
-    public float calculateTotal(ArrayList orderItems){
+    public float getRestaurantTotal(){
         float total = 0;
         for (OrderItem order: getOrderItems()) {
             float orderPrice = order.getTotalPrice();

@@ -27,12 +27,11 @@ public class OrderItem {
         return price;
     }
 
-    // Return total price of the item with quantity
+    // Get total price of the item with quantity
     public float getTotalPrice() {
         float price = this.price;
         int quantity = this.quantity;
-        float total = price * (float) quantity;
-        return total;
+        return price * (float) quantity;
     }
     public void setPrice(float price) {
         this.price = price;
