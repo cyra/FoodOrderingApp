@@ -1,35 +1,35 @@
 package edu.curtin.foodapp.model;
 
 public class FoodItem {
-    int foodId;
-    String foodName;
+    int ID;
+    String name;
     String description;
     float price;
-    String foodImg;
+    String img;
 
     public FoodItem(int foodId, String foodName, String description, float price, String foodImg) {
-        this.foodId = foodId;
-        this.foodName = foodName;
+        this.ID = foodId;
+        this.name = foodName;
         this.description = description;
         this.price = price;
-        this.foodImg = foodImg;
+        this.img = foodImg;
     }
 
     // Setters and Getters
-    public int getFoodId() {
-        return foodId;
+    public int getID() {
+        return ID;
     }
 
-    public void setFoodId(int foodId) {
-        this.foodId = foodId;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
-    public String getFoodName() {
-        return foodName;
+    public String getName() {
+        return name;
     }
 
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -48,11 +48,11 @@ public class FoodItem {
         this.price = price;
     }
 
-    public String getFoodImg() {
-        return foodImg;
+    public String getImg() {
+        return img;
     }
 
-    public void setFoodImg(String foodImg) {
-        this.foodImg = foodImg;
+    public void setImg(String img) {
+        this.img = img;
     }
 }
