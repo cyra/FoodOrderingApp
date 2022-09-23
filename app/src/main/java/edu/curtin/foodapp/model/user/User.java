@@ -1,4 +1,4 @@
-package edu.curtin.foodapp.model;
+package edu.curtin.foodapp.model.user;
 
 import java.util.List;
 

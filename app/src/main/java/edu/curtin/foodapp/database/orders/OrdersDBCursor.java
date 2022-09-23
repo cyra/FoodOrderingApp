@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 
 import edu.curtin.foodapp.database.DBSchema.OrdersTable;
-import edu.curtin.foodapp.model.Orders;
+import edu.curtin.foodapp.model.orders.Orders;
 
 public class OrdersDBCursor extends CursorWrapper {
     public OrdersDBCursor(Cursor cursor) { super(cursor); }

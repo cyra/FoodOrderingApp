@@ -1,6 +1,8 @@
-package edu.curtin.foodapp.model;
+package edu.curtin.foodapp.model.restaurant;
 
 import java.util.ArrayList;
+
+import edu.curtin.foodapp.model.fooditems.FoodItem;
 
 public class Restaurant {
     int id;

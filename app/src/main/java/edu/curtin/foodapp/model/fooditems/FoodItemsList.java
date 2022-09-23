@@ -1,4 +1,4 @@
-package edu.curtin.foodapp.model;
+package edu.curtin.foodapp.model.fooditems;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import edu.curtin.foodapp.database.DBSchema;
 import edu.curtin.foodapp.database.DBSchema.FoodItemsTable;
 import edu.curtin.foodapp.database.fooditems.FoodItemsDBCursor;
 import edu.curtin.foodapp.database.fooditems.FoodItemsDBHelper;

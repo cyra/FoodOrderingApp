@@ -3,7 +3,7 @@ package edu.curtin.foodapp.database.restaurants;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import edu.curtin.foodapp.model.Restaurant;
+import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.database.DBSchema.RestaurantsTable;
 
 public class RestaurantsDBCursor extends CursorWrapper {
