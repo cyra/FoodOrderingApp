@@ -1,4 +1,4 @@
-package edu.curtin.foodapp;
+package edu.curtin.foodapp.model;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package edu.curtin.foodapp;
+package edu.curtin.foodapp.model;
 
 public class FoodItem {
     int foodId;
