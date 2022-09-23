@@ -3,17 +3,16 @@ package edu.curtin.foodapp.ui.browse;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import edu.curtin.foodapp.model.restaurant.Restaurant;
 
 public class BrowseViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private final MutableLiveData<Restaurant> restaurant;
 
     public BrowseViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is browse fragment");
+        restaurant = new MutableLiveData<Restaurant>();
     }
+    public String getName() {return restaurant.getValue().getName(); }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
+    public void setRestaurant(Restaurant restaurant) {this.restaurant.setValue(restaurant);}
 }

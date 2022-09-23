@@ -8,9 +8,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.databinding.FragmentBrowseBinding;
+import edu.curtin.foodapp.ui.account.UserDetailsFragment;
 import edu.curtin.foodapp.ui.browse.BrowseViewModel;
 
 public class BrowseFragment extends Fragment {
@@ -24,10 +27,20 @@ public class BrowseFragment extends Fragment {
 
         binding = FragmentBrowseBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        final TextView textView = binding.textBrowse;
-        browseViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
+    }
+
+    // Used for nesting child fragments
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        insertNestedFragment();
+    }
+
+    // Embeds the child fragment dynamically
+    private void insertNestedFragment() {
+        Fragment RestaurantListFragment = new RestaurantListFragment();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.restaurantListFragment, RestaurantListFragment).commit();
     }
 
     @Override
