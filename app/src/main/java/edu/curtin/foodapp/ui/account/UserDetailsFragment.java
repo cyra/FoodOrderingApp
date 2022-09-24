@@ -11,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import edu.curtin.foodapp.databinding.FragmentUserDetailsBinding;
+import edu.curtin.foodapp.databinding.SingleUserDetailsBinding;
 
 public class UserDetailsFragment extends Fragment {
 
-    private FragmentUserDetailsBinding binding;
+    private SingleUserDetailsBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -23,7 +23,7 @@ public class UserDetailsFragment extends Fragment {
         AccountViewModel accountViewModel =
                 new ViewModelProvider(getParentFragment()).get(AccountViewModel.class);
 
-        binding = FragmentUserDetailsBinding.inflate(inflater, container, false);
+        binding = SingleUserDetailsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         // Use the AccountViewModel
