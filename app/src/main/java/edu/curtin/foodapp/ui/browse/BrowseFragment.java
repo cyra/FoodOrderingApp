@@ -4,17 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.databinding.FragmentBrowseBinding;
-import edu.curtin.foodapp.ui.account.UserDetailsFragment;
-import edu.curtin.foodapp.ui.browse.BrowseViewModel;
+import edu.curtin.foodapp.ui.browse.fooditemfragment.FoodItemListFragment;
+import edu.curtin.foodapp.ui.browse.restaurantfragment.RestaurantListFragment;
 
 public class BrowseFragment extends Fragment {
 
@@ -22,12 +20,9 @@ public class BrowseFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        BrowseViewModel browseViewModel =
-                new ViewModelProvider(this).get(BrowseViewModel.class);
 
         binding = FragmentBrowseBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        return root;
+        return binding.getRoot();
     }
 
     // Used for nesting child fragments
@@ -39,8 +34,12 @@ public class BrowseFragment extends Fragment {
     // Embeds the child fragment dynamically
     private void insertNestedFragment() {
         Fragment RestaurantListFragment = new RestaurantListFragment();
+        Fragment FoodItemListFragment  = new FoodItemListFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.restaurantListFragment, RestaurantListFragment).commit();
+        // For multiple fragments in a fragment, use multiple transaction.replace() and then commit() after.
+        transaction.replace(R.id.restaurantListFragment, RestaurantListFragment);
+        transaction.replace(R.id.foodItemListFragment, FoodItemListFragment);
+        transaction.commit();
     }
 
     @Override

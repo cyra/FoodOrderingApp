@@ -1,6 +1,5 @@
-package edu.curtin.foodapp.ui.browse;
+package edu.curtin.foodapp.ui.browse.restaurantfragment;
 
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,7 +11,7 @@ import edu.curtin.foodapp.databinding.SingleRestaurantBinding;
 public class RestaurantViewHolder extends RecyclerView.ViewHolder {
     SingleRestaurantBinding binding;
     TextView itemName;
-    Button itemButton;
+
     public RestaurantViewHolder(@NonNull SingleRestaurantBinding binding) {
         super(binding.getRoot());
         itemName = binding.restaurantName;

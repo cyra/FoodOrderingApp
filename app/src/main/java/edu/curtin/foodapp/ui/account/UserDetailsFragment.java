@@ -11,13 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import edu.curtin.foodapp.R;
-import edu.curtin.foodapp.databinding.FragmentAccountBinding;
-import edu.curtin.foodapp.databinding.FragmentBrowseBinding;
 import edu.curtin.foodapp.databinding.FragmentUserDetailsBinding;
-import edu.curtin.foodapp.ui.browse.BrowseViewModel;
 
 public class UserDetailsFragment extends Fragment {
 

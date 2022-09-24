@@ -4,10 +4,10 @@ public class FoodItem {
     int ID;
     String name;
     String description;
-    float price;
+    double price;
     String img;
 
-    public FoodItem(int foodId, String foodName, String description, float price, String foodImg) {
+    public FoodItem(int foodId, String foodName, String description, double price, String foodImg) {
         this.ID = foodId;
         this.name = foodName;
         this.description = description;
@@ -40,11 +40,11 @@ public class FoodItem {
         this.description = description;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

@@ -5,13 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.browse.BrowseFragment">
+
     <FrameLayout
         android:id="@+id/restaurantListFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginVertical="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/foodItemListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantListFragment" />
 </androidx.constraintlayout.widget.ConstraintLayout>
