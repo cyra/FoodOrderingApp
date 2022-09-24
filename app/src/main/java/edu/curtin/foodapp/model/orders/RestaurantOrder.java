@@ -29,10 +29,10 @@ public class RestaurantOrder {
     }
 
     // Calculate order total
-    public float getRestaurantTotal(){
-        float total = 0;
+    public double getRestaurantTotal(){
+        double total = 0;
         for (OrderItem order: getOrderItems()) {
-            float orderPrice = order.getTotalPrice();
+            double orderPrice = order.getTotalPrice();
             total += orderPrice;
         }
         return total;

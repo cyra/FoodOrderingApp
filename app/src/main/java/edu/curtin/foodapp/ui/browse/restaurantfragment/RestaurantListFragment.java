@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import edu.curtin.foodapp.databinding.FragmentRestaurantListBinding;
+import edu.curtin.foodapp.databinding.ListRestaurantBinding;
 import edu.curtin.foodapp.model.restaurant.Restaurant;
 
 import java.util.ArrayList;
@@ -31,16 +31,14 @@ public class RestaurantListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private FragmentRestaurantListBinding binding;
+    private ListRestaurantBinding binding;
     ArrayList<Restaurant> restaurants;
 
     public RestaurantListFragment() {
         // Required empty public constructor
     }
 
-    public RestaurantListFragment(ArrayList<Restaurant> restaurants) {
-        this.restaurants = restaurants;
-    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -71,26 +69,17 @@ public class RestaurantListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentRestaurantListBinding.inflate(inflater, container, false);
+        binding = ListRestaurantBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         final RecyclerView rv = binding.recyclerview;
         // horizontal scrolling recyclerview
         rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        // default
-        // rv.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // For gridlayout
-        // rv.setLayoutManager(new GridLayoutManager(getContext(), 2));
-
         prepareData();
         RestaurantViewAdapter rvAdapter = new RestaurantViewAdapter(getContext(),restaurants);
         rv.setAdapter(rvAdapter);
         return root;
-        // Inflate the layout for this fragment
-        // View view = inflater.inflate(R.layout.fragment_restaurant_list, container, false);
-        // RecyclerView rv = view.findViewById(R.id.recyclerview);
-        //return view;
+
     }
 
     private void prepareData() {
