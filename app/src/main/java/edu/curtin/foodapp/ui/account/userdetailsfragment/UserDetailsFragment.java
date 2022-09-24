@@ -1,4 +1,4 @@
-package edu.curtin.foodapp.ui.account;
+package edu.curtin.foodapp.ui.account.userdetailsfragment;
 
 import android.os.Bundle;
 
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import edu.curtin.foodapp.databinding.SingleUserDetailsBinding;
+import edu.curtin.foodapp.ui.account.AccountViewModel;
 
 public class UserDetailsFragment extends Fragment {
 
