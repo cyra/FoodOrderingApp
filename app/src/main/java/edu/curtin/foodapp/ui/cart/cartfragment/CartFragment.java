@@ -17,6 +17,7 @@ import edu.curtin.foodapp.model.orders.OrderItem;
 import edu.curtin.foodapp.model.orders.Orders;
 import edu.curtin.foodapp.model.orders.RestaurantOrder;
 
+// Cart Fragment
 public class CartFragment extends Fragment {
 
     private FragmentCartBinding binding;
