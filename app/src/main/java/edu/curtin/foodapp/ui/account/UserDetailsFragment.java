@@ -38,10 +38,12 @@ public class UserDetailsFragment extends Fragment {
         final TextView addressTextView = binding.addressTextView;
         final TextView phoneTextView = binding.phoneTextView;
 
-        nameTextView.setText(accountViewModel.getName());
-        emailTextView.setText(accountViewModel.getEmail());
-        addressTextView.setText(accountViewModel.getAddress());
-        phoneTextView.setText(accountViewModel.getPhone());
+        if (accountViewModel.getLoggedIn()) {
+            nameTextView.setText(accountViewModel.getName());
+            emailTextView.setText(accountViewModel.getEmail());
+            addressTextView.setText(accountViewModel.getAddress());
+            phoneTextView.setText(accountViewModel.getPhone());
+        }
 
         return root;
     }

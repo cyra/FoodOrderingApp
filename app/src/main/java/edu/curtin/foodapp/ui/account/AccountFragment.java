@@ -32,6 +32,12 @@ public class AccountFragment extends Fragment {
         users.load(getActivity());
 
         users.addUser(new User(users.getSize(), String.valueOf(users.getSize()) + "@test.com", "person personson", "123 Fake Street", "404"));
+
+        if (currentUser == null) {
+            // Open LoginActivity
+
+        }
+
         currentUser = users.getUser(users.getSize() - 1);
     }
 
@@ -61,14 +67,20 @@ public class AccountFragment extends Fragment {
     // Used for nesting child fragments
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        insertNestedFragment();
+        insertUserDetailsFragment();
+        insertOrderHistoryFragment();
     }
 
-    // Embeds the child fragment dynamically
-    private void insertNestedFragment() {
+    private void insertUserDetailsFragment() {
         Fragment userDetailsFragment = new UserDetailsFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.userDetailsFragment, userDetailsFragment).commit();
+    }
+
+    private void insertOrderHistoryFragment() {
+        Fragment orderHistoryFragment = new OrderHistoryFragment();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.orderHistoryFragment, orderHistoryFragment).commit();
     }
 
     @Override

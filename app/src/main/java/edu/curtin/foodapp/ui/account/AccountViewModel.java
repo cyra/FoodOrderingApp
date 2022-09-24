@@ -19,5 +19,12 @@ public class AccountViewModel extends ViewModel {
     public String getAddress() { return user.getValue().getAddress(); }
     public String getPhone() { return user.getValue().getPhone(); }
 
+    public Boolean getLoggedIn() {
+        if (user != null) {
+            return true;
+        }
+        return false;
+    }
+
     public void setUser(User user) { this.user.setValue(user); }
 }
