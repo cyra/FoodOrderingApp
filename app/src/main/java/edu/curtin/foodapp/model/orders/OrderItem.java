@@ -4,10 +4,10 @@ package edu.curtin.foodapp.model.orders;
 
 public class OrderItem {
     String name;
-    float price;
+    double price;
     int quantity;
 
-    public OrderItem(String name, float price, int quantity) {
+    public OrderItem(String name, double price, int quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -23,17 +23,17 @@ public class OrderItem {
         this.name = name;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
     // Get total price of the item with quantity
-    public float getTotalPrice() {
-        float price = this.price;
+    public double getTotalPrice() {
+        double price = this.price;
         int quantity = this.quantity;
-        return price * (float) quantity;
+        return price * (double) quantity;
     }
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
