@@ -1,22 +1,22 @@
-package edu.curtin.foodapp.ui.browse.fooditemfragment;
+package edu.curtin.foodapp.ui.home.fooditemfragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import edu.curtin.foodapp.databinding.FragmentFoodItemListBinding;
-import edu.curtin.foodapp.model.fooditems.FoodItem;
-import edu.curtin.foodapp.ui.browse.restaurantfragment.RestaurantListFragment;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class FoodItemListFragment extends Fragment {
+import edu.curtin.foodapp.databinding.FragmentFoodItemListBinding;
+import edu.curtin.foodapp.model.fooditems.FoodItem;
+import edu.curtin.foodapp.ui.browse.fooditemfragment.FoodItemViewAdapter;
+import edu.curtin.foodapp.ui.browse.restaurantfragment.RestaurantListFragment;
+
+public class DailyFoodItemListFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,11 +30,11 @@ public class FoodItemListFragment extends Fragment {
     private FragmentFoodItemListBinding binding;
     ArrayList<FoodItem> foodItems;
 
-    public FoodItemListFragment() {
+    public DailyFoodItemListFragment() {
         // Required empty public constructor
     }
 
-    public FoodItemListFragment(ArrayList<FoodItem> foodItems) {
+    public DailyFoodItemListFragment(ArrayList<FoodItem> foodItems) {
         this.foodItems = foodItems;
     }
 
@@ -64,11 +64,7 @@ public class FoodItemListFragment extends Fragment {
         View root = binding.getRoot();
         final RecyclerView rv = binding.recyclerview;
 
-        // default
-        rv.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // For gridlayout
-        // rv.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        rv.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         prepareData();
         FoodItemViewAdapter rvAdapter = new FoodItemViewAdapter(getContext(),foodItems);
@@ -79,10 +75,15 @@ public class FoodItemListFragment extends Fragment {
     private void prepareData() {
         foodItems = new ArrayList<>();
 
+        // Find way to get random food items
         // No images yet
         foodItems.add(new FoodItem(1, "Pizza","very nice pizza",20.55,""));
         foodItems.add(new FoodItem(2, "Pasta","very nice pasta",25.55,""));
-
+        foodItems.add(new FoodItem(3, "Burger","very nice burger",25.55,""));
+        foodItems.add(new FoodItem(4, "Onion Rings","very nice onion rings",25.55,""));
+        // Figure out text wrapping/splitting etc, or just have a text length limit
+        foodItems.add(new FoodItem(5, "LONG TITLE LONG TITLE LONG TITLE","LOTS OF TEXT LOTS OF TEXT LOTS OF TEXT LOTS OF TEXT LOTS OF TEXT LOTS OF TEXT",25.55,""));
+        foodItems.add(new FoodItem(6, "Lettuce","just a lettuce",0.0,""));
     }
 
     @Override
