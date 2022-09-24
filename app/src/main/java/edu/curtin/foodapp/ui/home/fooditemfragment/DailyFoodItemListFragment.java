@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import edu.curtin.foodapp.databinding.ListFoodItemBinding;
+import edu.curtin.foodapp.databinding.FragmentFoodItemListBinding;
 import edu.curtin.foodapp.model.fooditems.FoodItem;
 import edu.curtin.foodapp.ui.browse.fooditemfragment.FoodItemViewAdapter;
 import edu.curtin.foodapp.ui.browse.restaurantfragment.RestaurantListFragment;
@@ -27,7 +27,7 @@ public class DailyFoodItemListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ListFoodItemBinding binding;
+    private FragmentFoodItemListBinding binding;
     ArrayList<FoodItem> foodItems;
 
     public DailyFoodItemListFragment() {
@@ -60,7 +60,7 @@ public class DailyFoodItemListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = ListFoodItemBinding.inflate(inflater, container, false);
+        binding = FragmentFoodItemListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         final RecyclerView rv = binding.recyclerview;
 

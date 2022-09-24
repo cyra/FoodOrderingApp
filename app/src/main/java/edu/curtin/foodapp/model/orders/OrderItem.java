@@ -1,7 +1,5 @@
 package edu.curtin.foodapp.model.orders;
 
-
-
 public class OrderItem {
     String name;
     double price;
