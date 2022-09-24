@@ -58,10 +58,10 @@ public class Orders {
     }
 
     // Calculate total of all restaurants in this order
-    public double getTotalOrderPrice(){
-        double total = 0;
+    public float getTotalOrderPrice(){
+        float total = 0;
         for (RestaurantOrder order: getOrders()){
-            double restaurantTotal = order.getRestaurantTotal();
+            float restaurantTotal = order.getRestaurantTotal();
             total += restaurantTotal;
         }
         return total;
