@@ -44,6 +44,22 @@ public class UserList {
         db.insert(UsersTable.NAME, null, cv);
     }
 
+    public int findIndexByLogin(String email, String password) {
+        for (int i = 0; i < users.size(); i++) {
+            User temp = users.get(i);
+
+            if (temp.getEmail().equals(email)) {
+                if (temp.getPassword().equals(password)) {
+                    return i;
+                }
+                else {
+                    return -1;
+                }
+            }
+        }
+        return -1;
+    }
+
 
     private ArrayList<User> getAllUsers() {
         Cursor cursor = db.query(UsersTable.NAME, null, null, null, null, null, null);

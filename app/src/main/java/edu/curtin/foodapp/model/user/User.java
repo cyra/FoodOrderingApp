@@ -9,15 +9,16 @@ public class User implements Serializable {
     private String name;
     private String address;
     private String phone;
+    private String password;
     //private ArrayList<Order> orderHistory;
-    //private boolean loggedIn;
 
-    public User(int id, String email, String name, String address, String phone) {
+    public User(int id, String email, String name, String address, String phone, String password) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.address = address;
         this.phone = phone;
+        this.password = password;
     }
 
     public int getID() { return id; }
@@ -26,4 +27,6 @@ public class User implements Serializable {
     public String getAddress() { return address; }
     public String getPhone() { return phone; }
 
+    // Forgive me java, I have sinned.
+    public String getPassword() { return password; }
 }

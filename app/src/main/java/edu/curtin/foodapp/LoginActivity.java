@@ -19,10 +19,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Load database into users
-        users = new UserList();
-        users.load(this);
-
         // Create login fragment
         FragmentManager fm = getSupportFragmentManager();
         LoginFragment loginFragment = (LoginFragment) fm.findFragmentById(R.id.loginFragment);
