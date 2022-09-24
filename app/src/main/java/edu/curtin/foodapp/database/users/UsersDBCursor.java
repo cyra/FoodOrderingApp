@@ -3,7 +3,7 @@ package edu.curtin.foodapp.database.users;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import edu.curtin.foodapp.User;
+import edu.curtin.foodapp.model.user.User;
 import edu.curtin.foodapp.database.DBSchema.UsersTable;
 
 public class UsersDBCursor extends CursorWrapper {

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import edu.curtin.foodapp.User;
+import edu.curtin.foodapp.model.user.User;
 
 public class AccountViewModel extends ViewModel {
 
