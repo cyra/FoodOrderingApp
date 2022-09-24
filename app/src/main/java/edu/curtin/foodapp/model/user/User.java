@@ -1,8 +1,9 @@
 package edu.curtin.foodapp.model.user;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     private int id;
     private String email;
     private String name;

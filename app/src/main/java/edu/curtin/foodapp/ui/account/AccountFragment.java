@@ -1,6 +1,9 @@
 package edu.curtin.foodapp.ui.account;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.ArrayList;
+
+import edu.curtin.foodapp.LoginActivity;
+import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.model.user.User;
 import edu.curtin.foodapp.model.user.UserList;
@@ -20,34 +27,27 @@ import edu.curtin.foodapp.databinding.FragmentAccountBinding;
 
 public class AccountFragment extends Fragment {
 
+    // For receiving data from LoginActivity
+    private static final int USER_REQUEST_CODE = 0;
+
     private FragmentAccountBinding binding;
 
-    private UserList users;
     private User currentUser;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        users = new UserList();
-        users.load(getActivity());
-
-        users.addUser(new User(users.getSize(), String.valueOf(users.getSize()) + "@test.com", "person personson", "123 Fake Street", "404"));
 
         if (currentUser == null) {
             // Open LoginActivity
-
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivityForResult(intent, USER_REQUEST_CODE);
         }
-
-        currentUser = users.getUser(users.getSize() - 1);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        View v = getView();
-
-        // TODO: Event listeners below!
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -59,7 +59,7 @@ public class AccountFragment extends Fragment {
         View root = binding.getRoot();
 
         // Use the AccountViewModel
-        accountViewModel.setUser(currentUser);
+        //accountViewModel.setUser(currentUser);
 
         return root;
     }
