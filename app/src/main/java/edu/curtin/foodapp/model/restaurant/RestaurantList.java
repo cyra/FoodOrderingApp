@@ -34,7 +34,7 @@ public class RestaurantList {
     public ArrayList<Restaurant> read(Context context) {
         // Open database
         this.db = new RestaurantsDBHelper(context.getApplicationContext())
-                .getReadableDatabase();
+                .getWritableDatabase();
 
         // Read database contents into restaurants
         restaurants = getAllRestaurants();
@@ -44,10 +44,13 @@ public class RestaurantList {
     }
 
     public void addAll() {
+        // Just to make sure db is cleared on app install
+        deleteAllRestaurants();
         if (this.getSize() == 0) {
-            this.addRestaurant(new Restaurant(getSize(), "pizza", ""));
-            this.addRestaurant(new Restaurant(getSize(), "pasta", ""));
-            this.addRestaurant(new Restaurant(getSize(), "burger", ""));
+            // Add restaurants here
+            this.addRestaurant(new Restaurant(getSize(), "Pizza Place", "pizza"));
+            this.addRestaurant(new Restaurant(getSize(), "Pasta Place", "pasta"));
+            this.addRestaurant(new Restaurant(getSize(), "Burger Place", "burger"));
         }
     }
 

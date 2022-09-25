@@ -28,9 +28,7 @@ public class FoodItemList {
         // Read database contents into foodItems
         foodItems = getAllFoodItems();
         this.addAll();
-
     }
-
 
     // make this method return a list (this) for the adapter
     public ArrayList<FoodItem> read(Context context) {
@@ -60,13 +58,13 @@ public class FoodItemList {
     }
 
     public void addAll() {
+        // Just to make sure db is cleared on app install
         deleteAllFoodItems();
         if (this.getSize() == 0) {
-            this.addFoodItem(new FoodItem(getSize(), "Pizza", "very nice pizza", 20.55, "burger", 1));
-            this.addFoodItem(new FoodItem(getSize(), "Pizza", "very nice pizza", 20.55, "", 1));
-            this.addFoodItem(new FoodItem(getSize(), "Pasta", "very nice pizza", 20.55, "", 1));
-
-
+            this.addFoodItem(new FoodItem(getSize(), "Burger", "Delicious burger", 20.55, "burger", 1));
+            this.addFoodItem(new FoodItem(getSize(), "Pizza", "Cool pizza", 20.55, "pizza", 1));
+            this.addFoodItem(new FoodItem(getSize(), "Pasta", "A pasta", 20.55, "pasta", 1));
+            this.addFoodItem(new FoodItem(getSize(), "Burrito", "A delicious burrito", 20.55, "burrito", 1));
         }
     }
 

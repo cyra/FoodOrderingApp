@@ -5,12 +5,15 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
@@ -21,6 +24,8 @@ import java.util.ArrayList;
 import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.databinding.SingleFoodBinding;
 import edu.curtin.foodapp.model.fooditems.FoodItem;
+import edu.curtin.foodapp.ui.browse.BrowseFragment;
+import edu.curtin.foodapp.ui.cart.cartfragment.CartFragment;
 
 public class FoodItemViewAdapter extends RecyclerView.Adapter<FoodItemViewHolder> {
     private final Context context;
