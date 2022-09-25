@@ -6,13 +6,15 @@ public class FoodItem {
     String description;
     double price;
     String img;
+    int restaurantRef;
 
-    public FoodItem(int foodId, String foodName, String description, double price, String foodImg) {
+    public FoodItem(int foodId, String foodName, String description, double price, String foodImg, int resRef) {
         this.ID = foodId;
         this.name = foodName;
         this.description = description;
         this.price = price;
         this.img = foodImg;
+        this.restaurantRef = resRef;
     }
 
     // Setters and Getters
@@ -54,5 +56,11 @@ public class FoodItem {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public int getRestaurantRef() {return restaurantRef;}
+
+    public void setRestaurantRef(int restaurantRef) {
+        this.restaurantRef = restaurantRef;
     }
 }

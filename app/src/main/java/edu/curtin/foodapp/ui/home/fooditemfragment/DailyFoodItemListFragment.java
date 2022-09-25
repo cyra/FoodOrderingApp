@@ -21,8 +21,7 @@ import edu.curtin.foodapp.ui.browse.fooditemfragment.FoodItemViewAdapter;
 public class DailyFoodItemListFragment extends Fragment {
 
     //ArrayList<FoodItem> foodItems;
-    FoodItemList foodItemList = new FoodItemList();
-    private @NonNull
+    private @NonNull FoodItemList foodItemList = new FoodItemList();
     ListDailyFoodItemBinding binding;
 
     public DailyFoodItemListFragment() {

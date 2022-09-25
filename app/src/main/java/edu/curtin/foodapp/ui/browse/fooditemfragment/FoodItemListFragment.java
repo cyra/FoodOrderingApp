@@ -80,8 +80,8 @@ public class FoodItemListFragment extends Fragment {
         foodItems = new ArrayList<>();
 
         // No images yet
-        foodItems.add(new FoodItem(1, "Pizza","very nice pizza",20.55,""));
-        foodItems.add(new FoodItem(2, "Pasta","very nice pasta",25.55,""));
+        foodItems.add(new FoodItem(1, "Pizza","very nice pizza",20.55,"", 1));
+        foodItems.add(new FoodItem(2, "Pasta","very nice pasta",25.55,"", 1));
 
     }
 

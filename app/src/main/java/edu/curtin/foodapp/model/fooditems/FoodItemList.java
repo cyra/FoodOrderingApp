@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -63,11 +62,10 @@ public class FoodItemList {
     public void addAll() {
         deleteAllFoodItems();
         if (this.getSize() == 0) {
-            this.addFoodItem(new FoodItem(getSize(), "Pizza", "very nice pizza", 20.55, ""));
-            this.addFoodItem(new FoodItem(getSize(), "Pizza", "very nice pizza", 20.55, ""));
-            this.addFoodItem(new FoodItem(getSize(), "Pizza", "very nice pizza", 20.55, ""));
-            this.addFoodItem(new FoodItem(getSize(), "Pasta", "very nice pizza", 20.55, ""));
-            this.addFoodItem(new FoodItem(getSize(), "Pasta", "very nice pizza", 20.55, ""));
+            this.addFoodItem(new FoodItem(getSize(), "Pizza", "very nice pizza", 20.55, "", 1));
+            this.addFoodItem(new FoodItem(getSize(), "Pizza", "very nice pizza", 20.55, "", 1));
+            this.addFoodItem(new FoodItem(getSize(), "PAsta", "very nice pizza", 20.55, "", 1));
+
 
         }
     }
@@ -102,6 +100,7 @@ public class FoodItemList {
         cv.put(FoodItemsTable.Cols.DESCRIPTION, newFoodItem.getDescription());
         cv.put(FoodItemsTable.Cols.PRICE, newFoodItem.getPrice());
         cv.put(FoodItemsTable.Cols.IMG, newFoodItem.getImg());
+        cv.put(FoodItemsTable.Cols.RESTAURANTREF, newFoodItem.getRestaurantRef());
 
         db.insert(FoodItemsTable.NAME, null, cv);
     }

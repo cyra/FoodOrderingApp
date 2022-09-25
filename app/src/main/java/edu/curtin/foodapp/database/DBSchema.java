@@ -35,6 +35,8 @@ public static class FoodItemsTable {
             public static final String DESCRIPTION = "description";
             public static final String PRICE = "price";
             public static final String IMG = "img";
+            public static final String RESTAURANTREF = "restaurantref";
+
 
         }
 }
