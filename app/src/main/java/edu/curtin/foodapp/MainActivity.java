@@ -1,11 +1,9 @@
 package edu.curtin.foodapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.widget.Toast;
 
 // added imports
@@ -21,7 +19,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-import edu.curtin.foodapp.DBEntries;
 import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
 
@@ -33,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+/*
         // Create Restaurants
         RestaurantList restaurantList = new RestaurantList();
         restaurantList.load(getApplicationContext());
@@ -47,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toast toast = Toast.makeText(MainActivity.this, "A restaurant is added", Toast.LENGTH_SHORT);
         toast.show();
-
+*/
 
 
 

@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.database.DBSchema.RestaurantsTable;
 import edu.curtin.foodapp.database.restaurants.RestaurantsDBCursor;
 import edu.curtin.foodapp.database.restaurants.RestaurantsDBHelper;
@@ -27,6 +29,7 @@ public class RestaurantList {
 
         restaurants = getAllRestaurants();
     }
+
     // make this method return a list (this) for the adapter
     public ArrayList<Restaurant> read(Context context) {
         // Open database
@@ -34,7 +37,21 @@ public class RestaurantList {
                 .getReadableDatabase();
 
         // Read database contents into restaurants
-        return getAllRestaurants();
+        restaurants = getAllRestaurants();
+        this.addAll();
+        return restaurants;
+
+    }
+
+    public void addAll(){
+
+        if (this.getSize() == 0){
+            this.addRestaurant(new Restaurant(getSize(), "pizza", ""));
+            this.addRestaurant(new Restaurant(getSize(), "pasta", ""));
+            this.addRestaurant(new Restaurant(getSize(), "burger", ""));
+
+        }
+
     }
 
     public int getSize() {
