@@ -62,9 +62,9 @@ public class FoodItemList {
     public void addAll() {
         deleteAllFoodItems();
         if (this.getSize() == 0) {
+            this.addFoodItem(new FoodItem(getSize(), "Pizza", "very nice pizza", 20.55, "burger", 1));
             this.addFoodItem(new FoodItem(getSize(), "Pizza", "very nice pizza", 20.55, "", 1));
-            this.addFoodItem(new FoodItem(getSize(), "Pizza", "very nice pizza", 20.55, "", 1));
-            this.addFoodItem(new FoodItem(getSize(), "PAsta", "very nice pizza", 20.55, "", 1));
+            this.addFoodItem(new FoodItem(getSize(), "Pasta", "very nice pizza", 20.55, "", 1));
 
 
         }
