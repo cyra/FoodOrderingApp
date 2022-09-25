@@ -16,6 +16,7 @@ public class BrowseViewModel extends ViewModel {
         restaurant = new MutableLiveData<>();
         fooditem = new MutableLiveData<>();
     }
+
     public String getName() {return restaurant.getValue().getName(); }
 
     public void setRestaurant(Restaurant restaurant) {this.restaurant.setValue(restaurant);}

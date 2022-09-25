@@ -21,6 +21,7 @@ public class DBSchema {
             public static final String ID = "id";
             public static final String NAME = "name";
             public static final String IMG = "img";
+            //public static final String MENU = "menu";
 
         }
     }

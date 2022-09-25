@@ -24,26 +24,50 @@ public class RestaurantList {
         // Open database
         this.db = new RestaurantsDBHelper(context.getApplicationContext())
                 .getWritableDatabase();
-        // Read database contents into restaurants
+
         restaurants = getAllRestaurants();
     }
+    // make this method return a list (this) for the adapter
+    public ArrayList<Restaurant> read(Context context) {
+        // Open database
+        this.db = new RestaurantsDBHelper(context.getApplicationContext())
+                .getReadableDatabase();
 
-    public int getSize() { return restaurants.size(); }
-    public Restaurant getRestaurant(int index) { return restaurants.get(index); }
+        // Read database contents into restaurants
+        return getAllRestaurants();
+    }
+
+    public int getSize() {
+        return restaurants.size();
+    }
+
+    public Restaurant getRestaurant(int index) {
+        return restaurants.get(index);
+    }
 
     public void addRestaurant(Restaurant newRestaurant) {
-        // Add restaurant to list
         restaurants.add(newRestaurant);
         // Add restaurant to database
         ContentValues cv = new ContentValues();
         cv.put(RestaurantsTable.Cols.ID, newRestaurant.getID());
         cv.put(RestaurantsTable.Cols.NAME, newRestaurant.getName());
         cv.put(RestaurantsTable.Cols.IMG, newRestaurant.getImg());
+        //cv.put(RestaurantsTable.Cols.MENU, newRestaurant.getMenu());
         db.insert(RestaurantsTable.NAME, null, cv);
     }
 
+    public void deleteAllRestaurants(){
+        for (int i = 0; i<this.getSize(); i++){
+            this.deleteRestaurant(i);
 
-    private ArrayList<Restaurant> getAllRestaurants() {
+        }
+    }
+    public boolean deleteRestaurant(int id)
+    {
+        return db.delete(RestaurantsTable.NAME, RestaurantsTable.Cols.ID + "=?", new String[]{String.valueOf(id)}) > 0;
+    }
+
+    public ArrayList<Restaurant> getAllRestaurants() {
         Cursor cursor = db.query(RestaurantsTable.NAME, null, null, null, null, null, null);
         RestaurantsDBCursor restaurantsDBCursor = new RestaurantsDBCursor(cursor);
 
@@ -53,8 +77,7 @@ public class RestaurantList {
                 restaurants.add(restaurantsDBCursor.getRestaurant());
                 restaurantsDBCursor.moveToNext();
             }
-        }
-        finally {
+        } finally {
             cursor.close();
         }
 
