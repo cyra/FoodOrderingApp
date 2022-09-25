@@ -14,9 +14,9 @@ import edu.curtin.foodapp.model.orders.OrderItem;
 
 public class ChildItemAdapter extends RecyclerView.Adapter<ChildViewHolder> {
 
-    private ArrayList<OrderItem> orderItems;
+    private final ArrayList<OrderItem> orderItems;
     private SingleCartFoodItemBinding binding;
-    private Context context;
+    private final Context context;
 
     // Constructor
     public ChildItemAdapter(Context context, ArrayList<OrderItem> orderItems) {

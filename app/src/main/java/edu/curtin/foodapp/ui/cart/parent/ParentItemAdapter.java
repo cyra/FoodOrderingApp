@@ -18,9 +18,9 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentViewHolder> {
 
     // An object of RecyclerView.RecycledViewPool is created to share the Views between the child and the parent RecyclerViews
     private SingleCartRestaurantBinding binding;
-    private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-    private ArrayList<RestaurantOrder> restaurants;
-    private Context context;
+    private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+    private final ArrayList<RestaurantOrder> restaurants;
+    private final Context context;
 
     public ParentItemAdapter(Context context, ArrayList<RestaurantOrder> restaurants) {
         this.context = context;

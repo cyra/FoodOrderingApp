@@ -13,7 +13,7 @@ public class FoodItemsDBCursor extends CursorWrapper {
         int id = getInt(getColumnIndex(FoodItemsTable.Cols.ID));
         String name = getString(getColumnIndex(FoodItemsTable.Cols.NAME));
         String description = getString(getColumnIndex(FoodItemsTable.Cols.DESCRIPTION));
-        double price = getInt(getColumnIndex(FoodItemsTable.Cols.PRICE));
+        double price = getDouble(getColumnIndex(FoodItemsTable.Cols.PRICE));
         String img = getString(getColumnIndex(FoodItemsTable.Cols.IMG));
 
         return new FoodItem(id, name, description, price, img);
