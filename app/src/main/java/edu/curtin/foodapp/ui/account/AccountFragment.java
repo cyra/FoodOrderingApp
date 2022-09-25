@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -31,7 +33,7 @@ import edu.curtin.foodapp.ui.login.LoginFragment;
 public class AccountFragment extends Fragment {
 
     // For receiving data from LoginActivity
-    public static final int USER_REQUEST_CODE = 0;
+    public static final String USER_REQUEST_CODE = "userCode";
 
     private FragmentAccountBinding binding;
 
@@ -41,39 +43,38 @@ public class AccountFragment extends Fragment {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
+        Log.d("Account", "hello");
+
+        if (bundle != null) {
+            Log.d("Account", "Bundle is not null");
+            currentUser = (User) bundle.getSerializable("user");
+        }
+
         if (currentUser == null) {
+            // Create result listener
+            getParentFragmentManager()
+                    .setFragmentResultListener(USER_REQUEST_CODE, this, new FragmentResultListener() {
+                        @Override
+                        public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                            User userResult = (User) bundle.getSerializable("user");
+                            currentUser = userResult;
+                            bundle.putSerializable("user", currentUser);
+
+                            Log.d("Account", "User returned from LoginActivity");
+                        }
+                    });
             // Open LoginActivity
             Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivityForResult(intent, USER_REQUEST_CODE);
+            startActivity(intent);
         }
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        AccountViewModel accountViewModel =
-                new ViewModelProvider(this).get(AccountViewModel.class);
-
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // Use the AccountViewModel
-        if (currentUser != null) {
-            accountViewModel.setUser(currentUser);
-        }
-
         return root;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode == RESULT_OK && requestCode == USER_REQUEST_CODE) {
-            currentUser = LoginFragment.getUser(data);
-        }
     }
 
     // Used for nesting child fragments

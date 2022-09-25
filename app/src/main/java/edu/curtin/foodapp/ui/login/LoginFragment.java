@@ -64,12 +64,11 @@ public class LoginFragment extends Fragment {
                     // Search database for match
                     int index = users.findIndexByLogin(email, password);
                     if (index != -1) {
-                        // Set return value to users.get(index)
-                        Intent returnUser = new Intent();
-                        returnUser.putExtra("user", users.getUser(index));
-                        getActivity().setResult(USER_REQUEST_CODE, returnUser);
-                        // Close the fragment
-                        //getFragmentManager().beginTransaction().remove(LoginFragment.this).commit();
+                        // Return result
+                        Bundle userResult = new Bundle();
+                        userResult.putSerializable("user", users.getUser(index));
+                        getParentFragmentManager().setFragmentResult(USER_REQUEST_CODE, userResult);
+                        // Close activity
                         getActivity().finish();
                     }
                     // Else display toast
@@ -103,10 +102,5 @@ public class LoginFragment extends Fragment {
     private boolean validatePassword(String password) {
         String passwordPattern = "^(?=\\S+$).{1,}$";
         return password.matches(passwordPattern) && password.length() > 0;
-    }
-
-
-    public static User getUser(Intent intent) {
-        return (User) intent.getSerializableExtra("user");
     }
 }
