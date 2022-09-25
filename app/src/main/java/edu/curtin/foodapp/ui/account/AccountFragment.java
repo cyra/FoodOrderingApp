@@ -1,5 +1,7 @@
 package edu.curtin.foodapp.ui.account;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,11 +26,12 @@ import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.model.user.User;
 import edu.curtin.foodapp.model.user.UserList;
 import edu.curtin.foodapp.databinding.FragmentAccountBinding;
+import edu.curtin.foodapp.ui.login.LoginFragment;
 
 public class AccountFragment extends Fragment {
 
     // For receiving data from LoginActivity
-    private static final int USER_REQUEST_CODE = 0;
+    public static final int USER_REQUEST_CODE = 0;
 
     private FragmentAccountBinding binding;
 
@@ -59,9 +62,18 @@ public class AccountFragment extends Fragment {
         View root = binding.getRoot();
 
         // Use the AccountViewModel
-        //accountViewModel.setUser(currentUser);
+        if (currentUser != null) {
+            accountViewModel.setUser(currentUser);
+        }
 
         return root;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == RESULT_OK && requestCode == USER_REQUEST_CODE) {
+            currentUser = LoginFragment.getUser(data);
+        }
     }
 
     // Used for nesting child fragments

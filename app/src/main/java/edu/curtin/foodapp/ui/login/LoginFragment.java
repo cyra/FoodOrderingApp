@@ -1,8 +1,11 @@
 package edu.curtin.foodapp.ui.login;
 
+import static edu.curtin.foodapp.ui.account.AccountFragment.USER_REQUEST_CODE;
+
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -14,6 +17,7 @@ import android.widget.EditText;
 
 import edu.curtin.foodapp.LoginActivity;
 import edu.curtin.foodapp.R;
+import edu.curtin.foodapp.model.user.User;
 import edu.curtin.foodapp.model.user.UserList;
 
 public class LoginFragment extends Fragment {
@@ -61,9 +65,12 @@ public class LoginFragment extends Fragment {
                     int index = users.findIndexByLogin(email, password);
                     if (index != -1) {
                         // Set return value to users.get(index)
-                        //Intent returnUser = new Intent();
-                        //returnUser.putExtra("user", users.getUser(index));
-                        // End activity?
+                        Intent returnUser = new Intent();
+                        returnUser.putExtra("user", users.getUser(index));
+                        getActivity().setResult(USER_REQUEST_CODE, returnUser);
+                        // Close the fragment
+                        //getFragmentManager().beginTransaction().remove(LoginFragment.this).commit();
+                        getActivity().finish();
                     }
                     // Else display toast
                 }
@@ -96,5 +103,10 @@ public class LoginFragment extends Fragment {
     private boolean validatePassword(String password) {
         String passwordPattern = "^(?=\\S+$).{1,}$";
         return password.matches(passwordPattern) && password.length() > 0;
+    }
+
+
+    public static User getUser(Intent intent) {
+        return (User) intent.getSerializableExtra("user");
     }
 }

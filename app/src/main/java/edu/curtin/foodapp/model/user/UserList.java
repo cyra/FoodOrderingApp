@@ -24,6 +24,13 @@ public class UserList {
         // Open database
         this.db = new UsersDBHelper(context.getApplicationContext())
                 .getWritableDatabase();
+
+        // Add test account
+        if (users.size() == 0) {
+            addUser(new User(1234, "t@t.t", "test person",
+                    "123 Fake Street", "404", "123"));
+        }
+
         // Read database contents into users
         users = getAllUsers();
     }
@@ -38,6 +45,7 @@ public class UserList {
         ContentValues cv = new ContentValues();
         cv.put(UsersTable.Cols.ID, newUser.getID());
         cv.put(UsersTable.Cols.EMAIL, newUser.getEmail());
+        cv.put(UsersTable.Cols.PASSWORD, newUser.getPassword());
         cv.put(UsersTable.Cols.NAME, newUser.getName());
         cv.put(UsersTable.Cols.ADDRESS, newUser.getAddress());
         cv.put(UsersTable.Cols.PHONE, newUser.getPhone());

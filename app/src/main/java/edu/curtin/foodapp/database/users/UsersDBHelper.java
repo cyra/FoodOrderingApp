@@ -1,10 +1,12 @@
 package edu.curtin.foodapp.database.users;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import edu.curtin.foodapp.database.DBSchema.UsersTable;
+import edu.curtin.foodapp.model.user.User;
 
 public class UsersDBHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;

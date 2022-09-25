@@ -7,12 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import edu.curtin.foodapp.model.user.User;
 import edu.curtin.foodapp.model.user.UserList;
 import edu.curtin.foodapp.ui.login.LoginFragment;
 
 public class LoginActivity extends AppCompatActivity {
-
-    private UserList users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
