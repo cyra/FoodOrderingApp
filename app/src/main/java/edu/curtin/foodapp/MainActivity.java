@@ -61,13 +61,5 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        /*
-        DBEntries addEntries = new DBEntries();
-        restaurants = addEntries.addRestaurants(context,restaurantList);
-        restaurantList.load(context);
-        restaurants = restaurantList.getAllRestaurants();
-        */
-
-
     }
 }

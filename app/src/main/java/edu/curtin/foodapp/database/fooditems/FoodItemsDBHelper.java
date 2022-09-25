@@ -18,7 +18,7 @@ public class FoodItemsDBHelper extends SQLiteOpenHelper {
                 FoodItemsTable.Cols.ID + " INTEGER, " +
                 FoodItemsTable.Cols.NAME + " TEXT, " +
                 FoodItemsTable.Cols.DESCRIPTION + " TEXT, " +
-                FoodItemsTable.Cols.PRICE + "FLOAT, " +
+                FoodItemsTable.Cols.PRICE + " DOUBLE, " +
                 FoodItemsTable.Cols.IMG + " TEXT)"
         );
     }

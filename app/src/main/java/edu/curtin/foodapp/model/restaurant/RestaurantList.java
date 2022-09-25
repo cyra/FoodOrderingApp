@@ -43,15 +43,12 @@ public class RestaurantList {
 
     }
 
-    public void addAll(){
-
-        if (this.getSize() == 0){
+    public void addAll() {
+        if (this.getSize() == 0) {
             this.addRestaurant(new Restaurant(getSize(), "pizza", ""));
             this.addRestaurant(new Restaurant(getSize(), "pasta", ""));
             this.addRestaurant(new Restaurant(getSize(), "burger", ""));
-
         }
-
     }
 
     public int getSize() {
@@ -73,14 +70,14 @@ public class RestaurantList {
         db.insert(RestaurantsTable.NAME, null, cv);
     }
 
-    public void deleteAllRestaurants(){
-        for (int i = 0; i<this.getSize(); i++){
+    public void deleteAllRestaurants() {
+        for (int i = 0; i < this.getSize(); i++) {
             this.deleteRestaurant(i);
 
         }
     }
-    public boolean deleteRestaurant(int id)
-    {
+
+    public boolean deleteRestaurant(int id) {
         return db.delete(RestaurantsTable.NAME, RestaurantsTable.Cols.ID + "=?", new String[]{String.valueOf(id)}) > 0;
     }
 

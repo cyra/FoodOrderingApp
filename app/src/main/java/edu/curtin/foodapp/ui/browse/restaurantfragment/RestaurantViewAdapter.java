@@ -35,6 +35,7 @@ public class RestaurantViewAdapter extends RecyclerView.Adapter<RestaurantViewHo
    // holder.itemName.setText(restaurants.getValue().get(position).getName());
         holder.itemName.setText(restaurantsList.get(position).getName());
 
+
     }
 
     @Override

@@ -15,7 +15,7 @@ import edu.curtin.foodapp.model.fooditems.FoodItem;
 public class FoodItemViewAdapter extends RecyclerView.Adapter<FoodItemViewHolder> {
     private final Context context;
     private SingleFoodBinding binding;
-    ArrayList<FoodItem> foodItems;
+    private final ArrayList<FoodItem> foodItems;
 
     public FoodItemViewAdapter(Context context, ArrayList<FoodItem> foodItems){
         this.context = context;

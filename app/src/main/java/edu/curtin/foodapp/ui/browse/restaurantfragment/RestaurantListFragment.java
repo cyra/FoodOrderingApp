@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edu.curtin.foodapp.databinding.ListRestaurantBinding;
-import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
 
 import java.util.ArrayList;
@@ -20,8 +19,8 @@ import java.util.ArrayList;
 
 public class RestaurantListFragment extends Fragment {
 
-     RestaurantList restaurantList = new RestaurantList();
-     ListRestaurantBinding binding;
+    RestaurantList restaurantList = new RestaurantList();
+    ListRestaurantBinding binding;
 
     public RestaurantListFragment() {
         // Required empty public constructor
@@ -37,16 +36,14 @@ public class RestaurantListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         binding = ListRestaurantBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
         final RecyclerView rv = binding.recyclerview;
         // horizontal scrolling recyclerview
-        rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         // Make the recyclerview read the RestaurantList
-        RestaurantViewAdapter rvAdapter = new RestaurantViewAdapter(getContext(),restaurantList.read(getContext()));
+        RestaurantViewAdapter rvAdapter = new RestaurantViewAdapter(getContext(), restaurantList.read(getContext()));
 
         rv.setAdapter(rvAdapter);
         return root;
