@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +51,7 @@ public class LoginFragment extends Fragment {
 
         View view = getView();
         Button loginButton = (Button) view.findViewById(R.id.loginButton);
-        Button createAccountButton = (Button) view.findViewById(R.id.createAccountButton);
+        Button registerAccountButton = (Button) view.findViewById(R.id.registerAccountButton);
 
         EditText emailField = (EditText) view.findViewById(R.id.emailLoginEditText);
         EditText passwordField = (EditText) view.findViewById(R.id.passwordLoginEditText);
@@ -62,7 +63,8 @@ public class LoginFragment extends Fragment {
                 String password = passwordField.getText().toString();
 
                 // If email and password valid
-                if (validateEmail(email) && validatePassword(password)) {
+                if (((LoginActivity) getActivity()).validateEmail(email) &&
+                        ((LoginActivity) getActivity()).validatePassword(password)) {
                     // Search database for match
                     int index = users.findIndexByLogin(email, password);
                     // If match found
@@ -72,51 +74,32 @@ public class LoginFragment extends Fragment {
                         returnData.putExtra("user", users.getUser(index));
                         getActivity().setResult(Activity.RESULT_OK, returnData);
                         // Display logged in notification
-                        displayToast("Logged in");
+                        ((LoginActivity) getActivity()).displayToast("Logged in");
                         // Close activity
                         getActivity().finish();
                     }
                     else {
-                        displayToast("Incorrect username/password");
+                        ((LoginActivity) getActivity()).displayToast("Incorrect username/password");
                     }
                 }
-                else if (!validateEmail(email)) {
-                    displayToast("Invalid email");
+                else if (!((LoginActivity) getActivity()).validateEmail(email)) {
+                    ((LoginActivity) getActivity()).displayToast("Invalid email");
                 }
-                else if (!validatePassword(password)) {
-                    displayToast("Invalid password");
+                else if (!((LoginActivity) getActivity()).validatePassword(password)) {
+                    ((LoginActivity) getActivity()).displayToast("Invalid password");
                 }
                 else {
-                    displayToast("Unknown error");
+                    ((LoginActivity) getActivity()).displayToast("Unknown error");
                 }
             }
         });
 
-        createAccountButton.setOnClickListener(new View.OnClickListener() {
+        registerAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Replace this fragment with CreateAccountFragment
+                // Create account fragment
+                ((LoginActivity) getActivity()).replaceLoginFragmentWithCreateAccountFragment();
             }
         });
-    }
-
-
-    private boolean validateEmail(String email) {
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        return email.matches(emailPattern) && email.length() > 0;
-    }
-
-    private boolean validatePassword(String password) {
-        String passwordPattern = "^(?=\\S+$).{1,}$";
-        return password.matches(passwordPattern) && password.length() > 0;
-    }
-
-
-    private void displayToast(String message) {
-        Context context = getContext().getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, message, duration);
-        toast.show();
     }
 }
