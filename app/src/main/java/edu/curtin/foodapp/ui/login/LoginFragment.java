@@ -3,6 +3,7 @@ package edu.curtin.foodapp.ui.login;
 import static edu.curtin.foodapp.ui.account.AccountFragment.USER_REQUEST_CODE;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import edu.curtin.foodapp.LoginActivity;
 import edu.curtin.foodapp.R;
@@ -53,8 +55,6 @@ public class LoginFragment extends Fragment {
         EditText emailField = (EditText) view.findViewById(R.id.emailLoginEditText);
         EditText passwordField = (EditText) view.findViewById(R.id.passwordLoginEditText);
 
-        // TODO: Toast set up
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,24 +65,29 @@ public class LoginFragment extends Fragment {
                 if (validateEmail(email) && validatePassword(password)) {
                     // Search database for match
                     int index = users.findIndexByLogin(email, password);
+                    // If match found
                     if (index != -1) {
                         // Return data
                         Intent returnData = new Intent();
                         returnData.putExtra("user", users.getUser(index));
                         getActivity().setResult(Activity.RESULT_OK, returnData);
+                        // Display logged in notification
+                        displayToast("Logged in");
                         // Close activity
                         getActivity().finish();
                     }
-                    // Else display toast
+                    else {
+                        displayToast("Incorrect username/password");
+                    }
                 }
                 else if (!validateEmail(email)) {
-                    // Display toast
+                    displayToast("Invalid email");
                 }
                 else if (!validatePassword(password)) {
-                    // Display toast
+                    displayToast("Invalid password");
                 }
                 else {
-                    // Display something
+                    displayToast("Unknown error");
                 }
             }
         });
@@ -104,5 +109,14 @@ public class LoginFragment extends Fragment {
     private boolean validatePassword(String password) {
         String passwordPattern = "^(?=\\S+$).{1,}$";
         return password.matches(passwordPattern) && password.length() > 0;
+    }
+
+
+    private void displayToast(String message) {
+        Context context = getContext().getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, message, duration);
+        toast.show();
     }
 }
