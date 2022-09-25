@@ -29,4 +29,13 @@ public class User implements Serializable {
 
     // Forgive me java, I have sinned.
     public String getPassword() { return password; }
+
+    public void setUser(User user) {
+        this.id = user.getID();
+        this.email = user.getEmail();
+        this.name = user.getName();
+        this.address = user.getAddress();
+        this.phone = user.getPhone();
+        this.password = user.getPassword();
+    }
 }

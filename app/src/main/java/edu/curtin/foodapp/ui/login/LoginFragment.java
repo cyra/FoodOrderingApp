@@ -2,6 +2,7 @@ package edu.curtin.foodapp.ui.login;
 
 import static edu.curtin.foodapp.ui.account.AccountFragment.USER_REQUEST_CODE;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -19,6 +20,7 @@ import edu.curtin.foodapp.LoginActivity;
 import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.model.user.User;
 import edu.curtin.foodapp.model.user.UserList;
+import edu.curtin.foodapp.ui.account.AccountFragment;
 
 public class LoginFragment extends Fragment {
 
@@ -51,7 +53,7 @@ public class LoginFragment extends Fragment {
         EditText emailField = (EditText) view.findViewById(R.id.emailLoginEditText);
         EditText passwordField = (EditText) view.findViewById(R.id.passwordLoginEditText);
 
-        // Toast set up
+        // TODO: Toast set up
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +66,10 @@ public class LoginFragment extends Fragment {
                     // Search database for match
                     int index = users.findIndexByLogin(email, password);
                     if (index != -1) {
-                        // Return result
-                        Bundle userResult = new Bundle();
-                        userResult.putSerializable("user", users.getUser(index));
-                        getParentFragmentManager().setFragmentResult(USER_REQUEST_CODE, userResult);
+                        // Return data
+                        Intent returnData = new Intent();
+                        returnData.putExtra("user", users.getUser(index));
+                        getActivity().setResult(Activity.RESULT_OK, returnData);
                         // Close activity
                         getActivity().finish();
                     }

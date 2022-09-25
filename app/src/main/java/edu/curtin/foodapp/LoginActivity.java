@@ -13,6 +13,8 @@ import edu.curtin.foodapp.ui.login.LoginFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private User currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,5 +27,14 @@ public class LoginActivity extends AppCompatActivity {
             loginFragment = new LoginFragment();
             fm.beginTransaction().add(R.id.loginFragment, loginFragment).commit();
         }
+    }
+
+    public static Intent getIntent(Context c) {
+        Intent intent = new Intent(c, LoginActivity.class);
+        return intent;
+    }
+
+    public static User getUser(Intent intent) {
+        return (User) intent.getSerializableExtra("user");
     }
 }

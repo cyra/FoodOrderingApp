@@ -28,12 +28,13 @@ import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.model.user.User;
 import edu.curtin.foodapp.model.user.UserList;
 import edu.curtin.foodapp.databinding.FragmentAccountBinding;
+import edu.curtin.foodapp.ui.cart.CartViewModel;
 import edu.curtin.foodapp.ui.login.LoginFragment;
 
 public class AccountFragment extends Fragment {
 
     // For receiving data from LoginActivity
-    public static final String USER_REQUEST_CODE = "userCode";
+    public static final int USER_REQUEST_CODE = 444;
 
     private FragmentAccountBinding binding;
 
@@ -43,29 +44,8 @@ public class AccountFragment extends Fragment {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
-        Log.d("Account", "hello");
-
-        if (bundle != null) {
-            Log.d("Account", "Bundle is not null");
-            currentUser = (User) bundle.getSerializable("user");
-        }
-
         if (currentUser == null) {
-            // Create result listener
-            getParentFragmentManager()
-                    .setFragmentResultListener(USER_REQUEST_CODE, this, new FragmentResultListener() {
-                        @Override
-                        public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                            User userResult = (User) bundle.getSerializable("user");
-                            currentUser = userResult;
-                            bundle.putSerializable("user", currentUser);
-
-                            Log.d("Account", "User returned from LoginActivity");
-                        }
-                    });
-            // Open LoginActivity
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
+            startActivityForResult(LoginActivity.getIntent(getContext()), USER_REQUEST_CODE);
         }
     }
 
@@ -73,6 +53,15 @@ public class AccountFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        AccountViewModel accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
+
+        if (currentUser != null) {
+            accountViewModel.setName(currentUser.getName());
+            accountViewModel.setEmail(currentUser.getEmail());
+            accountViewModel.setAddress(currentUser.getAddress());
+            accountViewModel.setPhone(currentUser.getPhone());
+        }
 
         return root;
     }
@@ -101,4 +90,24 @@ public class AccountFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == USER_REQUEST_CODE && resultCode == RESULT_OK) {
+            currentUser = LoginActivity.getUser(data);
+
+            AccountViewModel accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
+
+            accountViewModel.setName(currentUser.getName());
+            accountViewModel.setEmail(currentUser.getEmail());
+            accountViewModel.setAddress(currentUser.getAddress());
+            accountViewModel.setPhone(currentUser.getPhone());
+        }
+    }
+
+    /*@Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("user", currentUser);
+    }*/
 }

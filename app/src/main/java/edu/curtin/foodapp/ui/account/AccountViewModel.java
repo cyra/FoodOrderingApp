@@ -19,10 +19,10 @@ public class AccountViewModel extends ViewModel {
         address = new MutableLiveData<String>();
         phone = new MutableLiveData<String>();
 
-        name.setValue("name loading...");
+        /*name.setValue("name loading...");
         email.setValue("email loading...");
         address.setValue("address loading...");
-        phone.setValue("phone loading...");
+        phone.setValue("phone loading...");*/
     }
 
     public LiveData<String> getName() { return name; }
@@ -34,8 +34,4 @@ public class AccountViewModel extends ViewModel {
     public void setEmail(String email) { this.email.setValue(email); }
     public void setAddress(String address) { this.address.setValue(address); }
     public void setPhone(String phone) { this.phone.setValue(phone); }
-
-    public Boolean getLoggedIn() {
-        return false;
-    }
 }

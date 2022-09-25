@@ -25,14 +25,14 @@ public class UserList {
         this.db = new UsersDBHelper(context.getApplicationContext())
                 .getWritableDatabase();
 
+        // Read database contents into users
+        users = getAllUsers();
+
         // Add test account
         if (users.size() == 0) {
             addUser(new User(1234, "t@t.t", "test person",
                     "123 Fake Street", "404", "123"));
         }
-
-        // Read database contents into users
-        users = getAllUsers();
     }
 
     public int getSize() { return users.size(); }

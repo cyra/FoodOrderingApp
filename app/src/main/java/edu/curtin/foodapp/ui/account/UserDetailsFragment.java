@@ -46,8 +46,6 @@ public class UserDetailsFragment extends Fragment {
         accountViewModel.getAddress().observe(getViewLifecycleOwner(), addressTextView::setText);
         accountViewModel.getPhone().observe(getViewLifecycleOwner(), phoneTextView::setText);
 
-        accountViewModel.setPhone("404");
-
         return root;
     }
 
