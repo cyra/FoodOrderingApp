@@ -43,7 +43,7 @@ public class DailyFoodItemListFragment extends Fragment {
 
         rv.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        FoodItemViewAdapter rvAdapter = new FoodItemViewAdapter(getContext(), foodItemList.read(getContext()));
+        DailyFoodItemListAdapter rvAdapter = new DailyFoodItemListAdapter(getContext(), foodItemList.read(getContext()));
         rv.setAdapter(rvAdapter);
         return root;
 
