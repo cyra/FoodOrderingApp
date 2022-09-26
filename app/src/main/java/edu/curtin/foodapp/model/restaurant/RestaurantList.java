@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import edu.curtin.foodapp.MainActivity;
@@ -57,24 +58,36 @@ public class RestaurantList {
         Cursor cursor = db.query(RestaurantsTable.NAME, null, null, null, null, null, null);
         RestaurantsDBCursor restaurantsDBCursor = new RestaurantsDBCursor(cursor);
 
+        ArrayList<Restaurant> temp = new ArrayList<Restaurant>();
+
         try {
             restaurantsDBCursor.moveToFirst();
             while (!restaurantsDBCursor.isAfterLast()) {
-                restaurants.add(restaurantsDBCursor.getRestaurant());
+                temp.add(restaurantsDBCursor.getRestaurant());
                 restaurantsDBCursor.moveToNext();
             }
         } finally {
             cursor.close();
         }
 
-        return restaurants;
+        return temp;
     }
 
 
+    /**
+     * When new restaurants join the app, their entry in the database is added here.
+     * The app must be uninstalled/reinstalled or the database wiped to see the new changes.
+     */
     public void addAll() {
-        // Add restaurants here
-        this.addRestaurant(new Restaurant(getSize(), "Pizza Place", "pizza"));
-        this.addRestaurant(new Restaurant(getSize(), "Pasta Place", "pasta"));
-        this.addRestaurant(new Restaurant(getSize(), "Burger Place", "burger"));
+        this.addRestaurant(new Restaurant(getSize(), "Fork Be With You", "restaurant_fork_be_with_you"));
+        this.addRestaurant(new Restaurant(getSize(), "Guga's Kitchen", "restaurant_gugas_kitchen"));
+        this.addRestaurant(new Restaurant(getSize(), "Life of Pi", "restaurant_life_of_pi"));
+        this.addRestaurant(new Restaurant(getSize(), "Lord of the Wings", "restaurant_lord_of_the_wings"));
+        this.addRestaurant(new Restaurant(getSize(), "Spaghettea Monster", "restaurant_spaghettea_monster"));
+        this.addRestaurant(new Restaurant(getSize(), "Hungry Zak's", "restaurant_hungry_zaks"));
+        this.addRestaurant(new Restaurant(getSize(), "Salad World", "restaurant_salad_world"));
+        this.addRestaurant(new Restaurant(getSize(), "Cow Still Mooing (DIY)", "restaurant_cow_still_mooing"));
+        this.addRestaurant(new Restaurant(getSize(), "Burritos in a Box", "restaurant_burritos_in_a_box"));
+        this.addRestaurant(new Restaurant(getSize(), "Joust Kebabs", "restaurant_joust_kebabs"));
     }
 }
