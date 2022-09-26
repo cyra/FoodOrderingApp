@@ -1,6 +1,8 @@
 package edu.curtin.foodapp.ui.home.fooditemfragment;
 
 import edu.curtin.foodapp.database.fooditems.FoodItemsDBHelper;
+import edu.curtin.foodapp.model.cart.CartItem;
+import edu.curtin.foodapp.model.cart.CartItemList;
 import edu.curtin.foodapp.model.fooditems.FoodItemList;
 
 import android.content.Context;
@@ -27,7 +29,8 @@ public class DailyFoodItemListAdapter extends RecyclerView.Adapter<DailyFoodItem
     private final Context context;
     private SingleFoodBinding binding;
     private final ArrayList<FoodItem> foodItems;
-    //FoodItemList cart = new FoodItemList();
+    FoodItemList food = new FoodItemList();
+    CartItemList cart = new CartItemList();
 
 
     public DailyFoodItemListAdapter(Context context, ArrayList<FoodItem> foodItems) {
@@ -60,9 +63,11 @@ public class DailyFoodItemListAdapter extends RecyclerView.Adapter<DailyFoodItem
                 double price = Double.parseDouble(holder.itemPrice.getText().toString());
                 // save into database
                 // load context first before adding
-                //cart.load(view.getContext());
+                //cart.read(context);
+                food.load(context);
                 System.out.println("added food item " + title + " " + price);
-                //cart.addFoodItem(new FoodItem(1,title,title,price,"",1));
+                //cart.addCartItem(new CartItem(0,title,title,price,"burger",1,1,1,0));
+                food.addFoodItem(new FoodItem(0,title,title,price,"",0));
                 Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_cart);
             }
         });
