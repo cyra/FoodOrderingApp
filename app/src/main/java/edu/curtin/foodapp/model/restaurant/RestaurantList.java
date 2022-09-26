@@ -87,7 +87,7 @@ public class RestaurantList {
         this.addRestaurant(new Restaurant(getSize(), "Hungry Zak's", "restaurant_hungry_zaks"));
         this.addRestaurant(new Restaurant(getSize(), "Salad World", "restaurant_salad_world"));
         this.addRestaurant(new Restaurant(getSize(), "Cow Still Mooing (DIY)", "restaurant_cow_still_mooing"));
-        this.addRestaurant(new Restaurant(getSize(), "Burritos in a Box", "restaurant_burritos_in_a_box"));
+        this.addRestaurant(new Restaurant(getSize(), "Soup-a-bowl", "restaurant_soup_a_bowl"));
         this.addRestaurant(new Restaurant(getSize(), "Joust Kebabs", "restaurant_joust_kebabs"));
     }
 }
