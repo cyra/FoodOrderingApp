@@ -1,19 +1,15 @@
 package edu.curtin.foodapp.ui.account;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.databinding.FragmentOrderHistoryBinding;
-import edu.curtin.foodapp.databinding.FragmentUserDetailsBinding;
 
 public class OrderHistoryFragment extends Fragment {
 

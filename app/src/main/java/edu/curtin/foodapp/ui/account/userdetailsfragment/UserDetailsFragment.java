@@ -1,4 +1,4 @@
-package edu.curtin.foodapp.ui.account;
+package edu.curtin.foodapp.ui.account.userdetailsfragment;
 
 import android.os.Bundle;
 
@@ -13,17 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import edu.curtin.foodapp.R;
-import edu.curtin.foodapp.databinding.FragmentAccountBinding;
-import edu.curtin.foodapp.databinding.FragmentBrowseBinding;
-import edu.curtin.foodapp.databinding.FragmentUserDetailsBinding;
-import edu.curtin.foodapp.ui.browse.BrowseViewModel;
+import edu.curtin.foodapp.databinding.SingleUserDetailsBinding;
+import edu.curtin.foodapp.ui.account.AccountViewModel;
 
 public class UserDetailsFragment extends Fragment {
 
-    private FragmentUserDetailsBinding binding;
+    private SingleUserDetailsBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -31,7 +26,7 @@ public class UserDetailsFragment extends Fragment {
         AccountViewModel accountViewModel =
                 new ViewModelProvider(getParentFragment()).get(AccountViewModel.class);
 
-        binding = FragmentUserDetailsBinding.inflate(inflater, container, false);
+        binding = SingleUserDetailsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         // Use the AccountViewModel

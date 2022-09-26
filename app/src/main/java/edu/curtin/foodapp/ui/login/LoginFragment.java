@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,8 @@ public class LoginFragment extends Fragment {
                         ((LoginActivity) getActivity()).validatePassword(password)) {
                     // Search database for match
                     int index = users.findIndexByLogin(email, password);
+                    Log.d("Login", email);
+                    Log.d("Login", password);
                     // If match found
                     if (index != -1) {
                         // Return data

@@ -1,0 +1,53 @@
+package edu.curtin.foodapp.ui.cart.cartfragment;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import java.util.ArrayList;
+
+import edu.curtin.foodapp.R;
+import edu.curtin.foodapp.databinding.FragmentCartBinding;
+import edu.curtin.foodapp.model.orders.OrderItem;
+import edu.curtin.foodapp.model.orders.Orders;
+import edu.curtin.foodapp.model.orders.RestaurantOrder;
+
+// Cart Fragment
+public class CartFragment extends Fragment {
+
+    private FragmentCartBinding binding;
+    private ArrayList<Orders> orders;
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+
+        binding = FragmentCartBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        insertNestedFragment();
+    }
+
+    // Embeds the child fragment dynamically
+    private void insertNestedFragment() {
+        Fragment CartListFragment = new CartListFragment();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        // For multiple fragments in a fragment, use multiple transaction.replace() and then commit() after.
+        transaction.replace(R.id.cartListFragment, CartListFragment);
+        transaction.commit();
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+}

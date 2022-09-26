@@ -1,7 +1,7 @@
-package edu.curtin.foodapp.ui.browse;
+package edu.curtin.foodapp.ui.browse.restaurantfragment;
 
-import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,10 +12,12 @@ import edu.curtin.foodapp.databinding.SingleRestaurantBinding;
 public class RestaurantViewHolder extends RecyclerView.ViewHolder {
     SingleRestaurantBinding binding;
     TextView itemName;
-    Button itemButton;
+    ImageView itemImg;
+
     public RestaurantViewHolder(@NonNull SingleRestaurantBinding binding) {
         super(binding.getRoot());
         itemName = binding.restaurantName;
+        itemImg = binding.restaurantImg;
         this.binding = binding;
     }
 }

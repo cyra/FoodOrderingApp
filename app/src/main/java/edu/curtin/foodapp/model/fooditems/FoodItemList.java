@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import edu.curtin.foodapp.database.DBSchema;
 import edu.curtin.foodapp.database.DBSchema.FoodItemsTable;
 import edu.curtin.foodapp.database.fooditems.FoodItemsDBCursor;
 import edu.curtin.foodapp.database.fooditems.FoodItemsDBHelper;
@@ -24,16 +25,25 @@ public class FoodItemList {
         // Open database
         this.db = new FoodItemsDBHelper(context.getApplicationContext())
                 .getWritableDatabase();
-        // Read database contents into foodIterms
+        // Read database contents into foodItems
         foodItems = getAllFoodItems();
+
+        if (this.getSize() == 0) {
+            this.addAll();
+        }
     }
 
-    public int getSize() { return foodItems.size(); }
-    public FoodItem getFoodItem(int index) { return foodItems.get(index); }
+    public int getSize() {
+        return foodItems.size();
+    }
+
+    public FoodItem getFoodItem(int index) {
+        return foodItems.get(index);
+    }
 
     public void addFoodItem(FoodItem newFoodItem) {
         // Add foodItem to list
-        foodItems.add(newFoodItem);
+        this.foodItems.add(newFoodItem);
         // Add foodItem to database
         ContentValues cv = new ContentValues();
         cv.put(FoodItemsTable.Cols.ID, newFoodItem.getID());
@@ -41,26 +51,34 @@ public class FoodItemList {
         cv.put(FoodItemsTable.Cols.DESCRIPTION, newFoodItem.getDescription());
         cv.put(FoodItemsTable.Cols.PRICE, newFoodItem.getPrice());
         cv.put(FoodItemsTable.Cols.IMG, newFoodItem.getImg());
+        cv.put(FoodItemsTable.Cols.RESTAURANTREF, newFoodItem.getRestaurantRef());
 
         db.insert(FoodItemsTable.NAME, null, cv);
     }
 
-
-    private ArrayList<FoodItem> getAllFoodItems() {
-        Cursor cursor = db.query(FoodItemsTable.NAME, null, null, null, null, null, null);
+    public ArrayList<FoodItem> getAllFoodItems() {
+        Cursor cursor = db.query(DBSchema.FoodItemsTable.NAME, null, null, null, null, null, null);
         FoodItemsDBCursor foodItemsDBCursor = new FoodItemsDBCursor(cursor);
+
+        ArrayList<FoodItem> temp = new ArrayList<FoodItem>();
 
         try {
             foodItemsDBCursor.moveToFirst();
             while (!foodItemsDBCursor.isAfterLast()) {
-                foodItems.add(foodItemsDBCursor.getFoodItem());
+                temp.add(foodItemsDBCursor.getFoodItem());
                 foodItemsDBCursor.moveToNext();
             }
-        }
-        finally {
+        } finally {
             cursor.close();
         }
 
-        return foodItems;
+        return temp;
+    }
+
+    public void addAll() {
+        this.addFoodItem(new FoodItem(getSize(), "Burger", "Delicious burger", 20.55, "burger", 1));
+        this.addFoodItem(new FoodItem(getSize(), "Pizza", "Cool pizza", 20.55, "pizza", 1));
+        this.addFoodItem(new FoodItem(getSize(), "Pasta", "A pasta", 20.55, "pasta", 1));
+        this.addFoodItem(new FoodItem(getSize(), "Burrito", "A delicious burrito", 20.55, "burrito", 1));
     }
 }

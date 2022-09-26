@@ -8,7 +8,7 @@ public class Restaurant {
     int ID;
     String name;
     String img;
-    ArrayList<FoodItem>menu;
+    ArrayList<FoodItem> menu;
 
 
 

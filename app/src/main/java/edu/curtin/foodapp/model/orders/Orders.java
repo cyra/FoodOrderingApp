@@ -2,6 +2,8 @@ package edu.curtin.foodapp.model.orders;
 
 import java.util.ArrayList;
 
+import edu.curtin.foodapp.model.fooditems.FoodItem;
+
 public class Orders {
     int orderID;
     String userID;
@@ -58,10 +60,10 @@ public class Orders {
     }
 
     // Calculate total of all restaurants in this order
-    public float getTotalOrderPrice(){
-        float total = 0;
+    public double getTotalOrderPrice(){
+        double total = 0;
         for (RestaurantOrder order: getOrders()){
-            float restaurantTotal = order.getRestaurantTotal();
+            double restaurantTotal = order.getRestaurantTotal();
             total += restaurantTotal;
         }
         return total;
