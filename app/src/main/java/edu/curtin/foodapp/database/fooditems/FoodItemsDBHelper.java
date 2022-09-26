@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import edu.curtin.foodapp.database.DBSchema;
 import edu.curtin.foodapp.database.DBSchema.FoodItemsTable;
 
 public class FoodItemsDBHelper extends SQLiteOpenHelper {
@@ -23,7 +22,7 @@ public class FoodItemsDBHelper extends SQLiteOpenHelper {
                 FoodItemsTable.Cols.DESCRIPTION + " TEXT, " +
                 FoodItemsTable.Cols.PRICE + " DOUBLE, " +
                 FoodItemsTable.Cols.IMG + " TEXT, " +
-                FoodItemsTable.Cols.RESTAURANTREF + " INTEGER) ");
+                FoodItemsTable.Cols.RESTAURANTREF + " INTEGER)");
     }
 
     @Override

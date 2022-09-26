@@ -1,6 +1,8 @@
 package edu.curtin.foodapp.model.fooditems;
 
-public class FoodItem {
+import edu.curtin.foodapp.model.restaurant.Restaurant;
+
+public class FoodItem extends Restaurant {
     int ID;
     String name;
     String description;
@@ -8,14 +10,16 @@ public class FoodItem {
     String img;
     int restaurantRef;
 
-    public FoodItem(int foodId, String foodName, String description, double price, String foodImg, int resRef) {
+    public FoodItem(int foodId, String foodName, String description, double price, String foodImg, int restaurantID) {
+        super(restaurantID, null, null);
         this.ID = foodId;
         this.name = foodName;
         this.description = description;
         this.price = price;
         this.img = foodImg;
-        this.restaurantRef = resRef;
+        this.restaurantRef = restaurantID;
     }
+
 
     // Setters and Getters
     public int getID() {

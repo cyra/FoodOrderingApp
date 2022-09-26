@@ -19,6 +19,7 @@ public class FoodItemList {
 
     public FoodItemList() {
         foodItems = new ArrayList<>();
+
     }
 
     public void load(Context context) {
@@ -35,7 +36,6 @@ public class FoodItemList {
         // Open database
         this.db = new FoodItemsDBHelper(context.getApplicationContext())
                 .getWritableDatabase();
-
         foodItems = getAllFoodItems();
         this.addAll();
         return foodItems;
@@ -90,7 +90,7 @@ public class FoodItemList {
 
     public void addFoodItem(FoodItem newFoodItem) {
         // Add foodItem to list
-        foodItems.add(newFoodItem);
+        this.foodItems.add(newFoodItem);
         // Add foodItem to database
         ContentValues cv = new ContentValues();
         cv.put(FoodItemsTable.Cols.ID, newFoodItem.getID());

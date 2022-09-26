@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import edu.curtin.foodapp.databinding.SingleCartFoodItemBinding;
-import edu.curtin.foodapp.model.orders.OrderItem;
+import edu.curtin.foodapp.model.cart.CartItem;
 
 public class ChildItemAdapter extends RecyclerView.Adapter<ChildViewHolder> {
 
-    private final ArrayList<OrderItem> orderItems;
+    private final ArrayList<CartItem> orderItems;
     private SingleCartFoodItemBinding binding;
     private final Context context;
 
     // Constructor
-    public ChildItemAdapter(Context context, ArrayList<OrderItem> orderItems) {
+    public ChildItemAdapter(Context context, ArrayList<CartItem> orderItems) {
         this.context = context;
         this.orderItems = orderItems;
     }
@@ -37,7 +37,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<ChildViewHolder> {
     public void onBindViewHolder(@NonNull ChildViewHolder childViewHolder, int position) {
 
 
-        OrderItem orderItem = orderItems.get(position);
+        CartItem orderItem = orderItems.get(position);
         childViewHolder.ChildItemTitle.setText(orderItem.getName());
     }
 
