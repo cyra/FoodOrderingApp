@@ -21,7 +21,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentViewHolder> {
     // An object of RecyclerView.RecycledViewPool is created to share the Views between the child and the parent RecyclerViews
     private SingleCartRestaurantBinding binding;
     private final RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-    private final ArrayList<CartItem> restaurants;
+    private final ArrayList<CartItem> cartItems;
     private final Context context;
     RestaurantList restaurantList = new RestaurantList();
     CartItemList cartItemList = new CartItemList();
@@ -29,7 +29,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentViewHolder> {
 
     public ParentItemAdapter(Context context, ArrayList<CartItem> restaurants) {
         this.context = context;
-        this.restaurants = restaurants;
+        this.cartItems = restaurants;
     }
 
     @NonNull
@@ -44,13 +44,13 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ParentViewHolder parentViewHolder, int position) {
 
-        CartItem cartItem = restaurants.get(position);
+        CartItem cartItem = cartItems.get(position);
 
         // Create a layout manager for the reyclerview
         LinearLayoutManager layoutManager = new LinearLayoutManager(parentViewHolder.ChildRecyclerView.getContext());
 
         // Define child item prefetch size
-        layoutManager.setInitialPrefetchItemCount(restaurants.size());
+        layoutManager.setInitialPrefetchItemCount(cartItems.size());
 
         // Create instance of child item adapter and set layout
         restaurantList.load(context);
@@ -67,7 +67,7 @@ public class ParentItemAdapter extends RecyclerView.Adapter<ParentViewHolder> {
 
     @Override
     public int getItemCount() {
-        return restaurants.size();
+        return cartItems.size();
     }
 
 
