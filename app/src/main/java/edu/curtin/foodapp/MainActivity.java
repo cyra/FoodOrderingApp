@@ -1,10 +1,10 @@
 package edu.curtin.foodapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+import android.widget.Toast;
 
 // added imports
 
@@ -17,12 +17,36 @@ import edu.curtin.foodapp.databinding.ActivityMainBinding;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
+import edu.curtin.foodapp.model.restaurant.Restaurant;
+import edu.curtin.foodapp.model.restaurant.RestaurantList;
+
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
-
+    RestaurantList restaurantList;
+    ArrayList<Restaurant> restaurants;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+/*
+        // Create Restaurants
+        RestaurantList restaurantList = new RestaurantList();
+        restaurantList.load(getApplicationContext());
+        restaurantList.deleteAllRestaurants();
+        restaurantList.deleteRestaurant(7);
+        restaurantList.deleteRestaurant(8);
+        restaurantList.deleteRestaurant(2);
+
+        restaurantList.addRestaurant(new Restaurant(restaurantList.getSize(), "new", ""));
+        restaurantList.addRestaurant(new Restaurant(restaurantList.getSize(), "new2", ""));
+
+        Toast toast = Toast.makeText(MainActivity.this, "A restaurant is added", Toast.LENGTH_SHORT);
+        toast.show();
+*/
+
+
 
         // Menu Bar UI
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -36,5 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
     }
 }

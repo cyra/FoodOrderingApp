@@ -10,7 +10,9 @@ public class FoodItemsDBHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "fooditems.db";
 
-    public FoodItemsDBHelper(Context context) { super(context, DATABASE_NAME, null, VERSION); }
+    public FoodItemsDBHelper(Context context) {
+        super(context, DATABASE_NAME, null, VERSION);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -18,9 +20,9 @@ public class FoodItemsDBHelper extends SQLiteOpenHelper {
                 FoodItemsTable.Cols.ID + " INTEGER, " +
                 FoodItemsTable.Cols.NAME + " TEXT, " +
                 FoodItemsTable.Cols.DESCRIPTION + " TEXT, " +
-                FoodItemsTable.Cols.PRICE + "FLOAT, " +
-                FoodItemsTable.Cols.IMG + " TEXT)"
-        );
+                FoodItemsTable.Cols.PRICE + " DOUBLE, " +
+                FoodItemsTable.Cols.IMG + " TEXT, " +
+                FoodItemsTable.Cols.RESTAURANTREF + " INTEGER)");
     }
 
     @Override

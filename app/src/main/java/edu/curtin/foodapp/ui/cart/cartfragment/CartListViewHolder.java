@@ -1,25 +1,29 @@
-package edu.curtin.foodapp.ui.browse.fooditemfragment;
+package edu.curtin.foodapp.ui.cart.cartfragment;
+
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import edu.curtin.foodapp.databinding.SingleFoodBinding;
 
-public class FoodItemViewHolder extends RecyclerView.ViewHolder {
-    public SingleFoodBinding binding;
-    public TextView itemName;
-    TextView itemDescription;
+import edu.curtin.foodapp.databinding.SingleCartFoodItemBinding;
+
+public class CartListViewHolder extends RecyclerView.ViewHolder {
+    SingleCartFoodItemBinding binding;
+    TextView itemName;
     TextView itemPrice;
+    TextView itemQuantity;
     ImageView itemImg;
     CardView cardView;
-    public FoodItemViewHolder(@NonNull SingleFoodBinding binding) {
+
+    public CartListViewHolder(@NonNull SingleCartFoodItemBinding binding) {
         super(binding.getRoot());
         cardView = binding.cardClick;
         itemName = binding.foodName;
-        itemDescription = binding.foodDescription;
         itemPrice = binding.foodPrice;
         itemImg = binding.foodImg;
+        itemQuantity = binding.quantityNum;
         this.binding = binding;
     }
 }

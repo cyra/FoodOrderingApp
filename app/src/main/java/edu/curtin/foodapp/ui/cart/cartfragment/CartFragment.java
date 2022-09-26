@@ -22,6 +22,7 @@ public class CartFragment extends Fragment {
 
     private FragmentCartBinding binding;
     private ArrayList<Orders> orders;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -29,7 +30,6 @@ public class CartFragment extends Fragment {
         return binding.getRoot();
     }
 
-    // Used for nesting child fragments
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         insertNestedFragment();
@@ -38,44 +38,13 @@ public class CartFragment extends Fragment {
     // Embeds the child fragment dynamically
     private void insertNestedFragment() {
         Fragment CartListFragment = new CartListFragment();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
         // For multiple fragments in a fragment, use multiple transaction.replace() and then commit() after.
         transaction.replace(R.id.cartListFragment, CartListFragment);
         transaction.commit();
 
-/*
-        final RecyclerView rv = binding.cartListFragment;
-        rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        orders = new ArrayList<>();
-        orders = prepareData();
-        CartAdapter rvAdapter = new CartAdapter(getContext(),orders);
-        rv.setAdapter(rvAdapter);
-        */
-
-
     }
-    private ArrayList prepareData() {
-        ArrayList<OrderItem> pizzaOrders = new ArrayList<>();
-        ArrayList<OrderItem> pastaOrders = new ArrayList<>();
-        ArrayList<RestaurantOrder> restaurants = new ArrayList<>();
 
-        pizzaOrders.add(new OrderItem("pizza", 12.30, 1));
-        pizzaOrders.add(new OrderItem("pizza", 12.30, 1));
-        pizzaOrders.add(new OrderItem("pizza", 12.30, 1));
-        pastaOrders.add(new OrderItem("pi", 12.30, 1));
-        pastaOrders.add(new OrderItem("pa", 12.30, 1));
-
-        RestaurantOrder newRestaurant = new RestaurantOrder("resto", pizzaOrders);
-        RestaurantOrder pastarant = new RestaurantOrder("pasta", pastaOrders);
-
-        restaurants.add(newRestaurant);
-        restaurants.add(pastarant);
-        Orders order = new Orders(1,"", "","");
-        order.setOrders(restaurants);
-        orders.add(order);
-        return orders;
-
-    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

@@ -31,7 +31,7 @@ public class AccountFragment extends Fragment {
         users = new UserList();
         users.load(getActivity());
 
-        users.addUser(new User(users.getSize(), String.valueOf(users.getSize()) + "@test.com", "person personson", "123 Fake Street", "404"));
+        users.addUser(new User(users.getSize(), users.getSize() + "@test.com", "person personson", "123 Fake Street", "404"));
         currentUser = users.getUser(users.getSize() - 1);
     }
 

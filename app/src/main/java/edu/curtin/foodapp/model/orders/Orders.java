@@ -2,6 +2,8 @@ package edu.curtin.foodapp.model.orders;
 
 import java.util.ArrayList;
 
+import edu.curtin.foodapp.model.fooditems.FoodItem;
+
 public class Orders {
     int orderID;
     String userID;
