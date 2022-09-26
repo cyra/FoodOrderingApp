@@ -4,13 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 import edu.curtin.foodapp.database.DBSchema.CartItemsTable;
 import edu.curtin.foodapp.database.carts.CartItemsDBCursor;
 import edu.curtin.foodapp.database.carts.CartItemsDBHelper;
-import edu.curtin.foodapp.model.cart.CartItem;
 
 public class CartItemList {
     private ArrayList<CartItem> cartItems;
@@ -29,14 +29,32 @@ public class CartItemList {
         // Read database contents into foodItems
         cartItems = getAllCartItems();
 
+        /* dont need to add all in cart
         if (this.getSize() == 0) {
             this.addAll();
-        }
+        }*/
     }
+
+
+    public CartItem getCartItem(int index) {
+        return cartItems.get(index);
+    }
+
+    // get cartitem by id
+    public CartItem getCartItemByID(int id) {
+        for (CartItem cartItem : cartItems) {
+            if (cartItem.getID() == id) {
+                return cartItem;
+            }
+        }
+        return null;
+    }
+
 
     public int getSize() {
         return cartItems.size();
     }
+
 
     public void addCartItem(CartItem newCartItem) {
         ContentValues cv = new ContentValues();
@@ -67,6 +85,67 @@ public class CartItemList {
             cursor.close();
         }
         return temp;
+    }
+
+    public void addQuantity(int cartID) {
+        int originalQty = getCartItemByID(cartID).getQuantity();
+        int updateQty = originalQty + 1;
+        String stringID = String.valueOf(cartID);
+        try {
+            String rawQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.QUANTITY + " = " + updateQty + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+            db.execSQL(rawQuery);
+            db.close();
+            Log.v("DB", "Quantity increased");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void minusQuantity(int cartID) {
+        int originalQty = getCartItemByID(cartID).getQuantity();
+        int updateQty = originalQty - 1;
+        String stringID = String.valueOf(cartID);
+        // if quantity is 1, delete the item
+        if (updateQty == 0) {
+            deleteCartItem(cartID);
+        } else {
+            try {
+                String rawQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.QUANTITY + " = " + updateQty + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+                db.execSQL(rawQuery);
+                db.close();
+                Log.v("DB", "Quantity decreased");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void deleteCartItem(int cartID) {
+        String stringID = String.valueOf(cartID);
+        try {
+            String rawQuery = "delete from " + CartItemsTable.NAME + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+            db.execSQL(rawQuery);
+            db.close();
+            Log.v("DB", "Cart item deleted");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addORUpdateItem(CartItem item) {
+        //String[] mAllColumns = {CartItemsTable.Cols.ID,CartItemsTable.Cols.NAME, CartItemsTable.Cols.DESCRIPTION, CartItemsTable.Cols.PRICE, CartItemsTable.Cols.IMG, CartItemsTable.Cols.RESTAURANTREF, CartItemsTable.Cols.USERID, CartItemsTable.Cols.QUANTITY, CartItemsTable.Cols.TOTALPRICE};
+        //if the item does not exist, then create item id with item count as 0
+        Cursor cur = db.rawQuery("SELECT * FROM " + CartItemsTable.NAME + " WHERE " + CartItemsTable.Cols.ID + "= '" + Integer.toString(item.getID()) + "'", null);
+        if (cur.getCount() > 0) { // This will get the number of rows
+            addQuantity(item.getID());
+            Log.v("DB", "Item updated");
+        } else {
+            //insert
+            addCartItem(item);
+            Log.v("DB", "Item inserted");
+        }
+        cur.close();
+
     }
 
     public void addAll() {

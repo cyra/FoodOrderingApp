@@ -14,7 +14,10 @@ public class CartListViewHolder extends RecyclerView.ViewHolder {
     TextView itemName;
     TextView itemPrice;
     TextView itemQuantity;
+    TextView restaurantName;
     ImageView itemImg;
+    CardView minusButton;
+    CardView plusButton;
     CardView cardView;
 
     public CartListViewHolder(@NonNull SingleCartFoodItemBinding binding) {
@@ -24,6 +27,10 @@ public class CartListViewHolder extends RecyclerView.ViewHolder {
         itemPrice = binding.foodPrice;
         itemImg = binding.foodImg;
         itemQuantity = binding.quantityNum;
+        restaurantName = binding.restoName;
+        minusButton = binding.minus;
+        plusButton = binding.add;
+
         this.binding = binding;
     }
 }

@@ -7,6 +7,7 @@ public class CartItem extends FoodItem {
     int quantity;
     double totalPrice;
 
+
     public CartItem(int foodId, String foodName, String description, double price, String foodImg, int resRef, int userID, int quantity, double totalPrice) {
         super(foodId, foodName, description, price, foodImg, resRef);
         this.userID = userID;
@@ -38,5 +39,8 @@ public class CartItem extends FoodItem {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+
+
 }
 
