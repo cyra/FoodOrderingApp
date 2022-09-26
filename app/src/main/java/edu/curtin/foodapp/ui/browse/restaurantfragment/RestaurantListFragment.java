@@ -19,18 +19,16 @@ import java.util.ArrayList;
 
 public class RestaurantListFragment extends Fragment {
 
-    RestaurantList restaurantList = new RestaurantList();
     ListRestaurantBinding binding;
 
-    public RestaurantListFragment() {
-        // Required empty public constructor
-    }
-
+    RestaurantList restaurantList;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
+        restaurantList = new RestaurantList();
+        restaurantList.load(getContext());
     }
 
     @Override
@@ -43,7 +41,7 @@ public class RestaurantListFragment extends Fragment {
         rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         // Make the recyclerview read the RestaurantList
-        RestaurantViewAdapter rvAdapter = new RestaurantViewAdapter(getContext(), restaurantList.read(getContext()));
+        RestaurantViewAdapter rvAdapter = new RestaurantViewAdapter(getContext(), restaurantList.getAllRestaurants());
 
         rv.setAdapter(rvAdapter);
         return root;

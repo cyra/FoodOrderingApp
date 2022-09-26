@@ -28,29 +28,9 @@ public class RestaurantList {
                 .getWritableDatabase();
 
         restaurants = getAllRestaurants();
-    }
 
-    // make this method return a list (this) for the adapter
-    public ArrayList<Restaurant> read(Context context) {
-        // Open database
-        this.db = new RestaurantsDBHelper(context.getApplicationContext())
-                .getWritableDatabase();
-
-        // Read database contents into restaurants
-        restaurants = getAllRestaurants();
-        this.addAll();
-        return restaurants;
-
-    }
-
-    public void addAll() {
-        // Just to make sure db is cleared on app install
-        deleteAllRestaurants();
-        if (this.getSize() == 0) {
-            // Add restaurants here
-            this.addRestaurant(new Restaurant(getSize(), "Pizza Place", "pizza"));
-            this.addRestaurant(new Restaurant(getSize(), "Pasta Place", "pasta"));
-            this.addRestaurant(new Restaurant(getSize(), "Burger Place", "burger"));
+        if (getSize() == 0) {
+            addAll();
         }
     }
 
@@ -73,17 +53,6 @@ public class RestaurantList {
         db.insert(RestaurantsTable.NAME, null, cv);
     }
 
-    public void deleteAllRestaurants() {
-        for (int i = 0; i < this.getSize(); i++) {
-            this.deleteRestaurant(i);
-
-        }
-    }
-
-    public boolean deleteRestaurant(int id) {
-        return db.delete(RestaurantsTable.NAME, RestaurantsTable.Cols.ID + "=?", new String[]{String.valueOf(id)}) > 0;
-    }
-
     public ArrayList<Restaurant> getAllRestaurants() {
         Cursor cursor = db.query(RestaurantsTable.NAME, null, null, null, null, null, null);
         RestaurantsDBCursor restaurantsDBCursor = new RestaurantsDBCursor(cursor);
@@ -99,5 +68,13 @@ public class RestaurantList {
         }
 
         return restaurants;
+    }
+
+
+    public void addAll() {
+        // Add restaurants here
+        this.addRestaurant(new Restaurant(getSize(), "Pizza Place", "pizza"));
+        this.addRestaurant(new Restaurant(getSize(), "Pasta Place", "pasta"));
+        this.addRestaurant(new Restaurant(getSize(), "Burger Place", "burger"));
     }
 }
