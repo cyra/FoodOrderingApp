@@ -39,16 +39,12 @@ public class FoodItemListFragment extends Fragment {
         View root = binding.getRoot();
         final RecyclerView rv = binding.recyclerview;
 
-        // default
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        FoodItemViewAdapter rvAdapter = new FoodItemViewAdapter(getContext(),foodItemList.getAllFoodItems());
+        FoodItemViewAdapter rvAdapter = new FoodItemViewAdapter(getContext(),foodItemList.getRestaurantMenu(0));
 
         rv.setAdapter(rvAdapter);
         return root;
-
     }
-
 
     @Override
     public void onDestroyView() {

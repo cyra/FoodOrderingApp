@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,20 @@ public class FoodItemList {
         return foodItems.get(index);
     }
 
+    public ArrayList<FoodItem> getRestaurantMenu(int restaurantID) {
+        ArrayList<FoodItem> menu = new ArrayList<FoodItem>();
+
+        for (int i = 0; i < this.getSize(); i++) {
+            FoodItem temp = foodItems.get(i);
+
+            if (temp.getRestaurantRef() == restaurantID) {
+                menu.add(temp);
+            }
+        }
+
+        return menu;
+    }
+
     public void addFoodItem(FoodItem newFoodItem) {
         // Add foodItem to list
         this.foodItems.add(newFoodItem);
@@ -75,6 +90,10 @@ public class FoodItemList {
         return temp;
     }
 
+    /**
+     * When new restaurants join the app, their food items in the database is added here.
+     * The app must be uninstalled/reinstalled or the database wiped to see the new changes.
+     */
     public void addAll() {
         final int FORK_BE_WITH_YOU_ID = 0;
         final int GUGAS_KITCHEN_ID = 1;
