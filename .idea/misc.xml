@@ -10,8 +10,13 @@
         <entry key="..\:/Projects/MAD/FoodOrderingApp/app/src/main/res/layout/fragment_account.xml" value="0.1140625" />
         <entry key="..\:/Projects/MAD/FoodOrderingApp/app/src/main/res/layout/fragment_browse.xml" value="0.11510416666666666" />
         <entry key="..\:/Projects/MAD/FoodOrderingApp/app/src/main/res/layout/fragment_cart.xml" value="0.1" />
+        <entry key="..\:/Projects/MAD/FoodOrderingApp/app/src/main/res/layout/fragment_create_account.xml" value="0.4" />
         <entry key="..\:/Projects/MAD/FoodOrderingApp/app/src/main/res/layout/fragment_footer.xml" value="0.1" />
         <entry key="..\:/Projects/MAD/FoodOrderingApp/app/src/main/res/layout/fragment_header.xml" value="0.15846599131693198" />
+        <entry key="..\:/Projects/MAD/FoodOrderingApp/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Projects/MAD/FoodOrderingApp/app/src/main/res/layout/fragment_login.xml" value="0.176" />
+        <entry key="..\:/Projects/MAD/FoodOrderingApp/app/src/main/res/layout/fragment_order_history.xml" value="0.264" />
+        <entry key="..\:/Projects/MAD/FoodOrderingApp/app/src/main/res/layout/fragment_restaurant_list.xml" value="0.1" />
         <entry key="..\:/Projects/MAD/FoodOrderingApp/app/src/main/res/layout/fragment_user_details.xml" value="0.264" />
         <entry key="app/src/main/res/drawable-v24/ic_outline_shopping_cart_24.xml" value="0.185" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />

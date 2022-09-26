@@ -24,6 +24,7 @@ public class UserList {
         // Open database
         this.db = new UsersDBHelper(context.getApplicationContext())
                 .getWritableDatabase();
+
         // Read database contents into users
         users = getAllUsers();
     }
@@ -38,10 +39,27 @@ public class UserList {
         ContentValues cv = new ContentValues();
         cv.put(UsersTable.Cols.ID, newUser.getID());
         cv.put(UsersTable.Cols.EMAIL, newUser.getEmail());
+        cv.put(UsersTable.Cols.PASSWORD, newUser.getPassword());
         cv.put(UsersTable.Cols.NAME, newUser.getName());
         cv.put(UsersTable.Cols.ADDRESS, newUser.getAddress());
         cv.put(UsersTable.Cols.PHONE, newUser.getPhone());
         db.insert(UsersTable.NAME, null, cv);
+    }
+
+    public int findIndexByLogin(String email, String password) {
+        for (int i = 0; i < users.size(); i++) {
+            User temp = users.get(i);
+
+            if (temp.getEmail().equals(email)) {
+                if (temp.getPassword().equals(password)) {
+                    return i;
+                }
+                else {
+                    return -1;
+                }
+            }
+        }
+        return -1;
     }
 
 
@@ -62,6 +80,6 @@ public class UserList {
             cursor.close();
         }
 
-        return users;
+        return temp;
     }
 }

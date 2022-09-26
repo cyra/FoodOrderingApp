@@ -3,7 +3,9 @@ package edu.curtin.foodapp.ui.account.userdetailsfragment;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -33,10 +35,11 @@ public class UserDetailsFragment extends Fragment {
         final TextView addressTextView = binding.addressTextView;
         final TextView phoneTextView = binding.phoneTextView;
 
-        nameTextView.setText(accountViewModel.getName());
-        emailTextView.setText(accountViewModel.getEmail());
-        addressTextView.setText(accountViewModel.getAddress());
-        phoneTextView.setText(accountViewModel.getPhone());
+        // Set user details observers
+        accountViewModel.getName().observe(getViewLifecycleOwner(), nameTextView::setText);
+        accountViewModel.getEmail().observe(getViewLifecycleOwner(), emailTextView::setText);
+        accountViewModel.getAddress().observe(getViewLifecycleOwner(), addressTextView::setText);
+        accountViewModel.getPhone().observe(getViewLifecycleOwner(), phoneTextView::setText);
 
         return root;
     }
