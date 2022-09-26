@@ -19,7 +19,6 @@ public class FoodItemList {
 
     public FoodItemList() {
         foodItems = new ArrayList<>();
-
     }
 
     public void load(Context context) {
@@ -28,56 +27,10 @@ public class FoodItemList {
                 .getWritableDatabase();
         // Read database contents into foodItems
         foodItems = getAllFoodItems();
-        this.addAll();
-    }
 
-    // make this method return a list (this) for the adapter
-    public ArrayList<FoodItem> read(Context context) {
-        // Open database
-        this.db = new FoodItemsDBHelper(context.getApplicationContext())
-                .getWritableDatabase();
-        foodItems = getAllFoodItems();
-        this.addAll();
-        return foodItems;
-
-    }
-    // Find food items by name and return an array of matches
-    public ArrayList<FoodItem> select(Context context, String toFind) {
-        this.load(context);
-        return matchName(toFind);
-
-    }
-    public ArrayList<FoodItem> matchName(String toMatch) {
-        ArrayList<FoodItem> randomList = new ArrayList<>();
-        for (int i = 0; i < this.getSize(); i++) {
-            if (this.getFoodItem(i).getName().equals(toMatch)) {
-                randomList.add(this.getFoodItem(i));
-            }
-        }
-        return randomList;
-    }
-
-    public void addAll() {
-        // Just to make sure db is cleared on app install
-        deleteAllFoodItems();
         if (this.getSize() == 0) {
-            this.addFoodItem(new FoodItem(getSize(), "Burger", "Delicious burger", 20.55, "burger", 1));
-            this.addFoodItem(new FoodItem(getSize(), "Pizza", "Cool pizza", 20.55, "pizza", 1));
-            this.addFoodItem(new FoodItem(getSize(), "Pasta", "A pasta", 20.55, "pasta", 1));
-            this.addFoodItem(new FoodItem(getSize(), "Burrito", "A delicious burrito", 20.55, "burrito", 1));
+            this.addAll();
         }
-    }
-
-
-    public void deleteAllFoodItems() {
-        for (int i = 0; i < this.getSize(); i++) {
-            this.deleteFoodItem(i);
-
-        }
-    }
-
-    public boolean deleteFoodItem(int id) {
-        return db.delete(DBSchema.FoodItemsTable.NAME, DBSchema.FoodItemsTable.Cols.ID + "=?", new String[]{String.valueOf(id)}) > 0;
     }
 
     public int getSize() {
@@ -103,21 +56,29 @@ public class FoodItemList {
         db.insert(FoodItemsTable.NAME, null, cv);
     }
 
-
     public ArrayList<FoodItem> getAllFoodItems() {
         Cursor cursor = db.query(DBSchema.FoodItemsTable.NAME, null, null, null, null, null, null);
         FoodItemsDBCursor foodItemsDBCursor = new FoodItemsDBCursor(cursor);
 
+        ArrayList<FoodItem> temp = new ArrayList<FoodItem>();
+
         try {
             foodItemsDBCursor.moveToFirst();
             while (!foodItemsDBCursor.isAfterLast()) {
-                foodItems.add(foodItemsDBCursor.getFoodItem());
+                temp.add(foodItemsDBCursor.getFoodItem());
                 foodItemsDBCursor.moveToNext();
             }
         } finally {
             cursor.close();
         }
 
-        return foodItems;
+        return temp;
+    }
+
+    public void addAll() {
+        this.addFoodItem(new FoodItem(getSize(), "Burger", "Delicious burger", 20.55, "burger", 1));
+        this.addFoodItem(new FoodItem(getSize(), "Pizza", "Cool pizza", 20.55, "pizza", 1));
+        this.addFoodItem(new FoodItem(getSize(), "Pasta", "A pasta", 20.55, "pasta", 1));
+        this.addFoodItem(new FoodItem(getSize(), "Burrito", "A delicious burrito", 20.55, "burrito", 1));
     }
 }

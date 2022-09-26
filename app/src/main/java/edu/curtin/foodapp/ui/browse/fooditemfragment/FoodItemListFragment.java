@@ -20,18 +20,16 @@ import java.util.ArrayList;
 
 public class FoodItemListFragment extends Fragment {
 
-    private @NonNull FoodItemList foodItemList = new FoodItemList();
     ListFoodItemBinding binding;
 
-    public FoodItemListFragment() {
-        // Required empty public constructor
-    }
-
+    private FoodItemList foodItemList;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
+        foodItemList = new FoodItemList();
+        foodItemList.load(getContext());
     }
 
     @Override
@@ -44,10 +42,8 @@ public class FoodItemListFragment extends Fragment {
         // default
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // For gridlayout
-        // rv.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        FoodItemViewAdapter rvAdapter = new FoodItemViewAdapter(getContext(),foodItemList.getAllFoodItems());
 
-        FoodItemViewAdapter rvAdapter = new FoodItemViewAdapter(getContext(),foodItemList.read(getContext()));
         rv.setAdapter(rvAdapter);
         return root;
 

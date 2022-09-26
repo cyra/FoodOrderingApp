@@ -27,7 +27,7 @@ public class RestaurantList {
         // Open database
         this.db = new RestaurantsDBHelper(context.getApplicationContext())
                 .getWritableDatabase();
-
+        // Read database contents into restaurants
         restaurants = getAllRestaurants();
 
         if (getSize() == 0) {

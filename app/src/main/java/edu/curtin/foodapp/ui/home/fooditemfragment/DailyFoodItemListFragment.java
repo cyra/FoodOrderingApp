@@ -20,18 +20,16 @@ import edu.curtin.foodapp.ui.browse.fooditemfragment.FoodItemViewAdapter;
 
 public class DailyFoodItemListFragment extends Fragment {
 
-    private @NonNull FoodItemList foodItemList = new FoodItemList();
     ListDailyFoodItemBinding binding;
 
-    public DailyFoodItemListFragment() {
-        // Required empty public constructor
-    }
+    private FoodItemList foodItemList;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
-
+        foodItemList = new FoodItemList();
+        foodItemList.load(getContext());
     }
 
     @Override
@@ -43,7 +41,7 @@ public class DailyFoodItemListFragment extends Fragment {
 
         rv.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        DailyFoodItemListAdapter rvAdapter = new DailyFoodItemListAdapter(getContext(), foodItemList.read(getContext()));
+        DailyFoodItemListAdapter rvAdapter = new DailyFoodItemListAdapter(getContext(), foodItemList.getAllFoodItems());
         rv.setAdapter(rvAdapter);
         return root;
 
