@@ -5,74 +5,51 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import edu.curtin.foodapp.databinding.SingleCartRestaurantBinding;
+import edu.curtin.foodapp.databinding.ListCartBinding;
+import edu.curtin.foodapp.databinding.ListDailyFoodItemBinding;
 import edu.curtin.foodapp.model.cart.CartItemList;
-import edu.curtin.foodapp.model.orders.OrderItem;
-import edu.curtin.foodapp.model.orders.RestaurantOrder;
-import edu.curtin.foodapp.model.restaurant.RestaurantList;
-import edu.curtin.foodapp.ui.cart.parent.ParentItemAdapter;
-
+import edu.curtin.foodapp.model.fooditems.FoodItem;
+import edu.curtin.foodapp.model.fooditems.FoodItemList;
+import edu.curtin.foodapp.ui.browse.fooditemfragment.FoodItemViewAdapter;
+import edu.curtin.foodapp.ui.home.fooditemfragment.DailyFoodItemListAdapter;
 
 public class CartListFragment extends Fragment {
 
-    private SingleCartRestaurantBinding binding;
-    //private FragmentCartBinding binding;
-    ArrayList<RestaurantOrder> restaurants;
-    CartItemList cartList = new CartItemList();
+    ListCartBinding binding;
 
-    public CartListFragment() {
-        // Required empty public constructor
-    }
-
+    private CartItemList cartItemList;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+
+        cartItemList = new CartItemList();
+        cartItemList.load(getContext());
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = SingleCartRestaurantBinding.inflate(inflater, container, false);
-        //binding = FragmentCartBinding.inflate(inflater, container, false);
+        binding = ListCartBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        final RecyclerView rv = binding.childRecyclerView;
+        final RecyclerView rv = binding.recyclerview;
+
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ParentItemAdapter rvAdapter = new ParentItemAdapter(getContext(),cartList.read(getContext()));
+        CartListAdapter rvAdapter = new CartListAdapter(getContext(), cartItemList.getAllCartItems());
         rv.setAdapter(rvAdapter);
-
         return root;
-
-
-
     }
 
-    private ArrayList<RestaurantOrder> prepareData() {
-        ArrayList<RestaurantOrder> restaurants = new ArrayList<>();
-        ArrayList<OrderItem> pizzaOrders = new ArrayList<>();
-        ArrayList<OrderItem> pastaOrders = new ArrayList<>();
-        pizzaOrders.add(new OrderItem("pizza", 12.30, 1));
-        pizzaOrders.add(new OrderItem("pizza", 12.30, 1));
-        pizzaOrders.add(new OrderItem("pizza", 12.30, 1));
-        pastaOrders.add(new OrderItem("pi", 12.30, 1));
-        pastaOrders.add(new OrderItem("pa", 12.30, 1));
-
-        RestaurantOrder newRestaurant = new RestaurantOrder("resto", pizzaOrders);
-        RestaurantOrder pastarant = new RestaurantOrder("pasta", pastaOrders);
-
-
-        restaurants.add(newRestaurant);
-        restaurants.add(pastarant);
-        return restaurants;
-
-    }
 
     @Override
     public void onDestroyView() {

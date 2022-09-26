@@ -28,73 +28,17 @@ public class CartItemList {
                 .getWritableDatabase();
         // Read database contents into foodItems
         cartItems = getAllCartItems();
-        this.addAll();
-    }
 
-    // make this method return a list (this) for the adapter
-    public ArrayList<CartItem> read(Context context) {
-        // Open database
-        this.db = new CartItemsDBHelper(context.getApplicationContext())
-                .getWritableDatabase();
-        cartItems = getAllCartItems();
-        this.addAll();
-        return cartItems;
-
-    }
-
-    // Find cart items selected by name and return an array of matches
-    public ArrayList<CartItem> selectCart(Context context, String toFind) {
-        this.load(context);
-        return matchName(toFind);
-
-    }
-
-    // Match name for cart item
-    public ArrayList<CartItem> matchName(String toFind) {
-        ArrayList<CartItem> matches = new ArrayList<>();
-        for (CartItem item : cartItems) {
-            if (item.getName().toLowerCase().contains(toFind.toLowerCase())) {
-                matches.add(item);
-            }
-        }
-        return matches;
-    }
-
-    public void addAll() {
-        // Just to make sure db is cleared on app install
-       deleteAllCartItems();
         if (this.getSize() == 0) {
-
-            this.addCartItem(new CartItem(1, "Chicken Burger", "Chicken Burger", 10.00, "burger", 1, 1, 1, 10.00));
-        }
-
-    }
-
-    // Delete All Cart Items
-    public void deleteAllCartItems() {
-        for (int i = 0; i < this.getSize(); i++) {
-            this.deleteCartItem(i);
+            this.addAll();
         }
     }
 
-    // Delete CartItem from database
-    public boolean deleteCartItem(int id) {
-        return db.delete(CartItemsTable.NAME, CartItemsTable.Cols.ID + "=?", new String[]{String.valueOf(id)}) > 0;
-    }
-
-    // Get Cart Item Size
     public int getSize() {
         return cartItems.size();
     }
 
-    // Get a Cart Item from database
-    public CartItem getCartItem(int index) {
-        return cartItems.get(index);
-    }
-
-
-// Add Cart item to database
-    public void addCartItem(CartItem newCartItem){
+    public void addCartItem(CartItem newCartItem) {
         ContentValues cv = new ContentValues();
         cv.put(CartItemsTable.Cols.ID, newCartItem.getID());
         cv.put(CartItemsTable.Cols.NAME, newCartItem.getName());
@@ -109,20 +53,26 @@ public class CartItemList {
 
     }
 
-    // Get all cart items
     public ArrayList<CartItem> getAllCartItems() {
         Cursor cursor = db.query(CartItemsTable.NAME, null, null, null, null, null, null);
         CartItemsDBCursor cartItemsDBCursor = new CartItemsDBCursor(cursor);
+        ArrayList<CartItem> temp = new ArrayList<>();
         try {
-            cursor.moveToFirst();
+            cartItemsDBCursor.moveToFirst();
             while (!cartItemsDBCursor.isAfterLast()) {
-                cartItems.add(cartItemsDBCursor.getCartItem());
-                cursor.moveToNext();
+                temp.add(cartItemsDBCursor.getCartItem());
+                cartItemsDBCursor.moveToNext();
             }
         } finally {
             cursor.close();
         }
-        return cartItems;
+        return temp;
     }
+
+    public void addAll() {
+        this.addCartItem(new CartItem(getSize(), "Chicken Burger", "Chicken Burger", 10.00, "burger", 1, 1, 1, 10.00));
+        System.out.println("added cartlist");
+    }
+
 }
 

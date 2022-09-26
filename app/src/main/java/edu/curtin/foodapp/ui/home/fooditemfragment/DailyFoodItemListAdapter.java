@@ -1,11 +1,14 @@
 package edu.curtin.foodapp.ui.home.fooditemfragment;
 
 import edu.curtin.foodapp.database.fooditems.FoodItemsDBHelper;
+import edu.curtin.foodapp.model.cart.CartItem;
+import edu.curtin.foodapp.model.cart.CartItemList;
 import edu.curtin.foodapp.model.fooditems.FoodItemList;
 
 import android.content.Context;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +30,7 @@ public class DailyFoodItemListAdapter extends RecyclerView.Adapter<DailyFoodItem
     private final Context context;
     private SingleFoodBinding binding;
     private final ArrayList<FoodItem> foodItems;
-    //FoodItemList cart = new FoodItemList();
+    private CartItemList cart;
 
 
     public DailyFoodItemListAdapter(Context context, ArrayList<FoodItem> foodItems) {
@@ -60,10 +63,18 @@ public class DailyFoodItemListAdapter extends RecyclerView.Adapter<DailyFoodItem
                 double price = Double.parseDouble(holder.itemPrice.getText().toString());
                 // save into database
                 // load context first before adding
-                //cart.load(view.getContext());
+                CartItemList cart = new CartItemList();
+                cart.load(view.getContext());
+                int foodId = foodItems.get(position).getID();
+                String foodName = foodItems.get(position).getName();
+                double foodPrice = foodItems.get(position).getPrice();
+                String foodImg = foodItems.get(position).getImg();
+                int restaurantRef = foodItems.get(position).getRestaurantRef();
                 System.out.println("added food item " + title + " " + price);
-                //cart.addFoodItem(new FoodItem(1,title,title,price,"",1));
-                Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_cart);
+                cart.addCartItem(new CartItem(foodId, foodName,"", foodPrice, foodImg, restaurantRef, 1,1,foodPrice));
+                Bundle bundle = new Bundle();
+                bundle.putString(holder.itemName.getText().toString(), title);
+                Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_cart, bundle);
             }
         });
     }

@@ -31,7 +31,7 @@
         <entry key="app/src/main/res/layout/list_orders.xml" value="0.30434782608695654" />
         <entry key="app/src/main/res/layout/list_restaurant.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/layout/recyclerview.xml" value="0.2604166666666667" />
-        <entry key="app/src/main/res/layout/single_cart_food_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/single_cart_food_item.xml" value="0.2679473876953125" />
         <entry key="app/src/main/res/layout/single_cart_item.xml" value="0.2604166666666667" />
         <entry key="app/src/main/res/layout/single_cart_restaurant.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/single_food.xml" value="0.2577153523763021" />
