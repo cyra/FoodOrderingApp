@@ -44,7 +44,6 @@ public class DailyFoodItemListFragment extends Fragment {
         DailyFoodItemListAdapter rvAdapter = new DailyFoodItemListAdapter(getContext(), foodItemList.getAllFoodItems());
         rv.setAdapter(rvAdapter);
         return root;
-
     }
 
 

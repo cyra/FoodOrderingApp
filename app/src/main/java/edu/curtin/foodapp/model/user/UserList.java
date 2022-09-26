@@ -49,10 +49,12 @@ public class UserList {
         Cursor cursor = db.query(UsersTable.NAME, null, null, null, null, null, null);
         UsersDBCursor usersDBCursor = new UsersDBCursor(cursor);
 
+        ArrayList<User> temp = new ArrayList<User>();
+
         try {
             usersDBCursor.moveToFirst();
             while (!usersDBCursor.isAfterLast()) {
-                users.add(usersDBCursor.getUser());
+                temp.add(usersDBCursor.getUser());
                 usersDBCursor.moveToNext();
             }
         }
