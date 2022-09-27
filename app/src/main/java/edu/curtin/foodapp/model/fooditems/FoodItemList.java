@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -75,7 +76,8 @@ public class FoodItemList {
     public ArrayList<FoodItem> getRandomFoodItems(int num) {
         ArrayList<FoodItem> randomItems = new ArrayList<FoodItem>();
         // Set seed as current date
-        Random rng = new Random(/*seed*/);
+        LocalDate currentDate = LocalDate.now();
+        Random rng = new Random(localDateToLong(currentDate));
         int n = rng.nextInt(foodItems.size());
 
         while (randomItems.size() < num) {
@@ -86,8 +88,12 @@ public class FoodItemList {
 
             n = rng.nextInt(foodItems.size());
         }
-
         return randomItems;
+    }
+
+    private long localDateToLong(LocalDate date) {
+        String dateStr = String.valueOf(date);
+        return Long.parseLong(String.join("", dateStr.split("-")));
     }
 
     public ArrayList<FoodItem> getAllFoodItems() {
