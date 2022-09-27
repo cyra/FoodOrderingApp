@@ -35,13 +35,18 @@ public class CartListFragment extends Fragment {
     FragmentCartBinding cartBinding;
     ExtendedFloatingActionButton fab;
     private CartItemList cartItemList;
+    private CartViewModel cartViewModel;
+    private String totalPrice;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         cartItemList = new CartItemList();
         cartItemList.load(getContext());
-        // Set fab text to checkout + cart total price
+        CartViewModel cartViewModel = new ViewModelProvider(getActivity(),
+                (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(CartViewModel.class);
+        totalPrice = cartViewModel.getTotalCart();
+
     }
 
     @Override
@@ -55,8 +60,12 @@ public class CartListFragment extends Fragment {
 
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        CartListAdapter rvAdapter = new CartListAdapter(getContext(), cartItemList.getAllCartItems());
+        CartListAdapter rvAdapter = new CartListAdapter(getContext(), cartItemList.getAllCartItems(),cartViewModel);
         rv.setAdapter(rvAdapter);
+        // Set fab text to checkout + cart total price
+        fab = getActivity().findViewById(R.id.cart_fab);
+        String totalText = "Checkout $" + totalPrice;
+        fab.setText(totalText);
 
         return root;
     }

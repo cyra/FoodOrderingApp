@@ -14,7 +14,7 @@ public class CartViewModel extends ViewModel {
         totalCartPrice = new MutableLiveData<String>();
     }
 
-    public LiveData<String> getTotalCartPrice() { return totalCartPrice; }
 
-    public void setTotalCartPrice(String total) { this.totalCartPrice.setValue(total); }
+    public String getTotalCart() { return totalCartPrice.getValue(); }
+    public void setTotalCart(String total) { this.totalCartPrice.setValue(total); }
 }

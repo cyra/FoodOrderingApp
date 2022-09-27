@@ -25,10 +25,11 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
     ArrayList<CartItem> cartItems;
     //CartItemList cart = new CartItemList();
     RestaurantList restaurantList;
+    private CartViewModel cartViewModel;
 
-
-    public CartListAdapter(Context context, ArrayList<CartItem> cartItems) {
+    public CartListAdapter(Context context, ArrayList<CartItem> cartItems, CartViewModel cartViewModel) {
         this.context = context;
+        this.cartViewModel = cartViewModel;
         this.cartItems = cartItems;
     }
 
@@ -67,6 +68,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
                 cartItems.get(position).setTotalPrice(cartItems.get(position).getTotalPrice() + cartItems.get(position).getPrice());
                 holder.itemQuantity.setText(String.valueOf(quantity));
                 holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
+                String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
+                cartViewModel.setTotalCart(totalCartPrice);
             }
         });
         holder.minusButton.setOnClickListener(new View.OnClickListener() {
@@ -83,9 +86,15 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
                     cartItems.get(position).setTotalPrice(cartItems.get(position).getTotalPrice() - cartItems.get(position).getPrice());
                     holder.itemQuantity.setText(String.valueOf(quantity));
                     holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
+                    String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
+                    cartViewModel.setTotalCart(totalCartPrice);
+
                 } else {
                     cart.deleteCartItem(cartItems.get(position).getID());
                     cartItems.remove(position);
+                    String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
+                    cartViewModel.setTotalCart(totalCartPrice);
+
                     // somehow recyclerview crashes without this
                     notifyDataSetChanged();
                 }

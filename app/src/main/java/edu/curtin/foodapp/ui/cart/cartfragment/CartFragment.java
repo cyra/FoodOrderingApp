@@ -28,11 +28,9 @@ public class CartFragment extends Fragment {
     private ArrayList<Orders> orders;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-       CartViewModel cartViewModel = new ViewModelProvider(getParentFragment()).get(CartViewModel.class);
 
         binding = FragmentCartBinding.inflate(inflater, container, false);
-        final ExtendedFloatingActionButton fab = binding.cartFab;
-        cartViewModel.getTotalCartPrice().observe(getViewLifecycleOwner(), fab::setText);
+
 
         return binding.getRoot();
     }

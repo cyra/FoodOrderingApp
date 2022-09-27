@@ -34,7 +34,7 @@ public class BrowseFragment extends Fragment {
     // Embeds the child fragment dynamically
     private void insertNestedFragment() {
         Fragment RestaurantListFragment = new RestaurantListFragment();
-        Fragment FoodItemListFragment  = new FoodItemListFragment();
+        Fragment FoodItemListFragment = new FoodItemListFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         // For multiple fragments in a fragment, use multiple transaction.replace() and then commit() after.
         transaction.replace(R.id.restaurantListFragment, RestaurantListFragment);
