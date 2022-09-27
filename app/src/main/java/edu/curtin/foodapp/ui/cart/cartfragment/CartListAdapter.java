@@ -54,6 +54,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
         holder.itemPrice.setText(String.valueOf(cartItems.get(position).getPrice()));
         holder.restaurantName.setText(restaurantName);
         holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
+
         holder.plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

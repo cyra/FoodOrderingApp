@@ -7,10 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+
+import edu.curtin.foodapp.databinding.FragmentCartBinding;
 import edu.curtin.foodapp.databinding.SingleCartFoodItemBinding;
 
 public class CartListViewHolder extends RecyclerView.ViewHolder {
     SingleCartFoodItemBinding binding;
+    FragmentCartBinding cartBinding;
     TextView itemName;
     TextView itemPrice;
     TextView itemQuantity;
@@ -20,7 +24,6 @@ public class CartListViewHolder extends RecyclerView.ViewHolder {
     CardView minusButton;
     CardView plusButton;
     CardView cardView;
-
     public CartListViewHolder(@NonNull SingleCartFoodItemBinding binding) {
         super(binding.getRoot());
         cardView = binding.cardClick;
@@ -35,4 +38,5 @@ public class CartListViewHolder extends RecyclerView.ViewHolder {
 
         this.binding = binding;
     }
+
 }

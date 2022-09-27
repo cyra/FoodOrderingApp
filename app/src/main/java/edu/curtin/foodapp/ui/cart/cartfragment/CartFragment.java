@@ -4,10 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -22,11 +26,14 @@ public class CartFragment extends Fragment {
 
     private FragmentCartBinding binding;
     private ArrayList<Orders> orders;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+       CartViewModel cartViewModel = new ViewModelProvider(getParentFragment()).get(CartViewModel.class);
 
         binding = FragmentCartBinding.inflate(inflater, container, false);
+        final ExtendedFloatingActionButton fab = binding.cartFab;
+        cartViewModel.getTotalCartPrice().observe(getViewLifecycleOwner(), fab::setText);
+
         return binding.getRoot();
     }
 
