@@ -68,8 +68,6 @@ public class LoginFragment extends Fragment {
                         ((LoginActivity) getActivity()).validatePassword(password)) {
                     // Search database for match
                     int index = users.findIndexByLogin(email, password);
-                    Log.d("Login", email);
-                    Log.d("Login", password);
                     // If match found
                     if (index != -1) {
                         // Return data

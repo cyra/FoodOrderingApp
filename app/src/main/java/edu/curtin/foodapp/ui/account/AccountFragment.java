@@ -2,6 +2,7 @@ package edu.curtin.foodapp.ui.account;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.accounts.Account;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,11 +38,21 @@ public class AccountFragment extends Fragment {
 
     private FragmentAccountBinding binding;
 
+    private AccountViewModel accountViewModel;
     private User currentUser;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+
+        // User persistence
+        accountViewModel = ((MainActivity) getActivity()).getAccountViewModel();
+        User savedUser = accountViewModel.getUser().getValue();
+        if (savedUser != null) {
+            currentUser = savedUser;
+
+            Log.d("user", currentUser.getName());
+        }
 
         if (currentUser == null) {
             startActivityForResult(LoginActivity.getIntent(getContext()), USER_REQUEST_CODE);
@@ -53,38 +64,23 @@ public class AccountFragment extends Fragment {
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        AccountViewModel accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
-
-        if (currentUser != null) {
-            accountViewModel.setName(currentUser.getName());
-            accountViewModel.setEmail(currentUser.getEmail());
-            accountViewModel.setAddress(currentUser.getAddress());
-            accountViewModel.setPhone(currentUser.getPhone());
-        }
-
         return root;
     }
 
     // Used for nesting child fragments
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        insertUserDetailsFragment();
+        insertChildFragments();
     }
 
-    private void insertUserDetailsFragment() {
-        // Embeds the child fragment dynamically
+    private void insertChildFragments() {
+        // Embeds the child fragments dynamically
         Fragment orderListFragment = new OrderListFragment();
         Fragment userDetailsFragment = new UserDetailsFragment();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.userDetailsFragment, userDetailsFragment);
         transaction.replace(R.id.orderListFragment, orderListFragment);
         transaction.commit();
-    }
-
-    private void insertOrderHistoryFragment() {
-        Fragment orderHistoryFragment = new OrderHistoryFragment();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.orderHistoryFragment, orderHistoryFragment).commit();
     }
 
     @Override
@@ -98,18 +94,11 @@ public class AccountFragment extends Fragment {
         if (requestCode == USER_REQUEST_CODE && resultCode == RESULT_OK) {
             currentUser = LoginActivity.getUser(data);
 
-            AccountViewModel accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
-
+            accountViewModel.setUser(currentUser);
             accountViewModel.setName(currentUser.getName());
             accountViewModel.setEmail(currentUser.getEmail());
             accountViewModel.setAddress(currentUser.getAddress());
             accountViewModel.setPhone(currentUser.getPhone());
         }
     }
-
-    /*@Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("user", currentUser);
-    }*/
 }
