@@ -134,31 +134,31 @@ public class FoodItemList {
         this.addFoodItem(new FoodItem(getSize(), "Honey Butter Chicken", "Umami Madness!", 13.50, "food_honey_chicken", SPAGHETTEA_MONSTER_ID));
 
         // Hungry Zak's
-        this.addFoodItem(new FoodItem(getSize(), "Cheeseburger", "...", 7.40, "food_whatever", HUNGRY_ZAKS_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Omega-Whopper", "...", 7.40, "food_whatever", HUNGRY_ZAKS_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Baconator", "...", 7.40, "food_whatever", HUNGRY_ZAKS_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Tomato Terror", "...", 7.40, "food_whatever", HUNGRY_ZAKS_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Literally Just Chips", "...", 7.40, "food_whatever", HUNGRY_ZAKS_ID));
-        this.addFoodItem(new FoodItem(getSize(), "FrainBreeze", "...", 7.40, "food_whatever", HUNGRY_ZAKS_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Cheeseburger", "Hamburger with added cheese", 2.00, "food_whatever", HUNGRY_ZAKS_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Omega-Whopper", "The sequel to the Beta-Whopper", 5.60, "food_whatever", HUNGRY_ZAKS_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Baconator", "Bacon with a vengeance", 6.10, "food_whatever", HUNGRY_ZAKS_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Tomato Terror", "Attack of the killer tomatoes", 4.70, "food_whatever", HUNGRY_ZAKS_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Literally Just Chips", "^", 3.20, "food_whatever", HUNGRY_ZAKS_ID));
+        this.addFoodItem(new FoodItem(getSize(), "FrainBreeze", "Will breeze your frain!", 4.50, "food_whatever", HUNGRY_ZAKS_ID));
 
         // Salad World
         this.addFoodItem(new FoodItem(getSize(), "Lettuce", "Some crisp lettuce", 3.60, "food_whatever", SALAD_WORLD_ID));
         this.addFoodItem(new FoodItem(getSize(), "Tomatoes", "Some sliced tomatoes", 4.10, "food_whatever", SALAD_WORLD_ID));
         this.addFoodItem(new FoodItem(getSize(), "Lettuce & Tomatoes", "Lettuce and tomatoes, but together", 5.60, "food_whatever", SALAD_WORLD_ID));
 
-        // Cow Still Mooing
-        this.addFoodItem(new FoodItem(getSize(), "Angus", "...", 3.60, "food_whatever", COW_STILL_MOOING_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Braford", "...", 3.60, "food_whatever", COW_STILL_MOOING_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Hereford", "...", 3.60, "food_whatever", COW_STILL_MOOING_ID));
+        // Cow Still Mooing/
+        this.addFoodItem(new FoodItem(getSize(), "Angus", "Australian Angus", 1300, "food_whatever", COW_STILL_MOOING_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Braford", "Australian Braford", 860, "food_whatever", COW_STILL_MOOING_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Hereford", "Australian Hereford", 720, "food_whatever", COW_STILL_MOOING_ID));
 
         // Soup-a-bowl
-        this.addFoodItem(new FoodItem(getSize(), "Chicken Soup", "...", 3.60, "food_whatever", SOUP_A_BOWL_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Pumpkin Soup", "...", 3.60, "food_whatever", SOUP_A_BOWL_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Tomato Soup", "...", 3.60, "food_whatever", SOUP_A_BOWL_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Chicken Soup", "There's soup in my chicken", 4.10, "food_whatever", SOUP_A_BOWL_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Pumpkin Soup", "We drove over a pumpkin", 3.40, "food_whatever", SOUP_A_BOWL_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Tomato Soup", "There's definitely tomatoes in this...", 3.70, "food_whatever", SOUP_A_BOWL_ID));
 
         // Joust Kebabs
-        this.addFoodItem(new FoodItem(getSize(), "Good Knight Kebab", "...", 3.60, "food_whatever", JOUST_KEBABS_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Lanced Lamb Kebab", "...", 3.60, "food_whatever", JOUST_KEBABS_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Good Knight Kebab", "Fit for a good knight", 5.50, "food_whatever", JOUST_KEBABS_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Lanced Lamb Kebab", "What happens when a lamb is jousted", 5.20, "food_whatever", JOUST_KEBABS_ID));
     }
 
 }
