@@ -41,8 +41,6 @@ public class FoodItemListFragment extends Fragment {
         BrowseViewModel browseViewModel = new ViewModelProvider(getActivity(),
                 (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(BrowseViewModel.class);
         restaurantID = browseViewModel.getRestaurantID();
-
-        Toast.makeText(getContext(), String.valueOf(restaurantID), Toast.LENGTH_SHORT).show();
     }
 
     @Override

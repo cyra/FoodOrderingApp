@@ -60,36 +60,11 @@ public class RestaurantViewAdapter extends RecyclerView.Adapter<RestaurantViewHo
                 int id = findRestaurantIDByName(holder.itemName.getText().toString());
                 // Change BrowseViewModel restaurantID
                 browseViewModel.setRestaurantID(id);
-                // Remove FoodItemListFragment
+                // Restart FoodItemListFragment
                 FragmentTransaction transaction = fm.beginTransaction();
-                //FoodItemListFragment foodItemListFragment = new FoodItemListFragment();
-                FoodItemListFragment foodItemListFragment = (FoodItemListFragment) fm.findFragmentById(R.id.foodItemListFragment);
-                transaction.remove(foodItemListFragment);
+                FoodItemListFragment foodItemListFragment = new FoodItemListFragment();
+                transaction.replace(R.id.foodItemListFragment, foodItemListFragment);
                 transaction.commit();
-
-                fm.executePendingTransactions();
-                // Start FoodItemListFragment
-                transaction = fm.beginTransaction();
-                foodItemListFragment = new FoodItemListFragment();
-                //FoodItemListFragment foodItemListFragment = (FoodItemListFragment) fm.findFragmentById(R.id.foodItemListFragment);
-                transaction.add(R.id.foodItemListFragment, foodItemListFragment);
-                transaction.commit();
-
-                //transaction.replace(R.id.foodItemListFragment, foodItemListFragment);
-                //transaction.commit();
-
-                /*FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-                // For multiple fragments in a fragment, use multiple transaction.replace() and then commit() after.
-                transaction.replace(R.id.restaurantListFragment, RestaurantListFragment);
-                transaction.replace(R.id.foodItemListFragment, FoodItemListFragment);
-                transaction.commit();*/
-
-                /*FragmentTransaction transaction = parentFragmentManager.beginTransaction();
-                FoodItemListFragment foodItemListFragment = (FoodItemListFragment) parentFragmentManager.findFragmentById(R.id.foodItemListFragment);
-                parentFragmentManager.beginTransaction().remove(foodItemListFragment);
-                //foodItemListFragment = new FoodItemListFragment();
-                //parentFragmentManager.beginTransaction().add(R.id.foodItemListFragment, foodItemListFragment);
-                 */
             }
         });
     }
