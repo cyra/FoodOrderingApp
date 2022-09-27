@@ -41,7 +41,8 @@ public class DailyFoodItemListFragment extends Fragment {
 
         rv.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        DailyFoodItemListAdapter rvAdapter = new DailyFoodItemListAdapter(getContext(), foodItemList.getAllFoodItems());
+        final int NUM_RANDOM_FOOD_ITEMS = 10;
+        DailyFoodItemListAdapter rvAdapter = new DailyFoodItemListAdapter(getContext(), foodItemList.getRandomFoodItems(NUM_RANDOM_FOOD_ITEMS));
         rv.setAdapter(rvAdapter);
         return root;
     }

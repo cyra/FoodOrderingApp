@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import edu.curtin.foodapp.database.DBSchema;
 import edu.curtin.foodapp.database.DBSchema.FoodItemsTable;
@@ -69,6 +70,24 @@ public class FoodItemList {
         cv.put(FoodItemsTable.Cols.RESTAURANTREF, newFoodItem.getRestaurantRef());
 
         db.insert(FoodItemsTable.NAME, null, cv);
+    }
+
+    public ArrayList<FoodItem> getRandomFoodItems(int num) {
+        ArrayList<FoodItem> randomItems = new ArrayList<FoodItem>();
+        // Set seed as current date
+        Random rng = new Random(/*seed*/);
+        int n = rng.nextInt(foodItems.size());
+
+        while (randomItems.size() < num) {
+            FoodItem randomFoodItem = foodItems.get(n);
+            if (!randomItems.contains(randomFoodItem)) {
+                randomItems.add(randomFoodItem);
+            }
+
+            n = rng.nextInt(foodItems.size());
+        }
+
+        return randomItems;
     }
 
     public ArrayList<FoodItem> getAllFoodItems() {
