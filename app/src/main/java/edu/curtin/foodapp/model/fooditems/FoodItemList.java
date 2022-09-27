@@ -108,30 +108,30 @@ public class FoodItemList {
 
         // Fork Be With You
         this.addFoodItem(new FoodItem(getSize(), "Hutt Dogs", "Hutt Dogs by Jabba!", 7.40, "food_hutt_dogs", FORK_BE_WITH_YOU_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Jabba Juice", "A Green Juice", 7.40, "food_jabba_juice", FORK_BE_WITH_YOU_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Han Burger", "The Fastest Burger in Space", 7.40, "food_han_burger", FORK_BE_WITH_YOU_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Yoda Soda", "Thirsty Are You?", 7.40, "food_yoda_soda", FORK_BE_WITH_YOU_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Space Buns", "...", 7.40, "food_space_buns", FORK_BE_WITH_YOU_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Imperial Wings", "Dark Meat", 7.40, "food_imperial_wings", FORK_BE_WITH_YOU_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Cuke Skywalker", "Cuke Salad", 7.40, "food_cuke_skywalker", FORK_BE_WITH_YOU_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Jabba Juice", "A Green Juice", 6.50, "food_jabba_juice", FORK_BE_WITH_YOU_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Han Burger", "The Fastest Burger in Space", 9.50, "food_han_burger", FORK_BE_WITH_YOU_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Yoda Soda", "Thirsty Are You?", 5.20, "food_yoda_soda", FORK_BE_WITH_YOU_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Space Buns", "...", 4.50, "food_space_buns", FORK_BE_WITH_YOU_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Imperial Wings", "Dark Meat", 12.00, "food_imperial_wings", FORK_BE_WITH_YOU_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Cuke Skywalker", "Cuke Salad", 9.75, "food_cuke_skywalker", FORK_BE_WITH_YOU_ID));
 
         // Guga's Kitchen
-        this.addFoodItem(new FoodItem(getSize(), "Wagyu A5 Steak", "S, P & G", 7.40, "food_wagyu_a5", GUGAS_KITCHEN_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Potatoes", "A Comforting Side Dish", 7.40, "food_potatoes", GUGAS_KITCHEN_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Wagyu A5 Steak", "S, P & G", 55.70, "food_wagyu_a5", GUGAS_KITCHEN_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Potatoes", "A Comforting Side Dish", 5.50, "food_potatoes", GUGAS_KITCHEN_ID));
 
         // Life of Pi
-        this.addFoodItem(new FoodItem(getSize(), "3.14159", "A Pie of Pi", 7.40, "food_pi", LIFE_OF_PI_ID));
+        this.addFoodItem(new FoodItem(getSize(), "3.14159", "A Pie of Pi", 3.14, "food_pi", LIFE_OF_PI_ID));
 
         // Lord of the Wings
-        this.addFoodItem(new FoodItem(getSize(), "Hot Chicken Wings", "Beware.", 7.40, "food_hot_wings", LORD_OF_THE_WINGS_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Onion Rings", "My Precious", 7.40, "food_onion_rings", LORD_OF_THE_WINGS_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Hot Chicken Wings", "Beware.", 8.75, "food_hot_wings", LORD_OF_THE_WINGS_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Onion Rings", "My Precious", 6.50, "food_onion_rings", LORD_OF_THE_WINGS_ID));
 
         // Spaghettea Monster
-        this.addFoodItem(new FoodItem(getSize(), "Bubble Tea", "A Bubble Tea that doesn't bite!", 7.40, "food_bubble_tea", SPAGHETTEA_MONSTER_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Spaghetti", "Innocent Spaghetti", 7.40, "food_spaghetti", SPAGHETTEA_MONSTER_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Corndogs", "Surprise Each bite!", 7.40, "food_corndogs", SPAGHETTEA_MONSTER_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Milk Tea", "A Simple Milk Tea", 7.40, "food_milktea", SPAGHETTEA_MONSTER_ID));
-        this.addFoodItem(new FoodItem(getSize(), "Honey Butter Chicken", "Umami Madness!", 7.40, "food_honey_chicken", SPAGHETTEA_MONSTER_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Bubble Tea", "A Bubble Tea that doesn't bite!", 6.50, "food_bubble_tea", SPAGHETTEA_MONSTER_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Spaghetti", "Innocent Spaghetti", 12.30, "food_spaghetti", SPAGHETTEA_MONSTER_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Corndogs", "Surprise Each bite!", 7.30, "food_corndogs", SPAGHETTEA_MONSTER_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Milk Tea", "A Simple Milk Tea", 5.50, "food_milktea", SPAGHETTEA_MONSTER_ID));
+        this.addFoodItem(new FoodItem(getSize(), "Honey Butter Chicken", "Umami Madness!", 13.50, "food_honey_chicken", SPAGHETTEA_MONSTER_ID));
 
         // Hungry Zak's
         this.addFoodItem(new FoodItem(getSize(), "Cheeseburger", "...", 7.40, "food_whatever", HUNGRY_ZAKS_ID));
