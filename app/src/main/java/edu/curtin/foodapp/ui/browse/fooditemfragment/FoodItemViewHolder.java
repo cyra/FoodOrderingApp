@@ -13,6 +13,7 @@ public class FoodItemViewHolder extends RecyclerView.ViewHolder {
     TextView itemPrice;
     ImageView itemImg;
     CardView cardView;
+
     public FoodItemViewHolder(@NonNull SingleFoodBinding binding) {
         super(binding.getRoot());
         cardView = binding.cardClick;
