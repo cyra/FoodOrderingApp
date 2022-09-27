@@ -90,12 +90,16 @@ public class CartItemList {
     public void addQuantity(int cartID) {
         int originalQty = getCartItemByID(cartID).getQuantity();
         int updateQty = originalQty + 1;
+        double originalPrice = getCartItemByID(cartID).getTotalPrice();
+        double updateTotal = originalPrice + getCartItemByID(cartID).getPrice();
         String stringID = String.valueOf(cartID);
         try {
-            String rawQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.QUANTITY + " = " + updateQty + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
-            db.execSQL(rawQuery);
+            String qtyQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.QUANTITY + " = " + updateQty + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+            String totalQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.TOTALPRICE + " = " + updateTotal + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+            db.execSQL(qtyQuery);
+            db.execSQL(totalQuery);
             db.close();
-            Log.v("DB", "Quantity increased");
+            Log.v("DB", "Quantity and Price increased");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -104,16 +108,20 @@ public class CartItemList {
     public void minusQuantity(int cartID) {
         int originalQty = getCartItemByID(cartID).getQuantity();
         int updateQty = originalQty - 1;
+        double originalPrice = getCartItemByID(cartID).getTotalPrice();
+        double updateTotal = originalPrice - getCartItemByID(cartID).getPrice();
         String stringID = String.valueOf(cartID);
         // if quantity is 1, delete the item
         if (updateQty == 0) {
             deleteCartItem(cartID);
         } else {
             try {
-                String rawQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.QUANTITY + " = " + updateQty + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
-                db.execSQL(rawQuery);
+                String qtyQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.QUANTITY + " = " + updateQty + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+                String totalQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.TOTALPRICE + " = " + updateTotal + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+                db.execSQL(qtyQuery);
+                db.execSQL(totalQuery);
                 db.close();
-                Log.v("DB", "Quantity decreased");
+                Log.v("DB", "Quantity and Price decreased");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

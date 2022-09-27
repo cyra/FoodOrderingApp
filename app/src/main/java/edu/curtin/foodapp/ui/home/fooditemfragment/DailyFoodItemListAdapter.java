@@ -73,13 +73,7 @@ public class DailyFoodItemListAdapter extends RecyclerView.Adapter<DailyFoodItem
                 System.out.println("added food item " + title + " " + price);
                 CartItem newCartItem = new CartItem(foodId, foodName, "", foodPrice, foodImg, restaurantRef, 1, 1, foodPrice);
                 cart.addORUpdateItem(newCartItem);
-
-
-
-                //cart.addCartItem(new CartItem(foodId, foodName,"", foodPrice, foodImg, restaurantRef, 1,1,foodPrice));
-                Bundle bundle = new Bundle();
-                bundle.putString(holder.itemName.getText().toString(), title);
-                Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_cart, bundle);
+                Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_cart);
             }
         });
     }

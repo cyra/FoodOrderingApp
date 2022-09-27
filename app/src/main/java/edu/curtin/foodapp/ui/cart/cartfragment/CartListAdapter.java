@@ -50,9 +50,10 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
         String restaurantName = restaurantList.getRestaurant(restaurantNumber).getName();
         holder.itemName.setText(cartItems.get(position).getName());
         System.out.println("name set");
-        holder.itemQuantity.setText(Integer.toString(cartItems.get(position).getQuantity()));
+        holder.itemQuantity.setText(String.valueOf(cartItems.get(position).getQuantity()));
         holder.itemPrice.setText(String.valueOf(cartItems.get(position).getPrice()));
         holder.restaurantName.setText(restaurantName);
+        holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
         holder.plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,11 +61,11 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
                 cart.load(view.getContext());
                 int quantity = Integer.parseInt(holder.itemQuantity.getText().toString());
                 quantity++;
-                holder.itemQuantity.setText(Integer.toString(quantity));
                 cart.addQuantity(cartItems.get(position).getID());
                 cartItems.get(position).setQuantity(quantity);
-                cartItems.get(position).setPrice(quantity * cartItems.get(position).getPrice());
-                holder.itemPrice.setText(String.valueOf(cartItems.get(position).getPrice()));
+                cartItems.get(position).setTotalPrice(cartItems.get(position).getTotalPrice() + cartItems.get(position).getPrice());
+                holder.itemQuantity.setText(String.valueOf(quantity));
+                holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
             }
         });
         holder.minusButton.setOnClickListener(new View.OnClickListener() {
@@ -76,14 +77,15 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
                 int quantity = Integer.parseInt(holder.itemQuantity.getText().toString());
                 if (quantity > 1) {
                     quantity--;
-                    holder.itemQuantity.setText(Integer.toString(quantity));
                     cart.minusQuantity(cartItems.get(position).getID());
                     cartItems.get(position).setQuantity(quantity);
-                    cartItems.get(position).setPrice(quantity * cartItems.get(position).getPrice());
-                    holder.itemPrice.setText(String.valueOf(cartItems.get(position).getPrice()));
+                    cartItems.get(position).setTotalPrice(cartItems.get(position).getTotalPrice() - cartItems.get(position).getPrice());
+                    holder.itemQuantity.setText(String.valueOf(quantity));
+                    holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
                 } else {
                     cart.deleteCartItem(cartItems.get(position).getID());
                     cartItems.remove(position);
+                    // somehow recyclerview crashes without this
                     notifyDataSetChanged();
                 }
             }
