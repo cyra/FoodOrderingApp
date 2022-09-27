@@ -18,11 +18,6 @@ public class AccountViewModel extends ViewModel {
         email = new MutableLiveData<String>();
         address = new MutableLiveData<String>();
         phone = new MutableLiveData<String>();
-
-        /*name.setValue("name loading...");
-        email.setValue("email loading...");
-        address.setValue("address loading...");
-        phone.setValue("phone loading...");*/
     }
 
     public LiveData<String> getName() { return name; }

@@ -72,12 +72,15 @@ public class FoodItemViewAdapter extends RecyclerView.Adapter<FoodItemViewHolder
             }
         });
     }
+
     public int getImage(String imageName) {
         int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
         return drawableResourceId;
     }
+
     @Override
     public int getItemCount() {
         return foodItems.size();
     }
+
 }
