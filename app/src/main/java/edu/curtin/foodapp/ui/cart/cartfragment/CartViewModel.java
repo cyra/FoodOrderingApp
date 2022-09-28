@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import edu.curtin.foodapp.model.cart.CartItem;
-
 public class CartViewModel extends ViewModel {
 
     private final MutableLiveData<String> totalCartPrice;
@@ -14,7 +12,7 @@ public class CartViewModel extends ViewModel {
         totalCartPrice = new MutableLiveData<String>();
     }
 
+    public LiveData<String> getTotalCart() { return totalCartPrice; }
 
-    public String getTotalCart() { return totalCartPrice.getValue(); }
-    public void setTotalCart(String total) { this.totalCartPrice.setValue(total); }
+    public void setTotalCart(String totalCartPrice) { this.totalCartPrice.setValue(totalCartPrice); }
 }

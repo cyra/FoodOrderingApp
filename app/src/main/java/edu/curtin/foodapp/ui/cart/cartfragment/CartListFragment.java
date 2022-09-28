@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.databinding.FragmentCartBinding;
 import edu.curtin.foodapp.databinding.ListCartBinding;
@@ -32,26 +33,19 @@ import edu.curtin.foodapp.ui.home.fooditemfragment.DailyFoodItemListAdapter;
 public class CartListFragment extends Fragment {
 
     ListCartBinding binding;
-    FragmentCartBinding cartBinding;
-    ExtendedFloatingActionButton fab;
     private CartItemList cartItemList;
-    private CartViewModel cartViewModel;
-    private String totalPrice;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         cartItemList = new CartItemList();
         cartItemList.load(getContext());
-        CartViewModel cartViewModel = new ViewModelProvider(getActivity(),
-                (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(CartViewModel.class);
-        totalPrice = cartViewModel.getTotalCart();
-
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        CartViewModel cartViewModel = ((MainActivity) getActivity()).getCartViewModel();
 
         binding = ListCartBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -60,12 +54,8 @@ public class CartListFragment extends Fragment {
 
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        CartListAdapter rvAdapter = new CartListAdapter(getContext(), cartItemList.getAllCartItems(),cartViewModel);
+        CartListAdapter rvAdapter = new CartListAdapter(getContext(), cartItemList.getAllCartItems(), cartViewModel);
         rv.setAdapter(rvAdapter);
-        // Set fab text to checkout + cart total price
-        fab = getActivity().findViewById(R.id.cart_fab);
-        String totalText = "Checkout $" + totalPrice;
-        fab.setText(totalText);
 
         return root;
     }

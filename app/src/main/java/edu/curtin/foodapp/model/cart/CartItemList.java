@@ -103,7 +103,7 @@ public class CartItemList {
             String totalQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.TOTALPRICE + " = " + updateTotal + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
             db.execSQL(qtyQuery);
             db.execSQL(totalQuery);
-            db.close();
+            //db.close();
             Log.v("DB", "Quantity and Price increased");
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -125,7 +125,7 @@ public class CartItemList {
                 String totalQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.TOTALPRICE + " = " + updateTotal + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
                 db.execSQL(qtyQuery);
                 db.execSQL(totalQuery);
-                db.close();
+                //db.close();
                 Log.v("DB", "Quantity and Price decreased");
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -138,7 +138,7 @@ public class CartItemList {
         try {
             String rawQuery = "delete from " + CartItemsTable.NAME + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
             db.execSQL(rawQuery);
-            db.close();
+            //db.close();
             Log.v("DB", "Cart item deleted");
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -167,14 +167,16 @@ public class CartItemList {
     }
 
     // Calculate all cart total price and but check if the cart is empty
-    public double getCartTotalPrice() {
+    public String getCartTotalPrice() {
         double totalPrice = 0;
         if (getAllCartItems().size() > 0) {
             for (CartItem item : getAllCartItems()) {
                 totalPrice += item.getTotalPrice();
             }
         }
-        return totalPrice;
+        String result = String.format("%.2f", totalPrice);
+
+        return result;
     }
 
 

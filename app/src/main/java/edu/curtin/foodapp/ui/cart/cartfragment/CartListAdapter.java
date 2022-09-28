@@ -1,5 +1,6 @@
 package edu.curtin.foodapp.ui.cart.cartfragment;
 
+import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.databinding.SingleCartFoodItemBinding;
 import edu.curtin.foodapp.model.cart.CartItem;
 import edu.curtin.foodapp.model.cart.CartItemList;
@@ -14,9 +15,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
@@ -29,14 +33,15 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
 
     public CartListAdapter(Context context, ArrayList<CartItem> cartItems, CartViewModel cartViewModel) {
         this.context = context;
-        this.cartViewModel = cartViewModel;
         this.cartItems = cartItems;
+        this.cartViewModel = cartViewModel;
     }
 
     @NonNull
     @Override
     public CartListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         binding = SingleCartFoodItemBinding.inflate(LayoutInflater.from(context), parent, false);
+
         return new CartListViewHolder(binding);
     }
 
@@ -44,6 +49,9 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
     public void onBindViewHolder(@NonNull CartListViewHolder holder, int position) {
         // save into database
         // load context first before adding
+        CartItemList cart = new CartItemList();
+        cart.load(context);
+
         RestaurantList restaurantList = new RestaurantList();
         restaurantList.load(context);
 
@@ -55,6 +63,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
         holder.itemPrice.setText(String.valueOf(cartItems.get(position).getPrice()));
         holder.restaurantName.setText(restaurantName);
         holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
+        String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
+        cartViewModel.setTotalCart(totalCartPrice);
 
         holder.plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +77,10 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
                 cartItems.get(position).setQuantity(quantity);
                 cartItems.get(position).setTotalPrice(cartItems.get(position).getTotalPrice() + cartItems.get(position).getPrice());
                 holder.itemQuantity.setText(String.valueOf(quantity));
-                holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
+                String roundedItemTotal = String.format(Locale.ENGLISH, "%.2f", cartItems.get(position).getTotalPrice());
+                holder.itemTotal.setText(roundedItemTotal);
                 String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
+                System.out.println("total price: "+totalCartPrice);
                 cartViewModel.setTotalCart(totalCartPrice);
             }
         });
@@ -85,9 +97,11 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
                     cartItems.get(position).setQuantity(quantity);
                     cartItems.get(position).setTotalPrice(cartItems.get(position).getTotalPrice() - cartItems.get(position).getPrice());
                     holder.itemQuantity.setText(String.valueOf(quantity));
-                    holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
+                    String roundedItemTotal = String.format(Locale.ENGLISH,"%.2f", cartItems.get(position).getTotalPrice());
+                    holder.itemTotal.setText(roundedItemTotal);
                     String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
                     cartViewModel.setTotalCart(totalCartPrice);
+
 
                 } else {
                     cart.deleteCartItem(cartItems.get(position).getID());
