@@ -40,8 +40,16 @@
     <FrameLayout
         android:id="@+id/foodItemListFragment"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="650dp"
         android:layout_marginHorizontal="10dp"
         app:layout_constraintTop_toBottomOf="@id/foodItemListTitle"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <FrameLayout
+        android:id="@+id/featuredRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/foodItemListFragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
