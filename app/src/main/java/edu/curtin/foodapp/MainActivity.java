@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Restaurant> restaurants;
     Context context;
 
+    private BrowseViewModel browseViewModel;
     private AccountViewModel accountViewModel;
 
     @Override
@@ -51,8 +52,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
+        browseViewModel = new ViewModelProvider(this).get(BrowseViewModel.class);
     }
 
+    public BrowseViewModel getBrowseViewModel() { return browseViewModel; }
     public AccountViewModel getAccountViewModel() {
         return accountViewModel;
     }

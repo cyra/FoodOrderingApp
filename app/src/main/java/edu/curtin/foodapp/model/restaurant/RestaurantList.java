@@ -7,12 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Random;
 
 import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.database.DBSchema.RestaurantsTable;
 import edu.curtin.foodapp.database.restaurants.RestaurantsDBCursor;
 import edu.curtin.foodapp.database.restaurants.RestaurantsDBHelper;
+import edu.curtin.foodapp.model.fooditems.FoodItem;
 
 public class RestaurantList {
     private ArrayList<Restaurant> restaurants;
@@ -52,6 +55,20 @@ public class RestaurantList {
         cv.put(RestaurantsTable.Cols.IMG, newRestaurant.getImg());
         //cv.put(RestaurantsTable.Cols.MENU, newRestaurant.getMenu());
         db.insert(RestaurantsTable.NAME, null, cv);
+    }
+
+    public Restaurant getRandomRestaurant() {
+        // Set seed as current date
+        LocalDate currentDate = LocalDate.now();
+        Random rng = new Random(localDateToLong(currentDate));
+        int n = rng.nextInt(restaurants.size());
+
+        return restaurants.get(n);
+    }
+
+    private long localDateToLong(LocalDate date) {
+        String dateStr = String.valueOf(date);
+        return Long.parseLong(String.join("", dateStr.split("-")));
     }
 
     public ArrayList<Restaurant> getAllRestaurants() {

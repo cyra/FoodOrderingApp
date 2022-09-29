@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_click"
+        android:id="@+id/featured_card_click"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -27,7 +27,7 @@
                 app:cardCornerRadius="8dp">
 
                 <ImageView
-                    android:id="@+id/restaurantImg"
+                    android:id="@+id/featuredRestaurantImg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -41,7 +41,7 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/restaurantName"
+                    android:id="@+id/featuredRestaurantName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Restaurant name"
@@ -49,7 +49,7 @@
                     android:textStyle="bold" />
 
                 <RatingBar
-                    android:id="@+id/ratingBar"
+                    android:id="@+id/featuredRatingBar"
                     style="@style/Widget.AppCompat.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
