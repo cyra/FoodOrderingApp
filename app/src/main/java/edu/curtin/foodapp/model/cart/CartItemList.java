@@ -22,7 +22,7 @@ public class CartItemList {
     // The database connection
     private SQLiteDatabase db;
 
-    public CartItemList(SQLiteDatabase foodItemDb) {
+    public CartItemList() {
         cartItems = new ArrayList<>();
     }
 
@@ -74,6 +74,14 @@ public class CartItemList {
                 ex.printStackTrace();
             }
         }
+    }*/
+
+    /*public void addCartItem(CartItem newCartItem) {
+        ContentValues cv = new ContentValues();
+        cv.put(CartItemsTable.Cols.ID, newCartItem.getID());
+        cv.put(CartItemsTable.Cols.PRICE, newCartItem.getPrice());
+        cv.put(CartItemsTable.Cols.QUANTITY, newCartItem.getQuantity());
+        db.insert(CartItemsTable.NAME, null, cv);
     }*/
 
     /*public void addORUpdateItem(CartItem item) {

@@ -5,6 +5,7 @@ import edu.curtin.foodapp.model.cart.CartItem;
 import edu.curtin.foodapp.model.cart.CartItemList;
 import edu.curtin.foodapp.model.fooditems.FoodItemList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import android.database.sqlite.SQLiteDatabase;
@@ -29,6 +30,7 @@ import edu.curtin.foodapp.model.fooditems.FoodItem;
 public class DailyFoodItemListAdapter extends RecyclerView.Adapter<DailyFoodItemListViewHolder> {
     private final Context context;
     private SingleFoodBinding binding;
+
     private final ArrayList<FoodItem> foodItems;
     private CartItemList cart;
 
@@ -36,6 +38,9 @@ public class DailyFoodItemListAdapter extends RecyclerView.Adapter<DailyFoodItem
     public DailyFoodItemListAdapter(Context context, ArrayList<FoodItem> foodItems) {
         this.context = context;
         this.foodItems = foodItems;
+
+        this.cart = new CartItemList();
+        cart.load(context);
     }
 
     @NonNull
@@ -46,33 +51,30 @@ public class DailyFoodItemListAdapter extends RecyclerView.Adapter<DailyFoodItem
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DailyFoodItemListViewHolder holder, int position) {
-        holder.itemName.setText(foodItems.get(position).getName());
-        holder.itemDescription.setText(foodItems.get(position).getDescription());
-        holder.itemPrice.setText(String.valueOf(foodItems.get(position).getPrice()));
-        // If empty show placeholder
-        if (!foodItems.get(position).getImg().isEmpty()) {
-            holder.itemImg.setImageResource(getImage(foodItems.get(position).getImg()));
+    public void onBindViewHolder(@NonNull DailyFoodItemListViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        FoodItem item = foodItems.get(position);
+
+        holder.itemName.setText(item.getName());
+        holder.itemDescription.setText(item.getDescription());
+        holder.itemPrice.setText(String.valueOf(item.getPrice()));
+        if (!item.getImg().isEmpty()) {
+            holder.itemImg.setImageResource(getImage(item.getImg()));
+        }
+        else {
+            // Show placeholder image
         }
 
-        // onclick item opens cart fragment
+        // Clicking item opens Cart
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String title = holder.itemName.getText().toString();
-                double price = Double.parseDouble(holder.itemPrice.getText().toString());
-                // save into database
-                // load context first before adding
-                CartItemList cart = new CartItemList();
-                cart.load(view.getContext());
-                int foodId = foodItems.get(position).getID();
-                String foodName = foodItems.get(position).getName();
-                double foodPrice = foodItems.get(position).getPrice();
-                String foodImg = foodItems.get(position).getImg();
-                int restaurantRef = foodItems.get(position).getRestaurantRef();
-                System.out.println("added food item " + title + " " + price);
-                CartItem newCartItem = new CartItem(foodId, foodName, "", foodPrice, foodImg, restaurantRef, 1, 1, foodPrice);
-                cart.addORUpdateItem(newCartItem);
+                int id = item.getID();
+                double price = item.getPrice();
+                int quantity = 1;
+
+                CartItem cartItem = new CartItem(id, price, quantity);
+                cart.addCartItem(cartItem);
+
                 Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_cart);
             }
         });

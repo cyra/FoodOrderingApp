@@ -33,13 +33,14 @@ import edu.curtin.foodapp.ui.home.fooditemfragment.DailyFoodItemListAdapter;
 public class CartListFragment extends Fragment {
 
     ListCartBinding binding;
-    private CartItemList cartItemList;
+    private CartItemList cart;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        cartItemList = new CartItemList();
-        cartItemList.load(getContext());
+
+        cart = new CartItemList();
+        cart.load(getContext());
     }
 
     @Override
@@ -54,7 +55,7 @@ public class CartListFragment extends Fragment {
 
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        CartListAdapter rvAdapter = new CartListAdapter(getContext(), cartItemList.getAllCartItems(), cartViewModel);
+        CartListAdapter rvAdapter = new CartListAdapter(getContext(), cart, cartViewModel);
         rv.setAdapter(rvAdapter);
 
         return root;

@@ -27,14 +27,14 @@ import java.util.Locale;
 public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
     Context context;
     SingleCartFoodItemBinding binding;
-    ArrayList<CartItem> cartItems;
-    //CartItemList cart = new CartItemList();
-    RestaurantList restaurantList;
+
+    private CartItemList cart;
+
     private CartViewModel cartViewModel;
 
-    public CartListAdapter(Context context, ArrayList<CartItem> cartItems, CartViewModel cartViewModel) {
+    public CartListAdapter(Context context, CartItemList cart, CartViewModel cartViewModel) {
         this.context = context;
-        this.cartItems = cartItems;
+        this.cart = cart;
         this.cartViewModel = cartViewModel;
     }
 
@@ -50,13 +50,13 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
     public void onBindViewHolder(@NonNull CartListViewHolder holder, @SuppressLint("RecyclerView") int position) {
         // save into database
         // load context first before adding
-        CartItemList cart = new CartItemList();
-        cart.load(context);
+        /*CartItemList cart = new CartItemList();
+        cart.load(context);*/
 
         RestaurantList restaurantList = new RestaurantList();
         restaurantList.load(context);
 
-        int restaurantNumber = cartItems.get(position).getRestaurantRef();
+        /*int restaurantNumber = cartItems.get(position).getRestaurantRef();
         String restaurantName = restaurantList.getRestaurant(restaurantNumber).getName();
         holder.itemName.setText(cartItems.get(position).getName());
         System.out.println("name set");
@@ -64,14 +64,14 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
         holder.itemPrice.setText(String.valueOf(cartItems.get(position).getPrice()));
         holder.restaurantName.setText(restaurantName);
         holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
-        String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
+        String totalCartPrice = String.valueOf(cart.getCartTotalPrice());*/
 
         //cartViewModel.setTotalCart(totalCartPrice);
 
         holder.plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CartItemList cart = new CartItemList();
+                /*CartItemList cart = new CartItemList();
                 cart.load(view.getContext());
                 int quantity = Integer.parseInt(holder.itemQuantity.getText().toString());
                 quantity++;
@@ -84,14 +84,14 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
                 String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
                 System.out.println("total price: "+totalCartPrice);
 
-                //cartViewModel.setTotalCart(totalCartPrice);
+                //cartViewModel.setTotalCart(totalCartPrice);*/
             }
         });
 
         holder.minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CartItemList cart = new CartItemList();
+                /*CartItemList cart = new CartItemList();
                 cart.load(view.getContext());
                 // if quantity is 1, remove item from recyclerview
                 int quantity = Integer.parseInt(holder.itemQuantity.getText().toString());
@@ -116,14 +116,14 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
 
                     // somehow recyclerview crashes without this
                     notifyDataSetChanged();
-                }
+                }*/
             }
         });
 
         // If empty show placeholder
-        if (!cartItems.get(position).getImg().isEmpty()) {
+        /*if (!cart.get(position).getImg().isEmpty()) {
             holder.itemImg.setImageResource(getImage(cartItems.get(position).getImg()));
-        }
+        }*/
     }
 
 
@@ -134,6 +134,6 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
 
     @Override
     public int getItemCount() {
-        return cartItems.size();
+        return cart.getSize();
     }
 }
