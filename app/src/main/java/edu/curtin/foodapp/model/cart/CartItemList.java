@@ -6,16 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import java.util.ArrayList;
 
 import edu.curtin.foodapp.database.DBSchema.CartItemsTable;
 import edu.curtin.foodapp.database.carts.CartItemsDBCursor;
 import edu.curtin.foodapp.database.carts.CartItemsDBHelper;
-import edu.curtin.foodapp.ui.browse.BrowseViewModel;
-import edu.curtin.foodapp.ui.cart.cartfragment.CartListViewHolder;
-import edu.curtin.foodapp.ui.cart.cartfragment.CartViewModel;
 
 public class CartItemList {
     private ArrayList<CartItem> cartItems;
@@ -33,11 +28,6 @@ public class CartItemList {
                 .getWritableDatabase();
         // Read database contents into foodItems
         cartItems = getAllCartItems();
-
-        /* dont need to add all in cart
-        if (this.getSize() == 0) {
-            this.addAll();
-        }*/
     }
 
 
@@ -92,51 +82,65 @@ public class CartItemList {
         return temp;
     }
 
-    public void addQuantity(int cartID) {
+    public int addQuantity(int cartID) {
         int originalQty = getCartItemByID(cartID).getQuantity();
         int updateQty = originalQty + 1;
         double originalPrice = getCartItemByID(cartID).getTotalPrice();
         double updateTotal = originalPrice + getCartItemByID(cartID).getPrice();
         String stringID = String.valueOf(cartID);
+        String stringTotal = String.valueOf(updateTotal);
+        String stringQty = String.valueOf(updateQty);
         try {
-            String qtyQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.QUANTITY + " = " + updateQty + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
-            String totalQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.TOTALPRICE + " = " + updateTotal + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+            updateTotalItemPrice(cartID);
+            String qtyQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.QUANTITY + " = " + stringQty + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+            //String totalQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.TOTALPRICE + " = " + stringTotal + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+
             db.execSQL(qtyQuery);
-            db.execSQL(totalQuery);
+            //db.execSQL(totalQuery);
             //db.close();
             Log.v("DB", "Quantity and Price increased");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return updateQty;
     }
 
-    public void minusQuantity(int cartID) {
+    public int minusQuantity(int cartID) {
         int originalQty = getCartItemByID(cartID).getQuantity();
         int updateQty = originalQty - 1;
         double originalPrice = getCartItemByID(cartID).getTotalPrice();
         double updateTotal = originalPrice - getCartItemByID(cartID).getPrice();
+        getCartItemByID(cartID).setQuantity(updateQty);
+        getCartItemByID(cartID).setTotalPrice(updateTotal);
         String stringID = String.valueOf(cartID);
+        String stringQty = String.valueOf(updateQty);
+        String stringTotal = String.valueOf(updateTotal);
+
+
         // if quantity is 1, delete the item
         if (updateQty == 0) {
             deleteCartItem(cartID);
         } else {
             try {
-                String qtyQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.QUANTITY + " = " + updateQty + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
-                String totalQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.TOTALPRICE + " = " + updateTotal + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+                String qtyQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.QUANTITY + " = " + stringQty + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+                //String totalQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.TOTALPRICE + " = " + stringTotal + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+                updateTotalItemPrice(cartID);
                 db.execSQL(qtyQuery);
-                db.execSQL(totalQuery);
+                //db.execSQL(totalQuery);
                 //db.close();
                 Log.v("DB", "Quantity and Price decreased");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
+        return updateQty;
     }
 
     public void deleteCartItem(int cartID) {
         String stringID = String.valueOf(cartID);
         try {
             String rawQuery = "delete from " + CartItemsTable.NAME + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+            updateTotalItemPrice(cartID);
             db.execSQL(rawQuery);
             //db.close();
             Log.v("DB", "Cart item deleted");
@@ -145,9 +149,45 @@ public class CartItemList {
         }
     }
 
+    // minus total item price in db
+    public void updateTotalItemPrice(int cartID) {
+        //double originalPrice = getCartItemByID(cartID).getTotalPrice();
+        double quantity = getCartItemByID(cartID).getQuantity();
+        double price = getCartItemByID(cartID).getPrice();
+        double updateTotal = quantity * price;
+        getCartItemByID(cartID).setTotalPrice(updateTotal);
+        String stringID = Integer.toString(cartID);
+        String stringTotal = Double.toString(updateTotal);
+        Log.v("DB", "Total price updated" + stringTotal);
+        try {
+            String totalQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.TOTALPRICE + " = " + stringTotal + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+            db.execSQL(totalQuery);
+            //db.close();
+            Log.v("DB", "Item total price updated " + stringTotal);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    // add total item price in db
+    public void addTotalPrice(int cartID) {
+        double originalPrice = getCartItemByID(cartID).getTotalPrice();
+        double updateTotal = originalPrice + getCartItemByID(cartID).getPrice();
+        getCartItemByID(cartID).setTotalPrice(updateTotal);
+        String stringID = String.valueOf(cartID);
+        String stringTotal = String.valueOf(updateTotal);
+        try {
+            String totalQuery = "update " + CartItemsTable.NAME + " set " + CartItemsTable.Cols.TOTALPRICE + " = " + stringTotal + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+            db.execSQL(totalQuery);
+            //db.close();
+            Log.v("DB", "Item total price increased " + stringTotal);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
     public void addORUpdateItem(CartItem item) {
-        //String[] mAllColumns = {CartItemsTable.Cols.ID,CartItemsTable.Cols.NAME, CartItemsTable.Cols.DESCRIPTION, CartItemsTable.Cols.PRICE, CartItemsTable.Cols.IMG, CartItemsTable.Cols.RESTAURANTREF, CartItemsTable.Cols.USERID, CartItemsTable.Cols.QUANTITY, CartItemsTable.Cols.TOTALPRICE};
-        //if the item does not exist, then create item id with item count as 0
         Cursor cur = db.rawQuery("SELECT * FROM " + CartItemsTable.NAME + " WHERE " + CartItemsTable.Cols.ID + "= '" + Integer.toString(item.getID()) + "'", null);
         if (cur.getCount() > 0) { // This will get the number of rows
             addQuantity(item.getID());
@@ -161,24 +201,17 @@ public class CartItemList {
 
     }
 
-    public void addAll() {
-        this.addCartItem(new CartItem(getSize(), "Chicken Burger", "Chicken Burger", 10.00, "burger", 1, 1, 1, 10.00));
-        System.out.println("added cartlist");
-    }
-
     // Calculate all cart total price and but check if the cart is empty
-    public String getCartTotalPrice() {
-        double totalPrice = 0;
+    public double getCartTotalPrice() {
+        double totalPrice = 0.0;
         if (getAllCartItems().size() > 0) {
-            for (CartItem item : getAllCartItems()) {
+            for (CartItem item : this.getAllCartItems()) {
                 totalPrice += item.getTotalPrice();
+                Log.v("DB", "price: " + item.getTotalPrice());
+                Log.v("DB", "Total price: " + totalPrice);
             }
         }
-        String result = String.format("%.2f", totalPrice);
-
-        return result;
+        return totalPrice;
     }
-
-
 }
 

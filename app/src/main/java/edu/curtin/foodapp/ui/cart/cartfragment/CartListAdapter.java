@@ -1,6 +1,5 @@
 package edu.curtin.foodapp.ui.cart.cartfragment;
 
-import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.databinding.SingleCartFoodItemBinding;
 import edu.curtin.foodapp.model.cart.CartItem;
 import edu.curtin.foodapp.model.cart.CartItemList;
@@ -15,8 +14,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -24,12 +21,12 @@ import java.util.Locale;
 
 
 public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
-    Context context;
+    final Context context;
     SingleCartFoodItemBinding binding;
-    ArrayList<CartItem> cartItems;
+    final ArrayList<CartItem> cartItems;
     //CartItemList cart = new CartItemList();
     RestaurantList restaurantList;
-    private CartViewModel cartViewModel;
+    private final CartViewModel cartViewModel;
 
     public CartListAdapter(Context context, ArrayList<CartItem> cartItems, CartViewModel cartViewModel) {
         this.context = context;
@@ -54,65 +51,30 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
 
         RestaurantList restaurantList = new RestaurantList();
         restaurantList.load(context);
+        position = holder.getAdapterPosition();
+        CartItem currentItem = cartItems.get(position);
 
-        int restaurantNumber = cartItems.get(position).getRestaurantRef();
+        int restaurantNumber = currentItem.getRestaurantRef();
         String restaurantName = restaurantList.getRestaurant(restaurantNumber).getName();
-        holder.itemName.setText(cartItems.get(position).getName());
+        holder.itemName.setText(currentItem.getName());
         System.out.println("name set");
-        holder.itemQuantity.setText(String.valueOf(cartItems.get(position).getQuantity()));
-        holder.itemPrice.setText(String.valueOf(cartItems.get(position).getPrice()));
+        holder.itemQuantity.setText(String.valueOf(currentItem.getQuantity()));
+        holder.itemPrice.setText(String.valueOf(currentItem.getPrice()));
         holder.restaurantName.setText(restaurantName);
-        holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
-        String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
-        cartViewModel.setTotalCart(totalCartPrice);
+        currentItem.setTotalPrice(currentItem.getPrice() * currentItem.getQuantity());
+        holder.itemTotal.setText(String.valueOf(currentItem.getTotalPrice()));
 
-        holder.plusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CartItemList cart = new CartItemList();
-                cart.load(view.getContext());
-                int quantity = Integer.parseInt(holder.itemQuantity.getText().toString());
-                quantity++;
-                cart.addQuantity(cartItems.get(position).getID());
-                cartItems.get(position).setQuantity(quantity);
-                cartItems.get(position).setTotalPrice(cartItems.get(position).getTotalPrice() + cartItems.get(position).getPrice());
-                holder.itemQuantity.setText(String.valueOf(quantity));
-                String roundedItemTotal = String.format(Locale.ENGLISH, "%.2f", cartItems.get(position).getTotalPrice());
-                holder.itemTotal.setText(roundedItemTotal);
-                String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
-                System.out.println("total price: "+totalCartPrice);
-                cartViewModel.setTotalCart(totalCartPrice);
-            }
+        updateTotalCartPrice(cart);
+
+        holder.plusButton.setOnClickListener(view -> {
+            CartItemList cartDB = new CartItemList();
+            cartDB.load(view.getContext());
+            addQuantity(cartDB, holder, holder.getAdapterPosition());
         });
-        holder.minusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CartItemList cart = new CartItemList();
-                cart.load(view.getContext());
-                // if quantity is 1, remove item from recyclerview
-                int quantity = Integer.parseInt(holder.itemQuantity.getText().toString());
-                if (quantity > 1) {
-                    quantity--;
-                    cart.minusQuantity(cartItems.get(position).getID());
-                    cartItems.get(position).setQuantity(quantity);
-                    cartItems.get(position).setTotalPrice(cartItems.get(position).getTotalPrice() - cartItems.get(position).getPrice());
-                    holder.itemQuantity.setText(String.valueOf(quantity));
-                    String roundedItemTotal = String.format(Locale.ENGLISH,"%.2f", cartItems.get(position).getTotalPrice());
-                    holder.itemTotal.setText(roundedItemTotal);
-                    String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
-                    cartViewModel.setTotalCart(totalCartPrice);
-
-
-                } else {
-                    cart.deleteCartItem(cartItems.get(position).getID());
-                    cartItems.remove(position);
-                    String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
-                    cartViewModel.setTotalCart(totalCartPrice);
-
-                    // somehow recyclerview crashes without this
-                    notifyDataSetChanged();
-                }
-            }
+        holder.minusButton.setOnClickListener(view -> {
+            CartItemList cart1 = new CartItemList();
+            cart1.load(view.getContext());
+            minusQuantity(cart1, holder, holder.getAdapterPosition());
         });
 
         // If empty show placeholder
@@ -122,10 +84,47 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
 
     }
 
+    private void minusQuantity(CartItemList cartDB, @NonNull CartListViewHolder holder, int position) {
+        int quantity = Integer.parseInt(holder.itemQuantity.getText().toString());
+        CartItem currentItem = cartItems.get(position);
+        if (quantity > 1) {
+            quantity--;
+            //cart.minusQuantity(currentItem.getID());
+            currentItem.setQuantity(cartDB.minusQuantity(currentItem.getID()));
+            currentItem.setTotalPrice(currentItem.getTotalPrice() - currentItem.getPrice());
+            holder.itemQuantity.setText(String.valueOf(quantity));
+            String roundedItemTotal = String.format(Locale.ENGLISH, "%.2f", currentItem.getTotalPrice());
+            holder.itemTotal.setText(roundedItemTotal);
+            updateTotalCartPrice(cartDB);
+        } else {
+            cartDB.deleteCartItem(currentItem.getID());
+            cartItems.remove(holder.getAdapterPosition());
+            updateTotalCartPrice(cartDB);
+            // somehow recyclerview crashes without this
+            notifyDataSetChanged();
+        }
+    }
+
+
+    private void updateTotalCartPrice(CartItemList cart) {
+        cartViewModel.setTotalCart(cart.getCartTotalPrice());
+    }
+
+    private void addQuantity(CartItemList cartDB, @NonNull CartListViewHolder holder, int position) {
+        int quantity = Integer.parseInt(holder.itemQuantity.getText().toString());
+        quantity++;
+        CartItem currentItem = cartItems.get(position);
+        currentItem.setQuantity(cartDB.addQuantity(currentItem.getID()));
+        currentItem.setTotalPrice(currentItem.getTotalPrice() + currentItem.getPrice());
+        holder.itemQuantity.setText(String.valueOf(quantity));
+        String roundedItemTotal = String.format(Locale.ENGLISH, "%.2f", currentItem.getTotalPrice());
+        holder.itemTotal.setText(roundedItemTotal);
+        updateTotalCartPrice(cartDB);
+
+    }
 
     public int getImage(String imageName) {
-        int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
-        return drawableResourceId;
+        return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
     }
 
     @Override
