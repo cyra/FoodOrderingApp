@@ -14,6 +14,7 @@ import edu.curtin.foodapp.database.DBSchema;
 import edu.curtin.foodapp.database.DBSchema.FoodItemsTable;
 import edu.curtin.foodapp.database.fooditems.FoodItemsDBCursor;
 import edu.curtin.foodapp.database.fooditems.FoodItemsDBHelper;
+import edu.curtin.foodapp.model.cart.CartItem;
 
 public class FoodItemList {
     private ArrayList<FoodItem> foodItems;
@@ -42,6 +43,15 @@ public class FoodItemList {
 
     public FoodItem getFoodItem(int index) {
         return foodItems.get(index);
+    }
+
+    public FoodItem getFoodItemByID(int id) {
+        for (FoodItem foodItem : foodItems) {
+            if (foodItem.getID() == id) {
+                return foodItem;
+            }
+        }
+        return null;
     }
 
     public ArrayList<FoodItem> getRestaurantMenu(int restaurantID) {

@@ -4,6 +4,9 @@ import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.databinding.SingleCartFoodItemBinding;
 import edu.curtin.foodapp.model.cart.CartItem;
 import edu.curtin.foodapp.model.cart.CartItemList;
+import edu.curtin.foodapp.model.fooditems.FoodItem;
+import edu.curtin.foodapp.model.fooditems.FoodItemList;
+import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
 
 import android.annotation.SuppressLint;
@@ -48,25 +51,32 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CartListViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        // save into database
-        // load context first before adding
-        /*CartItemList cart = new CartItemList();
-        cart.load(context);*/
+        FoodItemList foodItemList = new FoodItemList();
+        foodItemList.load(context);
 
         RestaurantList restaurantList = new RestaurantList();
         restaurantList.load(context);
 
-        /*int restaurantNumber = cartItems.get(position).getRestaurantRef();
-        String restaurantName = restaurantList.getRestaurant(restaurantNumber).getName();
-        holder.itemName.setText(cartItems.get(position).getName());
-        System.out.println("name set");
-        holder.itemQuantity.setText(String.valueOf(cartItems.get(position).getQuantity()));
-        holder.itemPrice.setText(String.valueOf(cartItems.get(position).getPrice()));
-        holder.restaurantName.setText(restaurantName);
-        holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
-        String totalCartPrice = String.valueOf(cart.getCartTotalPrice());*/
+        CartItem item = cart.getCartItem(position);
+        FoodItem foodItem = foodItemList.getFoodItemByID(item.getID());
+        Restaurant restaurant = restaurantList.getRestaurantByID(foodItem.getRestaurantRef());
 
-        //cartViewModel.setTotalCart(totalCartPrice);
+        // Set food image
+        holder.itemImg.setImageResource(getImage(foodItem.getImg()));
+        // Set restaurant name
+        holder.restaurantName.setText(restaurant.getName());
+        // Set food name
+        holder.itemName.setText(foodItemList.getFoodItemByID(item.getID()).getName());
+        // Set price
+        holder.itemPrice.setText(String.valueOf(item.getPrice()));
+        // Set quantity
+        holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
+        // Set total
+        holder.itemTotal.setText(String.valueOf(item.getTotalPrice()));
+
+        // Update checkout total
+        double totalCartPrice = cart.getCartTotalPrice();
+        cartViewModel.setTotalCart(totalCartPrice);
 
         holder.plusButton.setOnClickListener(new View.OnClickListener() {
             @Override

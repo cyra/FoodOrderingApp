@@ -54,7 +54,6 @@ public class CartFragment extends Fragment {
         Fragment CartListFragment = new CartListFragment();
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
         transaction.replace(R.id.cartListFragment, CartListFragment).commit();
-
     }
 
     @Override
