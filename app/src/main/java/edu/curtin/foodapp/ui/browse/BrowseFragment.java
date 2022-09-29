@@ -24,8 +24,7 @@ public class BrowseFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        browseViewModel = new ViewModelProvider(getActivity(),
-                (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory()).get(BrowseViewModel.class);
+        browseViewModel = ((MainActivity) getActivity()).getBrowseViewModel();
 
         binding = FragmentBrowseBinding.inflate(inflater, container, false);
         return binding.getRoot();

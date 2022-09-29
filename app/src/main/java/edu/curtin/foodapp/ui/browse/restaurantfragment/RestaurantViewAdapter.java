@@ -60,6 +60,7 @@ public class RestaurantViewAdapter extends RecyclerView.Adapter<RestaurantViewHo
                 int id = findRestaurantIDByName(holder.itemName.getText().toString());
                 // Change BrowseViewModel restaurantID
                 browseViewModel.setRestaurantID(id);
+                Toast.makeText(context, holder.itemName.getText().toString() + " Menu", Toast.LENGTH_SHORT).show();
                 // Restart FoodItemListFragment
                 FragmentTransaction transaction = fm.beginTransaction();
                 FoodItemListFragment foodItemListFragment = new FoodItemListFragment();
