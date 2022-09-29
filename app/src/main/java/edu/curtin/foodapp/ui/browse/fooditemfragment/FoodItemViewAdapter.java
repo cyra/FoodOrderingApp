@@ -108,5 +108,4 @@ public class FoodItemViewAdapter extends RecyclerView.Adapter<FoodItemViewHolder
     public int getItemCount() {
         return foodItems.size();
     }
-
 }
