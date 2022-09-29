@@ -35,19 +35,18 @@ public class CartFragment extends Fragment {
         binding = FragmentCartBinding.inflate(inflater, container, false);
 
         final ExtendedFloatingActionButton fab = binding.cartFab;
+
         cartViewModel.getTotalCart().observe((getViewLifecycleOwner()), total -> {
             String textTotal = "Checkout - $" + total;
             fab.setText(textTotal);
         });
+
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
         insertNestedFragment();
-
-
     }
 
     // Embeds the child fragment dynamically

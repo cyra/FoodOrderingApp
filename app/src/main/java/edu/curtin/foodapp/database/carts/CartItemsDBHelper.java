@@ -18,23 +18,13 @@ public class CartItemsDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + CartItemsTable.NAME + "(" +
                 CartItemsTable.Cols.ID + " INTEGER, " +
-                CartItemsTable.Cols.NAME + " TEXT, " +
-                CartItemsTable.Cols.DESCRIPTION + " TEXT, " +
                 CartItemsTable.Cols.PRICE + " DOUBLE, " +
-                CartItemsTable.Cols.IMG + " TEXT, " +
-                CartItemsTable.Cols.RESTAURANTREF + " INTEGER, " +
-                CartItemsTable.Cols.USERID + " INTEGER, " +
-                CartItemsTable.Cols.QUANTITY + " TEXT, " +
-                CartItemsTable.Cols.TOTALPRICE + " DOUBLE)");
+                CartItemsTable.Cols.QUANTITY + " TEXT)");
     }
-
 
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-
+        // Empty
     }
-    // DB Helper for CartItems
-
-
 }

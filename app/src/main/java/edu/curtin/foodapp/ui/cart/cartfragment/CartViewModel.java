@@ -6,13 +6,12 @@ import androidx.lifecycle.ViewModel;
 
 public class CartViewModel extends ViewModel {
 
-    private final MutableLiveData<String> totalCartPrice;
+    private final MutableLiveData<Double> totalCartPrice;
 
     public CartViewModel() {
-        totalCartPrice = new MutableLiveData<String>();
+        totalCartPrice = new MutableLiveData<Double>();
     }
 
-    public LiveData<String> getTotalCart() { return totalCartPrice; }
-
-    public void setTotalCart(String totalCartPrice) { this.totalCartPrice.setValue(totalCartPrice); }
+    public LiveData<Double> getTotalCart() { return totalCartPrice; }
+    public void setTotalCart(double totalCartPrice) { this.totalCartPrice.setValue(totalCartPrice); }
 }

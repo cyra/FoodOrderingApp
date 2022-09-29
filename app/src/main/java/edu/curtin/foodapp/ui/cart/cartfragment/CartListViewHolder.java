@@ -24,6 +24,7 @@ public class CartListViewHolder extends RecyclerView.ViewHolder {
     CardView minusButton;
     CardView plusButton;
     CardView cardView;
+
     public CartListViewHolder(@NonNull SingleCartFoodItemBinding binding) {
         super(binding.getRoot());
         cardView = binding.cardClick;
@@ -38,5 +39,4 @@ public class CartListViewHolder extends RecyclerView.ViewHolder {
 
         this.binding = binding;
     }
-
 }

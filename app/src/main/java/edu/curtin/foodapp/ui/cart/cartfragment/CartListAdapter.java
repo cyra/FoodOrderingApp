@@ -6,6 +6,7 @@ import edu.curtin.foodapp.model.cart.CartItem;
 import edu.curtin.foodapp.model.cart.CartItemList;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 
@@ -46,7 +47,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CartListViewHolder holder, @SuppressLint("RecyclerView") int position) {
         // save into database
         // load context first before adding
         CartItemList cart = new CartItemList();
@@ -64,7 +65,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
         holder.restaurantName.setText(restaurantName);
         holder.itemTotal.setText(String.valueOf(cartItems.get(position).getTotalPrice()));
         String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
-        cartViewModel.setTotalCart(totalCartPrice);
+
+        //cartViewModel.setTotalCart(totalCartPrice);
 
         holder.plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +83,11 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
                 holder.itemTotal.setText(roundedItemTotal);
                 String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
                 System.out.println("total price: "+totalCartPrice);
-                cartViewModel.setTotalCart(totalCartPrice);
+
+                //cartViewModel.setTotalCart(totalCartPrice);
             }
         });
+
         holder.minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,14 +104,15 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
                     String roundedItemTotal = String.format(Locale.ENGLISH,"%.2f", cartItems.get(position).getTotalPrice());
                     holder.itemTotal.setText(roundedItemTotal);
                     String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
-                    cartViewModel.setTotalCart(totalCartPrice);
 
-
-                } else {
+                    //cartViewModel.setTotalCart(totalCartPrice);
+                }
+                else {
                     cart.deleteCartItem(cartItems.get(position).getID());
                     cartItems.remove(position);
                     String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
-                    cartViewModel.setTotalCart(totalCartPrice);
+
+                    //cartViewModel.setTotalCart(totalCartPrice);
 
                     // somehow recyclerview crashes without this
                     notifyDataSetChanged();
@@ -119,7 +124,6 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
         if (!cartItems.get(position).getImg().isEmpty()) {
             holder.itemImg.setImageResource(getImage(cartItems.get(position).getImg()));
         }
-
     }
 
 

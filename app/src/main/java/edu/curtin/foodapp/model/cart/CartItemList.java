@@ -22,7 +22,7 @@ public class CartItemList {
     // The database connection
     private SQLiteDatabase db;
 
-    public CartItemList() {
+    public CartItemList(SQLiteDatabase foodItemDb) {
         cartItems = new ArrayList<>();
     }
 
@@ -33,66 +33,9 @@ public class CartItemList {
                 .getWritableDatabase();
         // Read database contents into foodItems
         cartItems = getAllCartItems();
-
-        /* dont need to add all in cart
-        if (this.getSize() == 0) {
-            this.addAll();
-        }*/
     }
 
-
-    public CartItem getCartItem(int index) {
-        return cartItems.get(index);
-    }
-
-    // get cartitem by id
-    public CartItem getCartItemByID(int id) {
-        for (CartItem cartItem : cartItems) {
-            if (cartItem.getID() == id) {
-                return cartItem;
-            }
-        }
-        return null;
-    }
-
-
-    public int getSize() {
-        return cartItems.size();
-    }
-
-
-    public void addCartItem(CartItem newCartItem) {
-        ContentValues cv = new ContentValues();
-        cv.put(CartItemsTable.Cols.ID, newCartItem.getID());
-        cv.put(CartItemsTable.Cols.NAME, newCartItem.getName());
-        cv.put(CartItemsTable.Cols.DESCRIPTION, newCartItem.getDescription());
-        cv.put(CartItemsTable.Cols.PRICE, newCartItem.getPrice());
-        cv.put(CartItemsTable.Cols.IMG, newCartItem.getImg());
-        cv.put(CartItemsTable.Cols.RESTAURANTREF, newCartItem.getRestaurantRef());
-        cv.put(CartItemsTable.Cols.USERID, newCartItem.getUserID());
-        cv.put(CartItemsTable.Cols.QUANTITY, newCartItem.getQuantity());
-        cv.put(CartItemsTable.Cols.TOTALPRICE, newCartItem.getTotalPrice());
-        db.insert(CartItemsTable.NAME, null, cv);
-
-    }
-
-    public ArrayList<CartItem> getAllCartItems() {
-        Cursor cursor = db.query(CartItemsTable.NAME, null, null, null, null, null, null);
-        CartItemsDBCursor cartItemsDBCursor = new CartItemsDBCursor(cursor);
-        ArrayList<CartItem> temp = new ArrayList<>();
-        try {
-            cartItemsDBCursor.moveToFirst();
-            while (!cartItemsDBCursor.isAfterLast()) {
-                temp.add(cartItemsDBCursor.getCartItem());
-                cartItemsDBCursor.moveToNext();
-            }
-        } finally {
-            cursor.close();
-        }
-        return temp;
-    }
-
-    public void addQuantity(int cartID) {
+    /*public void addQuantity(int cartID) {
         int originalQty = getCartItemByID(cartID).getQuantity();
         int updateQty = originalQty + 1;
         double originalPrice = getCartItemByID(cartID).getTotalPrice();
@@ -108,9 +51,9 @@ public class CartItemList {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
+    }*/
 
-    public void minusQuantity(int cartID) {
+    /*public void minusQuantity(int cartID) {
         int originalQty = getCartItemByID(cartID).getQuantity();
         int updateQty = originalQty - 1;
         double originalPrice = getCartItemByID(cartID).getTotalPrice();
@@ -131,21 +74,9 @@ public class CartItemList {
                 ex.printStackTrace();
             }
         }
-    }
+    }*/
 
-    public void deleteCartItem(int cartID) {
-        String stringID = String.valueOf(cartID);
-        try {
-            String rawQuery = "delete from " + CartItemsTable.NAME + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
-            db.execSQL(rawQuery);
-            //db.close();
-            Log.v("DB", "Cart item deleted");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void addORUpdateItem(CartItem item) {
+    /*public void addORUpdateItem(CartItem item) {
         //String[] mAllColumns = {CartItemsTable.Cols.ID,CartItemsTable.Cols.NAME, CartItemsTable.Cols.DESCRIPTION, CartItemsTable.Cols.PRICE, CartItemsTable.Cols.IMG, CartItemsTable.Cols.RESTAURANTREF, CartItemsTable.Cols.USERID, CartItemsTable.Cols.QUANTITY, CartItemsTable.Cols.TOTALPRICE};
         //if the item does not exist, then create item id with item count as 0
         Cursor cur = db.rawQuery("SELECT * FROM " + CartItemsTable.NAME + " WHERE " + CartItemsTable.Cols.ID + "= '" + Integer.toString(item.getID()) + "'", null);
@@ -158,27 +89,68 @@ public class CartItemList {
             Log.v("DB", "Item inserted");
         }
         cur.close();
+    }*/
 
-    }
-
-    public void addAll() {
-        this.addCartItem(new CartItem(getSize(), "Chicken Burger", "Chicken Burger", 10.00, "burger", 1, 1, 1, 10.00));
-        System.out.println("added cartlist");
-    }
-
-    // Calculate all cart total price and but check if the cart is empty
-    public String getCartTotalPrice() {
-        double totalPrice = 0;
-        if (getAllCartItems().size() > 0) {
-            for (CartItem item : getAllCartItems()) {
-                totalPrice += item.getTotalPrice();
+    public CartItem getCartItemByID(int id) {
+        for (CartItem cartItem : cartItems) {
+            if (cartItem.getID() == id) {
+                return cartItem;
             }
         }
-        String result = String.format("%.2f", totalPrice);
+        return null;
+    }
 
-        return result;
+    public int getSize() {
+        return cartItems.size();
+    }
+
+    public double getCartTotalPrice() {
+        double total = 0.0;
+
+        for (CartItem item : cartItems) {
+            total += item.getTotalPrice();
+        }
+        return total;
+    }
+
+    public CartItem getCartItem(int index) {
+        return cartItems.get(index);
+    }
+
+    public ArrayList<CartItem> getAllCartItems() {
+        Cursor cursor = db.query(CartItemsTable.NAME, null, null, null, null, null, null);
+        CartItemsDBCursor cartItemsDBCursor = new CartItemsDBCursor(cursor);
+        ArrayList<CartItem> temp = new ArrayList<>();
+        try {
+            cartItemsDBCursor.moveToFirst();
+            while (!cartItemsDBCursor.isAfterLast()) {
+                temp.add(cartItemsDBCursor.getCartItem());
+                cartItemsDBCursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return temp;
     }
 
 
+    public void addCartItem(CartItem newCartItem) {
+        ContentValues cv = new ContentValues();
+        cv.put(CartItemsTable.Cols.ID, newCartItem.getID());
+        cv.put(CartItemsTable.Cols.PRICE, newCartItem.getPrice());
+        cv.put(CartItemsTable.Cols.QUANTITY, newCartItem.getQuantity());
+        db.insert(CartItemsTable.NAME, null, cv);
+    }
+
+    public void deleteCartItem(int cartID) {
+        String stringID = String.valueOf(cartID);
+        try {
+            String rawQuery = "delete from " + CartItemsTable.NAME + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
+            db.execSQL(rawQuery);
+            Log.v("DB", "Cart item deleted");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }
 
