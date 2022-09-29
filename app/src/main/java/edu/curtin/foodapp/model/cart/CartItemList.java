@@ -142,6 +142,16 @@ public class CartItemList {
     }
 
 
+    public void editCartItem(CartItem item) {
+        ContentValues cv = new ContentValues();
+        cv.put(CartItemsTable.Cols.ID, item.getID());
+        cv.put(CartItemsTable.Cols.QUANTITY, item.getQuantity());
+        cv.put(CartItemsTable.Cols.PRICE, item.getPrice());
+
+        String[] whereID = { String.valueOf(item.getID()) };
+        db.update(CartItemsTable.NAME, cv, CartItemsTable.Cols.ID + " = ?", whereID);
+    }
+
     public void addCartItem(CartItem newCartItem) {
         ContentValues cv = new ContentValues();
         cv.put(CartItemsTable.Cols.ID, newCartItem.getID());
@@ -150,15 +160,15 @@ public class CartItemList {
         db.insert(CartItemsTable.NAME, null, cv);
     }
 
-    public void deleteCartItem(int cartID) {
-        String stringID = String.valueOf(cartID);
-        try {
-            String rawQuery = "delete from " + CartItemsTable.NAME + " where " + CartItemsTable.Cols.ID + " = '" + stringID + "';";
-            db.execSQL(rawQuery);
-            Log.v("DB", "Cart item deleted");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    public void removeCartItemByID(int id) {
+        // Find item
+        CartItem item = getCartItemByID(id);
+
+        // Remove from list
+        cartItems.remove(item);
+        // Remove from database
+        String[] whereID = { String.valueOf(id) };
+        db.delete(CartItemsTable.NAME, CartItemsTable.Cols.ID + " = ?", whereID);
     }
 }
 

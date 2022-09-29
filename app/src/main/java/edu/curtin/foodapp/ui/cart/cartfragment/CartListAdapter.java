@@ -32,6 +32,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
     SingleCartFoodItemBinding binding;
 
     private CartItemList cart;
+    private FoodItemList foodItemList;
+    private RestaurantList restaurantList;
 
     private CartViewModel cartViewModel;
 
@@ -39,6 +41,12 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
         this.context = context;
         this.cart = cart;
         this.cartViewModel = cartViewModel;
+
+        foodItemList = new FoodItemList();
+        foodItemList.load(context);
+
+        restaurantList = new RestaurantList();
+        restaurantList.load(context);
     }
 
     @NonNull
@@ -51,12 +59,6 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CartListViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        FoodItemList foodItemList = new FoodItemList();
-        foodItemList.load(context);
-
-        RestaurantList restaurantList = new RestaurantList();
-        restaurantList.load(context);
-
         CartItem item = cart.getCartItem(position);
         FoodItem foodItem = foodItemList.getFoodItemByID(item.getID());
         Restaurant restaurant = restaurantList.getRestaurantByID(foodItem.getRestaurantRef());
@@ -75,65 +77,50 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
         holder.itemTotal.setText(String.valueOf(item.getTotalPrice()));
 
         // Update checkout total
-        double totalCartPrice = cart.getCartTotalPrice();
-        cartViewModel.setTotalCart(totalCartPrice);
+        cartViewModel.setTotalCart(cart.getCartTotalPrice());
 
+        // Increase quantity button
         holder.plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*CartItemList cart = new CartItemList();
-                cart.load(view.getContext());
-                int quantity = Integer.parseInt(holder.itemQuantity.getText().toString());
-                quantity++;
-                cart.addQuantity(cartItems.get(position).getID());
-                cartItems.get(position).setQuantity(quantity);
-                cartItems.get(position).setTotalPrice(cartItems.get(position).getTotalPrice() + cartItems.get(position).getPrice());
-                holder.itemQuantity.setText(String.valueOf(quantity));
-                String roundedItemTotal = String.format(Locale.ENGLISH, "%.2f", cartItems.get(position).getTotalPrice());
-                holder.itemTotal.setText(roundedItemTotal);
-                String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
-                System.out.println("total price: "+totalCartPrice);
+                // Update cart database
+                item.increaseQuantity();
+                cart.editCartItem(item);
 
-                //cartViewModel.setTotalCart(totalCartPrice);*/
+                // Update quantity
+                holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
+                // Update total
+                holder.itemTotal.setText(String.valueOf(item.getTotalPrice()));
+
+                // Update checkout total
+                cartViewModel.setTotalCart(cart.getCartTotalPrice());
             }
         });
 
+        // Decrease quantity button
         holder.minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*CartItemList cart = new CartItemList();
-                cart.load(view.getContext());
-                // if quantity is 1, remove item from recyclerview
-                int quantity = Integer.parseInt(holder.itemQuantity.getText().toString());
-                if (quantity > 1) {
-                    quantity--;
-                    cart.minusQuantity(cartItems.get(position).getID());
-                    cartItems.get(position).setQuantity(quantity);
-                    cartItems.get(position).setTotalPrice(cartItems.get(position).getTotalPrice() - cartItems.get(position).getPrice());
-                    holder.itemQuantity.setText(String.valueOf(quantity));
-                    String roundedItemTotal = String.format(Locale.ENGLISH,"%.2f", cartItems.get(position).getTotalPrice());
-                    holder.itemTotal.setText(roundedItemTotal);
-                    String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
+                // Update cart database
+                item.decreaseQuantity();
 
-                    //cartViewModel.setTotalCart(totalCartPrice);
+                if (item.getQuantity() > 0) {
+                    cart.editCartItem(item);
+
+                    // Update quantity
+                    holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
+                    // Update total
+                    holder.itemTotal.setText(String.valueOf(item.getTotalPrice()));
                 }
                 else {
-                    cart.deleteCartItem(cartItems.get(position).getID());
-                    cartItems.remove(position);
-                    String totalCartPrice = String.valueOf(cart.getCartTotalPrice());
-
-                    //cartViewModel.setTotalCart(totalCartPrice);
-
-                    // somehow recyclerview crashes without this
+                    cart.removeCartItemByID(item.getID());
                     notifyDataSetChanged();
-                }*/
+                }
+
+                // Update checkout total
+                cartViewModel.setTotalCart(cart.getCartTotalPrice());
             }
         });
-
-        // If empty show placeholder
-        /*if (!cart.get(position).getImg().isEmpty()) {
-            holder.itemImg.setImageResource(getImage(cartItems.get(position).getImg()));
-        }*/
     }
 
 

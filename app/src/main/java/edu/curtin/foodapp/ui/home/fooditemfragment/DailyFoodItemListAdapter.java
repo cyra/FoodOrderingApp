@@ -70,10 +70,18 @@ public class DailyFoodItemListAdapter extends RecyclerView.Adapter<DailyFoodItem
             public void onClick(View view) {
                 int id = item.getID();
                 double price = item.getPrice();
-                int quantity = 1;
+                CartItem item;
 
-                CartItem cartItem = new CartItem(id, price, quantity);
-                cart.addCartItem(cartItem);
+                if (cart.getCartItemByID(id) == null) {
+                    item = new CartItem(id, price);
+                    cart.addCartItem(item);
+                }
+                else {
+                    // If item already exists in cart, increase quantity
+                    item = cart.getCartItemByID(id);
+                    item.increaseQuantity();
+                    cart.editCartItem(item);
+                }
 
                 Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_navigation_cart);
             }
