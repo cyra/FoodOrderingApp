@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-
     <TextView
         android:id="@+id/foodItemListTitle"
         android:layout_width="match_parent"
@@ -28,5 +27,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/foodItemListTitle" />
+
+    <TextView
+        android:id="@+id/featuredRestaurantTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="-20dp"
+        android:text="Featured Restaurant"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/foodItemListFragment"/>
+
+    <FrameLayout
+        android:id="@+id/featuredRestaurantFragment"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/featuredRestaurantTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
