@@ -87,6 +87,7 @@ public class OrderDetailsFragment extends Fragment {
             receipt.append(itemLine);
         }
         // End of receipt
+        receipt.append("\n");
         receipt.append(dividers);
         receipt.append(total);
         receipt.append(dividers);
