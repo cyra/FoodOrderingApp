@@ -47,6 +47,15 @@ public class OrderList {
 
     public int getSize() { return orders.size(); }
 
+    public Order getOrderByID(int orderID) {
+        for (Order order : orders) {
+            if (order.getOrderID() == orderID) {
+                return order;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Order> getAllOrdersByUserID(int userID) {
         ArrayList<Order> userOrders = new ArrayList<Order>();
 

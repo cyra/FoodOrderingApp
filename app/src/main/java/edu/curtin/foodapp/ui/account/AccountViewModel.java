@@ -15,6 +15,7 @@ public class AccountViewModel extends ViewModel {
     private final MutableLiveData<String> email;
     private final MutableLiveData<String> address;
     private final MutableLiveData<String> phone;
+    private final MutableLiveData<Integer> orderID;
 
     public AccountViewModel() {
         user = new MutableLiveData<User>();
@@ -22,6 +23,7 @@ public class AccountViewModel extends ViewModel {
         email = new MutableLiveData<String>();
         address = new MutableLiveData<String>();
         phone = new MutableLiveData<String>();
+        orderID = new MutableLiveData<Integer>();
     }
 
     public LiveData<User> getUser() { return user; }
@@ -29,6 +31,7 @@ public class AccountViewModel extends ViewModel {
     public LiveData<String> getEmail() { return email; }
     public LiveData<String> getAddress() { return address; }
     public LiveData<String> getPhone() { return phone; }
+    public LiveData<Integer> getOrderID() { return orderID; }
 
     public boolean getLoggedIn() {
         if (user.getValue() != null) {
@@ -42,4 +45,5 @@ public class AccountViewModel extends ViewModel {
     public void setEmail(String email) { this.email.setValue(email); }
     public void setAddress(String address) { this.address.setValue(address); }
     public void setPhone(String phone) { this.phone.setValue(phone); }
+    public void setOrderID(int orderID) { this.orderID.setValue(orderID); }
 }

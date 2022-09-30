@@ -45,7 +45,7 @@ public class OrderListFragment extends Fragment {
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         if (accountViewModel.getLoggedIn()) {
-            OrderViewAdapter rvAdapter = new OrderViewAdapter(getContext(), orders.getAllOrdersByUserID(accountViewModel.getUser().getValue().getID()));
+            OrderViewAdapter rvAdapter = new OrderViewAdapter(getContext(), orders.getAllOrdersByUserID(accountViewModel.getUser().getValue().getID()), accountViewModel);
             rv.setAdapter(rvAdapter);
         }
         return root;

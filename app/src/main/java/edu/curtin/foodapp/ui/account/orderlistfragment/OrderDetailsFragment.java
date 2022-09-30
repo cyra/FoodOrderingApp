@@ -1,5 +1,6 @@
 package edu.curtin.foodapp.ui.account.orderlistfragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,19 +15,25 @@ import org.w3c.dom.Text;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.databinding.FragmentOrderDetailsBinding;
 import edu.curtin.foodapp.model.cart.CartItem;
 import edu.curtin.foodapp.model.cart.CartItemList;
 import edu.curtin.foodapp.model.fooditem.FoodItem;
 import edu.curtin.foodapp.model.fooditem.FoodItemList;
+import edu.curtin.foodapp.model.order.Order;
+import edu.curtin.foodapp.model.order.OrderList;
 import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
+import edu.curtin.foodapp.ui.account.AccountViewModel;
 
 
 public class OrderDetailsFragment extends Fragment {
     private FragmentOrderDetailsBinding binding;
+
     TextView orderReceipt;
-    private CartItemList cart;
+
+    private OrderList orders;
     private FoodItemList foodItemList;
     private RestaurantList restaurantList;
 
@@ -36,14 +43,21 @@ public class OrderDetailsFragment extends Fragment {
         binding = FragmentOrderDetailsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        Context context = getContext();
+        // Load orders
+        orders = new OrderList();
+        orders.load(context);
+
         orderReceipt = binding.orderReceipt;
 
-        // Create a stringbuilder for a receipt with restaurants, total prices and food names
+        AccountViewModel accountViewModel = ((MainActivity) getActivity()).getAccountViewModel();
+        Order order = orders.getOrderByID(accountViewModel.getOrderID().getValue());
 
+        // Create a stringbuilder for a receipt with restaurants, total prices and food names
         StringBuilder receipt = new StringBuilder();
         String dividers = "----------------------------------- \n";
-        String title = printCenter("Order Receipt #", dividers.length());
-        String date = printCenter("Date: 2021-05-01", dividers.length());
+        String title = printCenter("Order Receipt #" + order.getOrderID(), dividers.length());
+        String date = printCenter("Date: " + order.getDate(), dividers.length());
         String total = printCenter("Total: $", dividers.length());
         String restaurant = printCenter("Billy's Restaurant", dividers.length());
         receipt.append(dividers);
@@ -58,12 +72,9 @@ public class OrderDetailsFragment extends Fragment {
         restaurantList = new RestaurantList();
         restaurantList.load(getContext());
 
-
-
         // End of receipt
         receipt.append(total);
         receipt.append(dividers);
-
 
         orderReceipt.setText(receipt.toString());
 
@@ -99,6 +110,6 @@ public class OrderDetailsFragment extends Fragment {
 
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
+        //
     }
 }
