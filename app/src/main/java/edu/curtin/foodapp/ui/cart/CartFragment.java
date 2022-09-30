@@ -1,4 +1,4 @@
-package edu.curtin.foodapp.ui.cart.cartfragment;
+package edu.curtin.foodapp.ui.cart;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.databinding.FragmentCartBinding;
+import edu.curtin.foodapp.ui.cart.cartfragment.CartListFragment;
 import edu.curtin.foodapp.model.cart.CartItem;
 import edu.curtin.foodapp.model.cart.CartItemList;
 import edu.curtin.foodapp.model.fooditem.FoodItem;

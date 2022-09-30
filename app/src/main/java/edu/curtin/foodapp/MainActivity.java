@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.widget.Toast;
 
 // added imports
 
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 
 import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
-import edu.curtin.foodapp.ui.cart.cartfragment.CartViewModel;
+import edu.curtin.foodapp.ui.cart.CartViewModel;
 import edu.curtin.foodapp.ui.account.AccountViewModel;
 import edu.curtin.foodapp.ui.browse.BrowseViewModel;
 

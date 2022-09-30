@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.databinding.ListCartBinding;
 import edu.curtin.foodapp.model.cart.CartItemList;
+import edu.curtin.foodapp.ui.cart.CartViewModel;
 
 public class CartListFragment extends Fragment {
 

@@ -71,6 +71,7 @@ public class FoodItemViewAdapter extends RecyclerView.Adapter<FoodItemViewHolder
                     cart.editCartItem(item);
                 }
 
+
                 Navigation.findNavController(view).navigate(R.id.action_navigation_browse_to_navigation_cart);
             }
         });

@@ -7,6 +7,7 @@ import edu.curtin.foodapp.model.fooditem.FoodItem;
 import edu.curtin.foodapp.model.fooditem.FoodItemList;
 import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
+import edu.curtin.foodapp.ui.cart.CartViewModel;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

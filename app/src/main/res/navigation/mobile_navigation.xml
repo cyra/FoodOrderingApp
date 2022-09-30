@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/navigation_cart"
-        android:name="edu.curtin.foodapp.ui.cart.cartfragment.CartFragment"
+        android:name="edu.curtin.foodapp.ui.cart.CartFragment"
         tools:layout="@layout/fragment_cart" >
         <action
             android:id="@+id/action_navigation_cart_to_navigation_browse"
@@ -63,5 +63,18 @@
         <action
             android:id="@+id/action_navigation_account_to_navigation_cart"
             app:destination="@id/navigation_cart" />
+        <action
+            android:id="@+id/action_navigation_account_to_navigation_order_details"
+            app:destination="@id/navigation_order_details" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_order_details"
+        android:name="edu.curtin.foodapp.ui.account.orderlistfragment.OrderDetailsFragment"
+        tools:layout="@layout/fragment_order_details" >
+        <action
+            android:id="@+id/action_navigation_order_details_to_navigation_account"
+            app:destination="@id/navigation_account" />
     </fragment>
 </navigation>

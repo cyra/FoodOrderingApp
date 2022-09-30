@@ -27,6 +27,7 @@ import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.model.user.User;
 import edu.curtin.foodapp.model.user.UserList;
 import edu.curtin.foodapp.databinding.FragmentAccountBinding;
+import edu.curtin.foodapp.ui.cart.cartfragment.CartListFragment;
 import edu.curtin.foodapp.ui.login.LoginFragment;
 import edu.curtin.foodapp.ui.account.orderlistfragment.OrderListFragment;
 import edu.curtin.foodapp.ui.account.userdetailsfragment.UserDetailsFragment;
@@ -80,6 +81,14 @@ public class AccountFragment extends Fragment {
         transaction.replace(R.id.orderListFragment, orderListFragment);
         transaction.commit();
     }
+
+    // Embeds the order details fragment
+    private void insertOrderDetailsFragment() {
+        Fragment CartListFragment = new CartListFragment();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.cartListFragment, CartListFragment).commit();
+    }
+
 
     @Override
     public void onDestroyView() {
