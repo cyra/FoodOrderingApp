@@ -67,10 +67,23 @@ public class OrderDetailsFragment extends Fragment {
         receipt.append(date);
         receipt.append(dividers);
         // --------
+
+        // Initial detail
+        String restaurantName = orderDetails.get(0).getRestaurantName();
+        receipt.append("\n");
+        String restaurantLine = printCenter("[" + orderDetails.get(0).getRestaurantName() + "]", dividers.length());
+        receipt.append(restaurantLine);
+
         for (OrderDetail detail : orderDetails) {
-            String itemLine = printCenter("[" + detail.getRestaurantName() + "]\n" +
-                    detail.getQuantity() + "x "+ detail.getItemName() + " - " +
-                    "$" + String.format("%.2f", detail.getTotalPrice()) + "\n", dividers.length());
+            if (!restaurantName.equals(detail.getRestaurantName())) {
+                receipt.append("\n");
+                restaurantLine = printCenter("[" + detail.getRestaurantName() + "]", dividers.length());
+                receipt.append(restaurantLine);
+                restaurantName = detail.getRestaurantName();
+            }
+
+            String itemLine = printCenter(detail.getQuantity() + "x "+ detail.getItemName() + " - " +
+                    "$" + String.format("%.2f", detail.getTotalPrice()), dividers.length());
             receipt.append(itemLine);
         }
         // End of receipt

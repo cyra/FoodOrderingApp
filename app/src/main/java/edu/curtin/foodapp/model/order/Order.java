@@ -1,5 +1,6 @@
 package edu.curtin.foodapp.model.order;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -51,6 +52,26 @@ public class Order {
             int quantity = Integer.parseInt(tokens[i + 3]);
 
             orderDetails.add(new OrderDetail(restaurantName, itemName, totalPrice, quantity));
+        }
+
+        orderDetails = sortOrderDetails(orderDetails);
+
+        return orderDetails;
+    }
+
+    private ArrayList<OrderDetail> sortOrderDetails(ArrayList<OrderDetail> orderDetails) {
+        for (int i = 1; i < orderDetails.size(); i++) {
+            OrderDetail key = orderDetails.get(i);
+            int j = i - 1;
+
+            while (j >= 0 && orderDetails.get(j).getRestaurantName().compareTo(key.getRestaurantName()) > 0) {
+                OrderDetail temp = orderDetails.remove(j + 1);
+                orderDetails.add(j, temp);
+                j--;
+            }
+
+            orderDetails.remove(j + 1);
+            orderDetails.add(j + 1, key);
         }
 
         return orderDetails;
