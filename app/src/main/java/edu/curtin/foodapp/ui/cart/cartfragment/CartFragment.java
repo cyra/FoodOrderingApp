@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,13 +29,17 @@ public class CartFragment extends Fragment {
 
     private FragmentCartBinding binding;
 
+    private CartViewModel cartViewModel;
+
+    private ExtendedFloatingActionButton fab;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        CartViewModel cartViewModel = ((MainActivity) getActivity()).getCartViewModel();
+        cartViewModel = ((MainActivity) getActivity()).getCartViewModel();
 
         binding = FragmentCartBinding.inflate(inflater, container, false);
 
-        final ExtendedFloatingActionButton fab = binding.cartFab;
+        fab = binding.cartFab;
 
         cartViewModel.getTotalCart().observe((getViewLifecycleOwner()), total -> {
             String textTotal = "Checkout - $" + String.format("%.2f", total);
@@ -47,6 +52,21 @@ public class CartFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         insertNestedFragment();
+
+        // If checkout button clicked
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (cartViewModel.getTotalCart().getValue() > 0.01) {
+                    // Add to orders database
+                    // Empty cart
+                    // Take to account
+                }
+                else {
+                    Toast.makeText(getContext(), "Cart empty", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     // Embeds the child fragment dynamically
