@@ -10,6 +10,7 @@ public class CartViewModel extends ViewModel {
 
     public CartViewModel() {
         totalCartPrice = new MutableLiveData<Double>();
+        totalCartPrice.setValue(0.0);
     }
 
     public LiveData<Double> getTotalCart() { return totalCartPrice; }

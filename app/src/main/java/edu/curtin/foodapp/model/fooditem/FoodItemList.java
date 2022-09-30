@@ -1,10 +1,9 @@
-package edu.curtin.foodapp.model.fooditems;
+package edu.curtin.foodapp.model.fooditem;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import edu.curtin.foodapp.database.DBSchema;
 import edu.curtin.foodapp.database.DBSchema.FoodItemsTable;
 import edu.curtin.foodapp.database.fooditems.FoodItemsDBCursor;
 import edu.curtin.foodapp.database.fooditems.FoodItemsDBHelper;
-import edu.curtin.foodapp.model.cart.CartItem;
 
 public class FoodItemList {
     private ArrayList<FoodItem> foodItems;

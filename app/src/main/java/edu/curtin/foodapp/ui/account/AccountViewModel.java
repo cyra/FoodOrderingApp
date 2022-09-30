@@ -30,6 +30,13 @@ public class AccountViewModel extends ViewModel {
     public LiveData<String> getAddress() { return address; }
     public LiveData<String> getPhone() { return phone; }
 
+    public boolean getLoggedIn() {
+        if (user.getValue() != null) {
+            return true;
+        }
+        return false;
+    }
+
     public void setUser(User user) { this.user.setValue(user); }
     public void setName(String name) { this.name.setValue(name); }
     public void setEmail(String email) { this.email.setValue(email); }

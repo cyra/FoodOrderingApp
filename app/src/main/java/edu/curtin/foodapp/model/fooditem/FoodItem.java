@@ -1,4 +1,4 @@
-package edu.curtin.foodapp.model.fooditems;
+package edu.curtin.foodapp.model.fooditem;
 
 import edu.curtin.foodapp.model.restaurant.Restaurant;
 

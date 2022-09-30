@@ -1,11 +1,10 @@
 package edu.curtin.foodapp.ui.cart.cartfragment;
 
-import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.databinding.SingleCartFoodItemBinding;
 import edu.curtin.foodapp.model.cart.CartItem;
 import edu.curtin.foodapp.model.cart.CartItemList;
-import edu.curtin.foodapp.model.fooditems.FoodItem;
-import edu.curtin.foodapp.model.fooditems.FoodItemList;
+import edu.curtin.foodapp.model.fooditem.FoodItem;
+import edu.curtin.foodapp.model.fooditem.FoodItemList;
 import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
 
@@ -19,12 +18,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-import java.util.Locale;
 
 
 public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
