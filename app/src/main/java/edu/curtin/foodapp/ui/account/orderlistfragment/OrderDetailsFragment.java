@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import edu.curtin.foodapp.databinding.FragmentOrderDetailsBinding;
 import edu.curtin.foodapp.model.cart.CartItem;
 import edu.curtin.foodapp.model.cart.CartItemList;
-import edu.curtin.foodapp.model.fooditems.FoodItem;
-import edu.curtin.foodapp.model.fooditems.FoodItemList;
+import edu.curtin.foodapp.model.fooditem.FoodItem;
+import edu.curtin.foodapp.model.fooditem.FoodItemList;
 import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
 

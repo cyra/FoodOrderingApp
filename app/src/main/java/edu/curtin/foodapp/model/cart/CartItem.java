@@ -1,8 +1,5 @@
 package edu.curtin.foodapp.model.cart;
 
-import edu.curtin.foodapp.model.fooditems.FoodItem;
-import edu.curtin.foodapp.model.fooditems.FoodItemList;
-
 public class CartItem {
     int id;
     double price;

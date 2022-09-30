@@ -48,11 +48,9 @@ public class AccountFragment extends Fragment {
 
         // User persistence
         accountViewModel = ((MainActivity) getActivity()).getAccountViewModel();
-        User savedUser = accountViewModel.getUser().getValue();
-        if (savedUser != null) {
-            currentUser = savedUser;
 
-            Log.d("user", currentUser.getName());
+        if (accountViewModel.getLoggedIn()) {
+            currentUser = accountViewModel.getUser().getValue();
         }
 
         if (currentUser == null) {

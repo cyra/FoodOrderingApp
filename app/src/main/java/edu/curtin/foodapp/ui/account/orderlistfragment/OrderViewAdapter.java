@@ -13,14 +13,15 @@ import java.util.ArrayList;
 
 import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.databinding.SingleOrderhistoryitemBinding;
-import edu.curtin.foodapp.model.orders.Orders;
+import edu.curtin.foodapp.model.order.Order;
 
 public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     private final Context context;
     private SingleOrderhistoryitemBinding binding;
-    ArrayList<Orders> orders;
 
-    public OrderViewAdapter(Context context, ArrayList<Orders> orders) {
+    private ArrayList<Order> orders;
+
+    public OrderViewAdapter(Context context, ArrayList<Order> orders){
         this.context = context;
         this.orders = orders;
     }
@@ -35,9 +36,10 @@ public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
-        Orders currentOrder = orders.get(position);
+        Order currentOrder = orders.get(position);
         String orderDetails = "Order # " + currentOrder.getOrderID() + " - " + currentOrder.getDate();
         holder.itemName.setText(orderDetails);
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,6 +47,7 @@ public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewHolder> {
             }
         });
 
+        holder.itemName.setText(orderDetails);
     }
 
 
