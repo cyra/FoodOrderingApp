@@ -70,11 +70,11 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
         // Set food name
         holder.itemName.setText(foodItemList.getFoodItemByID(item.getID()).getName());
         // Set price
-        holder.itemPrice.setText(String.valueOf(item.getPrice()));
+        holder.itemPrice.setText(String.format("%.2f", item.getPrice()));
         // Set quantity
         holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
         // Set total
-        holder.itemTotal.setText(String.valueOf(item.getTotalPrice()));
+        holder.itemTotal.setText(String.format("%.2f", item.getTotalPrice()));
 
         // Update checkout total
         cartViewModel.setTotalCart(cart.getCartTotalPrice());
@@ -90,7 +90,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
                 // Update quantity
                 holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
                 // Update total
-                holder.itemTotal.setText(String.valueOf(item.getTotalPrice()));
+                holder.itemTotal.setText(String.format("%.2f", item.getTotalPrice()));
 
                 // Update checkout total
                 cartViewModel.setTotalCart(cart.getCartTotalPrice());
@@ -110,7 +110,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListViewHolder> {
                     // Update quantity
                     holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
                     // Update total
-                    holder.itemTotal.setText(String.valueOf(item.getTotalPrice()));
+                    holder.itemTotal.setText(String.format("%.2f", item.getTotalPrice()));
                 }
                 else {
                     cart.removeCartItemByID(item.getID());
