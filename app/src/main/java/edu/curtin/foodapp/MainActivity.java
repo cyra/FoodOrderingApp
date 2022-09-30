@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
+import edu.curtin.foodapp.ui.cart.cartfragment.CartViewModel;
 import edu.curtin.foodapp.ui.account.AccountViewModel;
 import edu.curtin.foodapp.ui.browse.BrowseViewModel;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Context context;
 
     private BrowseViewModel browseViewModel;
+    private CartViewModel cartViewModel;
     private AccountViewModel accountViewModel;
 
     @Override
@@ -51,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
         browseViewModel = new ViewModelProvider(this).get(BrowseViewModel.class);
+        cartViewModel = new ViewModelProvider(this).get(CartViewModel.class);
+        accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
     }
 
     public BrowseViewModel getBrowseViewModel() { return browseViewModel; }
-    public AccountViewModel getAccountViewModel() {
-        return accountViewModel;
-    }
+    public CartViewModel getCartViewModel() { return cartViewModel; }
+    public AccountViewModel getAccountViewModel() { return accountViewModel; }
 }

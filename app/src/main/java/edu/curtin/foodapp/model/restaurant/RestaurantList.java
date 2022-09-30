@@ -46,6 +46,15 @@ public class RestaurantList {
         return restaurants.get(index);
     }
 
+    public Restaurant getRestaurantByID(int id) {
+        for (Restaurant restaurant : restaurants) {
+            if (restaurant.getID() == id) {
+                return restaurant;
+            }
+        }
+        return null;
+    }
+
     public void addRestaurant(Restaurant newRestaurant) {
         restaurants.add(newRestaurant);
         // Add restaurant to database

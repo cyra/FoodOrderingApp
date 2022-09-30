@@ -4,13 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
 
+import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.databinding.FragmentCartBinding;
 import edu.curtin.foodapp.model.orders.OrderItem;
@@ -21,12 +27,20 @@ import edu.curtin.foodapp.model.orders.RestaurantOrder;
 public class CartFragment extends Fragment {
 
     private FragmentCartBinding binding;
-    private ArrayList<Orders> orders;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        CartViewModel cartViewModel = ((MainActivity) getActivity()).getCartViewModel();
 
         binding = FragmentCartBinding.inflate(inflater, container, false);
+
+        final ExtendedFloatingActionButton fab = binding.cartFab;
+
+        cartViewModel.getTotalCart().observe((getViewLifecycleOwner()), total -> {
+            String textTotal = "Checkout - $" + total;
+            fab.setText(textTotal);
+        });
+
         return binding.getRoot();
     }
 
@@ -39,10 +53,7 @@ public class CartFragment extends Fragment {
     private void insertNestedFragment() {
         Fragment CartListFragment = new CartListFragment();
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        // For multiple fragments in a fragment, use multiple transaction.replace() and then commit() after.
-        transaction.replace(R.id.cartListFragment, CartListFragment);
-        transaction.commit();
-
+        transaction.replace(R.id.cartListFragment, CartListFragment).commit();
     }
 
     @Override

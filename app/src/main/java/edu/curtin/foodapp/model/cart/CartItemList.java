@@ -4,13 +4,18 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
 
 import edu.curtin.foodapp.database.DBSchema.CartItemsTable;
 import edu.curtin.foodapp.database.carts.CartItemsDBCursor;
 import edu.curtin.foodapp.database.carts.CartItemsDBHelper;
-import edu.curtin.foodapp.model.cart.CartItem;
+import edu.curtin.foodapp.ui.browse.BrowseViewModel;
+import edu.curtin.foodapp.ui.cart.cartfragment.CartListViewHolder;
+import edu.curtin.foodapp.ui.cart.cartfragment.CartViewModel;
 
 public class CartItemList {
     private ArrayList<CartItem> cartItems;
@@ -28,29 +33,33 @@ public class CartItemList {
                 .getWritableDatabase();
         // Read database contents into foodItems
         cartItems = getAllCartItems();
+    }
 
-        if (this.getSize() == 0) {
-            this.addAll();
+
+    public CartItem getCartItemByID(int id) {
+        for (CartItem cartItem : cartItems) {
+            if (cartItem.getID() == id) {
+                return cartItem;
+            }
         }
+        return null;
     }
 
     public int getSize() {
         return cartItems.size();
     }
 
-    public void addCartItem(CartItem newCartItem) {
-        ContentValues cv = new ContentValues();
-        cv.put(CartItemsTable.Cols.ID, newCartItem.getID());
-        cv.put(CartItemsTable.Cols.NAME, newCartItem.getName());
-        cv.put(CartItemsTable.Cols.DESCRIPTION, newCartItem.getDescription());
-        cv.put(CartItemsTable.Cols.PRICE, newCartItem.getPrice());
-        cv.put(CartItemsTable.Cols.IMG, newCartItem.getImg());
-        cv.put(CartItemsTable.Cols.RESTAURANTREF, newCartItem.getRestaurantRef());
-        cv.put(CartItemsTable.Cols.USERID, newCartItem.getUserID());
-        cv.put(CartItemsTable.Cols.QUANTITY, newCartItem.getQuantity());
-        cv.put(CartItemsTable.Cols.TOTALPRICE, newCartItem.getTotalPrice());
-        db.insert(CartItemsTable.NAME, null, cv);
+    public double getCartTotalPrice() {
+        double total = 0.0;
 
+        for (CartItem item : cartItems) {
+            total += item.getTotalPrice();
+        }
+        return total;
+    }
+
+    public CartItem getCartItem(int index) {
+        return cartItems.get(index);
     }
 
     public ArrayList<CartItem> getAllCartItems() {
@@ -69,10 +78,34 @@ public class CartItemList {
         return temp;
     }
 
-    public void addAll() {
-        this.addCartItem(new CartItem(getSize(), "Chicken Burger", "Chicken Burger", 10.00, "burger", 1, 1, 1, 10.00));
-        System.out.println("added cartlist");
+
+    public void editCartItem(CartItem item) {
+        ContentValues cv = new ContentValues();
+        cv.put(CartItemsTable.Cols.ID, item.getID());
+        cv.put(CartItemsTable.Cols.QUANTITY, item.getQuantity());
+        cv.put(CartItemsTable.Cols.PRICE, item.getPrice());
+
+        String[] whereID = { String.valueOf(item.getID()) };
+        db.update(CartItemsTable.NAME, cv, CartItemsTable.Cols.ID + " = ?", whereID);
     }
 
+    public void addCartItem(CartItem newCartItem) {
+        ContentValues cv = new ContentValues();
+        cv.put(CartItemsTable.Cols.ID, newCartItem.getID());
+        cv.put(CartItemsTable.Cols.PRICE, newCartItem.getPrice());
+        cv.put(CartItemsTable.Cols.QUANTITY, newCartItem.getQuantity());
+        db.insert(CartItemsTable.NAME, null, cv);
+    }
+
+    public void removeCartItemByID(int id) {
+        // Find item
+        CartItem item = getCartItemByID(id);
+
+        // Remove from list
+        cartItems.remove(item);
+        // Remove from database
+        String[] whereID = { String.valueOf(id) };
+        db.delete(CartItemsTable.NAME, CartItemsTable.Cols.ID + " = ?", whereID);
+    }
 }
 
