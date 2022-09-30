@@ -1,4 +1,4 @@
-package edu.curtin.foodapp.ui.cart.cartfragment;
+package edu.curtin.foodapp.ui.cart;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

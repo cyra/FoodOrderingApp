@@ -1,28 +1,21 @@
-package edu.curtin.foodapp.ui.cart.cartfragment;
+package edu.curtin.foodapp.ui.cart;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-
-import java.util.ArrayList;
 
 import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.databinding.FragmentCartBinding;
-import edu.curtin.foodapp.model.orders.OrderItem;
-import edu.curtin.foodapp.model.orders.Orders;
-import edu.curtin.foodapp.model.orders.RestaurantOrder;
+import edu.curtin.foodapp.ui.cart.cartfragment.CartListFragment;
 
 // Cart Fragment
 public class CartFragment extends Fragment {
@@ -58,6 +51,8 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (cartViewModel.getTotalCart().getValue() > 0.01) {
+
+
                     // Add to orders database
                     // Empty cart
                     // Take to account

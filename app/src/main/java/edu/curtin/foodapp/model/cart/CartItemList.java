@@ -4,18 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
-import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
 
 import edu.curtin.foodapp.database.DBSchema.CartItemsTable;
 import edu.curtin.foodapp.database.carts.CartItemsDBCursor;
 import edu.curtin.foodapp.database.carts.CartItemsDBHelper;
-import edu.curtin.foodapp.ui.browse.BrowseViewModel;
-import edu.curtin.foodapp.ui.cart.cartfragment.CartListViewHolder;
-import edu.curtin.foodapp.ui.cart.cartfragment.CartViewModel;
 
 public class CartItemList {
     private ArrayList<CartItem> cartItems;
