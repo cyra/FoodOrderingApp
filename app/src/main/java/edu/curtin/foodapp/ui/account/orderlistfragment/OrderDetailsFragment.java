@@ -2,6 +2,7 @@ package edu.curtin.foodapp.ui.account.orderlistfragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,8 +77,11 @@ public class OrderDetailsFragment extends Fragment {
         receipt.append(dividers);
         receipt.append(total);
         receipt.append(dividers);
+        receipt.append("\n\n");
 
         orderReceipt.setText(receipt.toString());
+        // Make scrollable
+        orderReceipt.setMovementMethod(new ScrollingMovementMethod());
 
         return root;
     }
