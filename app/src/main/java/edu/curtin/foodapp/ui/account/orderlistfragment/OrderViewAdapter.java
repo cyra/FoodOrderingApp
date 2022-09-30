@@ -44,7 +44,7 @@ public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Order currentOrder = orders.get(position);
-        String orderDetails = "Order # " + currentOrder.getOrderID() + " - " + currentOrder.getDate();
+        String orderDetails = "Order #" + currentOrder.getOrderID() + " - " + currentOrder.getDate();
         holder.itemName.setText(orderDetails);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {

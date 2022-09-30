@@ -22,6 +22,7 @@ import edu.curtin.foodapp.model.cart.CartItemList;
 import edu.curtin.foodapp.model.fooditem.FoodItem;
 import edu.curtin.foodapp.model.fooditem.FoodItemList;
 import edu.curtin.foodapp.model.order.Order;
+import edu.curtin.foodapp.model.order.OrderDetail;
 import edu.curtin.foodapp.model.order.OrderList;
 import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
@@ -34,8 +35,6 @@ public class OrderDetailsFragment extends Fragment {
     TextView orderReceipt;
 
     private OrderList orders;
-    private FoodItemList foodItemList;
-    private RestaurantList restaurantList;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -53,26 +52,28 @@ public class OrderDetailsFragment extends Fragment {
         AccountViewModel accountViewModel = ((MainActivity) getActivity()).getAccountViewModel();
         Order order = orders.getOrderByID(accountViewModel.getOrderID().getValue());
 
+        ArrayList<OrderDetail> orderDetails = order.getOrderDetails();
+
         // Create a stringbuilder for a receipt with restaurants, total prices and food names
         StringBuilder receipt = new StringBuilder();
         String dividers = "----------------------------------- \n";
         String title = printCenter("Order Receipt #" + order.getOrderID(), dividers.length());
         String date = printCenter("Date: " + order.getDate(), dividers.length());
-        String total = printCenter("Total: $", dividers.length());
-        String restaurant = printCenter("Billy's Restaurant", dividers.length());
+        String total = printCenter("Total: $" + String.format("%.2f", order.getTotalPrice()), dividers.length());
+
         receipt.append(dividers);
         receipt.append(title);
-        receipt.append(dividers);
         receipt.append(date);
         receipt.append(dividers);
         // --------
-        foodItemList = new FoodItemList();
-        foodItemList.load(getContext());
-
-        restaurantList = new RestaurantList();
-        restaurantList.load(getContext());
-
+        for (OrderDetail detail : orderDetails) {
+            String itemLine = printCenter("[" + detail.getRestaurantName() + "]\n" +
+                    detail.getQuantity() + "x "+ detail.getItemName() + " - " +
+                    "$" + String.format("%.2f", detail.getTotalPrice()) + "\n", dividers.length());
+            receipt.append(itemLine);
+        }
         // End of receipt
+        receipt.append(dividers);
         receipt.append(total);
         receipt.append(dividers);
 
