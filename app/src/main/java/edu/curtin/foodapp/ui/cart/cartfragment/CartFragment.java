@@ -37,7 +37,7 @@ public class CartFragment extends Fragment {
         final ExtendedFloatingActionButton fab = binding.cartFab;
 
         cartViewModel.getTotalCart().observe((getViewLifecycleOwner()), total -> {
-            String textTotal = "Checkout - $" + total;
+            String textTotal = "Checkout - $" + String.format("%.2f", total);
             fab.setText(textTotal);
         });
 
