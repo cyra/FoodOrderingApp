@@ -5,15 +5,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class BrowseViewModel extends ViewModel {
-
-    private final MutableLiveData<String> mText;
+    private final MutableLiveData<Integer> restaurantID;
 
     public BrowseViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is browse fragment");
+        restaurantID = new MutableLiveData<Integer>();
+        restaurantID.setValue(0);
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
+    public int getRestaurantID() { return restaurantID.getValue(); }
+    public void setRestaurantID(int restaurantID) { this.restaurantID.setValue(restaurantID); }
 }
+

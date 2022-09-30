@@ -4,30 +4,47 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import edu.curtin.foodapp.MainActivity;
+import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.databinding.FragmentBrowseBinding;
-import edu.curtin.foodapp.ui.browse.BrowseViewModel;
+import edu.curtin.foodapp.ui.browse.fooditemfragment.FoodItemListFragment;
+import edu.curtin.foodapp.ui.browse.restaurantfragment.RestaurantListFragment;
 
 public class BrowseFragment extends Fragment {
 
     private FragmentBrowseBinding binding;
 
+    private BrowseViewModel browseViewModel;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        BrowseViewModel browseViewModel =
-                new ViewModelProvider(this).get(BrowseViewModel.class);
+        browseViewModel = ((MainActivity) getActivity()).getBrowseViewModel();
 
         binding = FragmentBrowseBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        return binding.getRoot();
+    }
 
-        final TextView textView = binding.textBrowse;
-        browseViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+    // Used for nesting child fragments
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        insertNestedFragment();
+    }
+
+    // Embeds the child fragment dynamically
+    private void insertNestedFragment() {
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        Fragment restaurantListFragment = new RestaurantListFragment(getChildFragmentManager());
+        Fragment foodItemListFragment  = new FoodItemListFragment();
+        // For multiple fragments in a fragment, use multiple transaction.replace() and then commit() after.
+        transaction.replace(R.id.restaurantListFragment, restaurantListFragment);
+        transaction.replace(R.id.foodItemListFragment, foodItemListFragment);
+        transaction.commit();
     }
 
     @Override
