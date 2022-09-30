@@ -1,6 +1,7 @@
 package edu.curtin.foodapp.ui.login;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import edu.curtin.foodapp.LoginActivity;
 import edu.curtin.foodapp.R;
@@ -60,6 +62,9 @@ public class CreateAccountFragment extends Fragment {
                 String address = addressField.getText().toString();
                 String phone = phoneField.getText().toString();
 
+                // For toast notifications
+                Context context = getContext();
+
                 if (((LoginActivity) getActivity()).validateEmail(email) &&
                     ((LoginActivity) getActivity()).validatePassword(password) &&
                     validateName(name) &&
@@ -74,27 +79,27 @@ public class CreateAccountFragment extends Fragment {
                     returnData.putExtra("user", newUser);
                     getActivity().setResult(Activity.RESULT_OK, returnData);
                     // Display notification
-                    ((LoginActivity) getActivity()).displayToast("Account created");
+                    Toast.makeText(context, "Account created", Toast.LENGTH_SHORT).show();
                     // Close activity
                     getActivity().finish();
                 }
                 else if (!((LoginActivity) getActivity()).validateEmail(email)) {
-                    ((LoginActivity) getActivity()).displayToast("Invalid email");
+                    Toast.makeText(context, "Invalid email", Toast.LENGTH_SHORT).show();
                 }
                 else if (!((LoginActivity) getActivity()).validatePassword(password)) {
-                    ((LoginActivity) getActivity()).displayToast("Invalid password");
+                    Toast.makeText(context, "Invalid password", Toast.LENGTH_SHORT).show();
                 }
                 else if (!validateName(name)) {
-                    ((LoginActivity) getActivity()).displayToast("Invalid name");
+                    Toast.makeText(context, "Invalid name", Toast.LENGTH_SHORT).show();
                 }
                 else if (!validateAddress(address)) {
-                    ((LoginActivity) getActivity()).displayToast("Invalid address");
+                    Toast.makeText(context, "Invalid address", Toast.LENGTH_SHORT).show();
                 }
                 else if (!validatePhone(phone)) {
-                    ((LoginActivity) getActivity()).displayToast("Invalid phone");
+                    Toast.makeText(context, "Invalid phone", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    ((LoginActivity) getActivity()).displayToast("Unknown error");
+                    Toast.makeText(context, "Unknown error", Toast.LENGTH_SHORT).show();
                 }
             }
         });

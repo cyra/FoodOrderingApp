@@ -24,10 +24,6 @@ public class OrderHistoryFragment extends Fragment {
         binding = FragmentOrderHistoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // Use the AccountViewModel
-        // If user has order history display recyclerview of orders
-        // Else display text
-
         return root;
     }
 

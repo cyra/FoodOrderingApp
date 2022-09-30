@@ -51,14 +51,6 @@ public class LoginActivity extends AppCompatActivity {
         return password.matches(passwordPattern) && password.length() > 0;
     }
 
-    public void displayToast(String message) {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, message, duration);
-        toast.show();
-    }
-
 
     public static Intent getIntent(Context c) {
         Intent intent = new Intent(c, LoginActivity.class);

@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 // added imports
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -21,9 +22,12 @@ import java.util.ArrayList;
 
 import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
+import edu.curtin.foodapp.ui.account.AccountFragment;
+import edu.curtin.foodapp.ui.account.orderlistfragment.OrderListFragment;
 import edu.curtin.foodapp.ui.cart.CartViewModel;
 import edu.curtin.foodapp.ui.account.AccountViewModel;
 import edu.curtin.foodapp.ui.browse.BrowseViewModel;
+import edu.curtin.foodapp.ui.login.CreateAccountFragment;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -60,4 +64,11 @@ public class MainActivity extends AppCompatActivity {
     public BrowseViewModel getBrowseViewModel() { return browseViewModel; }
     public CartViewModel getCartViewModel() { return cartViewModel; }
     public AccountViewModel getAccountViewModel() { return accountViewModel; }
+
+
+    public void refreshOrderListFragment() {
+        FragmentManager fm = getSupportFragmentManager();
+        OrderListFragment orderListFragment = new OrderListFragment();
+        fm.beginTransaction().replace(R.id.orderListFragment, orderListFragment).commit();
+    }
 }

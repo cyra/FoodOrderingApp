@@ -1,6 +1,8 @@
 package edu.curtin.foodapp.ui.account.orderlistfragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +16,26 @@ import org.w3c.dom.Text;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.databinding.FragmentOrderDetailsBinding;
 import edu.curtin.foodapp.model.cart.CartItem;
 import edu.curtin.foodapp.model.cart.CartItemList;
 import edu.curtin.foodapp.model.fooditem.FoodItem;
 import edu.curtin.foodapp.model.fooditem.FoodItemList;
+import edu.curtin.foodapp.model.order.Order;
+import edu.curtin.foodapp.model.order.OrderDetail;
+import edu.curtin.foodapp.model.order.OrderList;
 import edu.curtin.foodapp.model.restaurant.Restaurant;
 import edu.curtin.foodapp.model.restaurant.RestaurantList;
+import edu.curtin.foodapp.ui.account.AccountViewModel;
 
 
 public class OrderDetailsFragment extends Fragment {
     private FragmentOrderDetailsBinding binding;
+
     TextView orderReceipt;
-    private CartItemList cart;
-    private FoodItemList foodItemList;
-    private RestaurantList restaurantList;
+
+    private OrderList orders;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -36,45 +43,59 @@ public class OrderDetailsFragment extends Fragment {
         binding = FragmentOrderDetailsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        Context context = getContext();
+        // Load orders
+        orders = new OrderList();
+        orders.load(context);
+
         orderReceipt = binding.orderReceipt;
 
-        // Create a stringbuilder for a receipt with restaurants, total prices and food names
+        AccountViewModel accountViewModel = ((MainActivity) getActivity()).getAccountViewModel();
+        Order order = orders.getOrderByID(accountViewModel.getOrderID().getValue());
 
+        ArrayList<OrderDetail> orderDetails = order.getOrderDetails();
+
+        // Create a stringbuilder for a receipt with restaurants, total prices and food names
         StringBuilder receipt = new StringBuilder();
         String dividers = "----------------------------------- \n";
-        String title = printCenter("Order Receipt #", dividers.length());
-        String date = printCenter("Date: 2021-05-01", dividers.length());
-        String total = printCenter("Total: $", dividers.length());
-        String restaurant = printCenter("Billy's Restaurant", dividers.length());
+        String title = printCenter("Order Receipt #" + order.getOrderID(), dividers.length());
+        String date = printCenter("Date: " + order.getDate(), dividers.length());
+        String total = printCenter("Total: $" + String.format("%.2f", order.getTotalPrice()), dividers.length());
+
         receipt.append(dividers);
         receipt.append(title);
-        receipt.append(dividers);
         receipt.append(date);
         receipt.append(dividers);
         // --------
-        foodItemList = new FoodItemList();
-        foodItemList.load(getContext());
 
-        restaurantList = new RestaurantList();
-        restaurantList.load(getContext());
+        // Initial detail
+        String restaurantName = orderDetails.get(0).getRestaurantName();
+        receipt.append("\n");
+        String restaurantLine = printCenter("[" + orderDetails.get(0).getRestaurantName() + "]", dividers.length());
+        receipt.append(restaurantLine);
 
-        ArrayList<CartItem> orderList = new ArrayList<>();
-        ArrayList<FoodItem> foodList = foodItemList.getAllFoodItems();
-        ArrayList<Restaurant> restaurants = restaurantList.getAllRestaurants();
-        orderList.add(new CartItem(14, 7.3, 1));
-        orderList.add(new CartItem(17, 2.0, 5));
-        orderList.add(new CartItem(3, 5.2, 2));
-        orderList.add(new CartItem(26, 1300, 1));
-        orderList.add(new CartItem(4, 4.5, 3));
-        // ArrayList<Restaurant> restaurantList = new ArrayList<>();
+        for (OrderDetail detail : orderDetails) {
+            if (!restaurantName.equals(detail.getRestaurantName())) {
+                receipt.append("\n");
+                restaurantLine = printCenter("[" + detail.getRestaurantName() + "]", dividers.length());
+                receipt.append(restaurantLine);
+                restaurantName = detail.getRestaurantName();
+            }
 
-
+            String itemLine = printCenter(detail.getQuantity() + "x "+ detail.getItemName() + " - " +
+                    "$" + String.format("%.2f", detail.getTotalPrice()), dividers.length());
+            receipt.append(itemLine);
+        }
         // End of receipt
+        receipt.append("\n");
+        receipt.append(dividers);
         receipt.append(total);
         receipt.append(dividers);
-
+        receipt.append("\n\n");
 
         orderReceipt.setText(receipt.toString());
+        // Make scrollable
+        orderReceipt.setMovementMethod(new ScrollingMovementMethod());
 
         return root;
     }
@@ -108,6 +129,6 @@ public class OrderDetailsFragment extends Fragment {
 
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
+        //
     }
 }

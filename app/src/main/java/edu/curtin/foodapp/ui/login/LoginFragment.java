@@ -63,6 +63,9 @@ public class LoginFragment extends Fragment {
                 String email = emailField.getText().toString();
                 String password = passwordField.getText().toString();
 
+                // For toast notifications
+                Context context = getContext();
+
                 // If email and password valid
                 if (((LoginActivity) getActivity()).validateEmail(email) &&
                         ((LoginActivity) getActivity()).validatePassword(password)) {
@@ -75,22 +78,22 @@ public class LoginFragment extends Fragment {
                         returnData.putExtra("user", users.getUser(index));
                         getActivity().setResult(Activity.RESULT_OK, returnData);
                         // Display logged in notification
-                        ((LoginActivity) getActivity()).displayToast("Logged in");
+                        Toast.makeText(context, "Logged in", Toast.LENGTH_SHORT).show();
                         // Close activity
                         getActivity().finish();
                     }
                     else {
-                        ((LoginActivity) getActivity()).displayToast("Incorrect username/password");
+                        Toast.makeText(context, "Incorrect username/password", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else if (!((LoginActivity) getActivity()).validateEmail(email)) {
-                    ((LoginActivity) getActivity()).displayToast("Invalid email");
+                    Toast.makeText(context, "Invalid email", Toast.LENGTH_SHORT).show();
                 }
                 else if (!((LoginActivity) getActivity()).validatePassword(password)) {
-                    ((LoginActivity) getActivity()).displayToast("Invalid password");
+                    Toast.makeText(context, "Invalid password", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    ((LoginActivity) getActivity()).displayToast("Unknown error");
+                    Toast.makeText(context, "Unknown error", Toast.LENGTH_SHORT).show();
                 }
             }
         });
