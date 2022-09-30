@@ -10,13 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.curtin.foodapp.databinding.ListDailyFoodItemBinding;
-import edu.curtin.foodapp.model.fooditems.FoodItem;
-import edu.curtin.foodapp.model.fooditems.FoodItemList;
-import edu.curtin.foodapp.ui.browse.fooditemfragment.FoodItemViewAdapter;
+import edu.curtin.foodapp.model.fooditem.FoodItemList;
 
 public class DailyFoodItemListFragment extends Fragment {
 

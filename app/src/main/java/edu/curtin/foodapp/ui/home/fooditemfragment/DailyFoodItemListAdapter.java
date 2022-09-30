@@ -1,19 +1,14 @@
 package edu.curtin.foodapp.ui.home.fooditemfragment;
 
-import edu.curtin.foodapp.database.fooditems.FoodItemsDBHelper;
 import edu.curtin.foodapp.model.cart.CartItem;
 import edu.curtin.foodapp.model.cart.CartItemList;
-import edu.curtin.foodapp.model.fooditems.FoodItemList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -24,7 +19,7 @@ import java.util.ArrayList;
 
 import edu.curtin.foodapp.R;
 import edu.curtin.foodapp.databinding.SingleFoodBinding;
-import edu.curtin.foodapp.model.fooditems.FoodItem;
+import edu.curtin.foodapp.model.fooditem.FoodItem;
 
 
 public class DailyFoodItemListAdapter extends RecyclerView.Adapter<DailyFoodItemListViewHolder> {

@@ -1,8 +1,6 @@
-package edu.curtin.foodapp.model.orders;
+package edu.curtin.foodapp.model.order;
 
 import java.time.LocalDate;
-
-import edu.curtin.foodapp.model.cart.CartItemList;
 
 public class Order {
     int orderID;

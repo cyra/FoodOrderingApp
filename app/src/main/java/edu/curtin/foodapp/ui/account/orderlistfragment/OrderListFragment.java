@@ -11,11 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edu.curtin.foodapp.databinding.ListOrdersBinding;
-import edu.curtin.foodapp.model.cart.CartItemList;
-import edu.curtin.foodapp.model.orders.Order;
-import edu.curtin.foodapp.model.orders.OrderList;
-
-import java.util.ArrayList;
+import edu.curtin.foodapp.model.order.OrderList;
 
 public class OrderListFragment extends Fragment {
     private ListOrdersBinding binding;

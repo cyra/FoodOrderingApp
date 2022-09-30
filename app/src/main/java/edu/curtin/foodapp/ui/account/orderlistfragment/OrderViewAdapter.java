@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import edu.curtin.foodapp.databinding.SingleOrderhistoryitemBinding;
-import edu.curtin.foodapp.model.orders.Order;
-import edu.curtin.foodapp.model.orders.OrderList;
+import edu.curtin.foodapp.model.order.Order;
 
 public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     private final Context context;

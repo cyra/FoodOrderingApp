@@ -4,18 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 
-import edu.curtin.foodapp.MainActivity;
 import edu.curtin.foodapp.database.DBSchema.RestaurantsTable;
 import edu.curtin.foodapp.database.restaurants.RestaurantsDBCursor;
 import edu.curtin.foodapp.database.restaurants.RestaurantsDBHelper;
-import edu.curtin.foodapp.model.fooditems.FoodItem;
 
 public class RestaurantList {
     private ArrayList<Restaurant> restaurants;

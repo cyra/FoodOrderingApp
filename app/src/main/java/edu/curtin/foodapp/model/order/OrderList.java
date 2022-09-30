@@ -1,10 +1,9 @@
-package edu.curtin.foodapp.model.orders;
+package edu.curtin.foodapp.model.order;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import edu.curtin.foodapp.database.DBSchema.OrdersTable;
@@ -43,11 +42,6 @@ public class OrderList {
         }
         finally {
             cursor.close();
-        }
-
-        // TODO: remove this
-        if (temp.isEmpty()) {
-            temp.add(new Order(1, 42));
         }
 
         return temp;
