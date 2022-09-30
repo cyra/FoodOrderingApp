@@ -58,15 +58,6 @@ public class OrderDetailsFragment extends Fragment {
         restaurantList = new RestaurantList();
         restaurantList.load(getContext());
 
-        ArrayList<CartItem> orderList = new ArrayList<>();
-        ArrayList<FoodItem> foodList = foodItemList.getAllFoodItems();
-        ArrayList<Restaurant> restaurants = restaurantList.getAllRestaurants();
-        orderList.add(new CartItem(14, 7.3, 1));
-        orderList.add(new CartItem(17, 2.0, 5));
-        orderList.add(new CartItem(3, 5.2, 2));
-        orderList.add(new CartItem(26, 1300, 1));
-        orderList.add(new CartItem(4, 4.5, 3));
-        // ArrayList<Restaurant> restaurantList = new ArrayList<>();
 
 
         // End of receipt

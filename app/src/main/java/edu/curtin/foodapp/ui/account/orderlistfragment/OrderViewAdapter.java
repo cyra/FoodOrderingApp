@@ -46,8 +46,6 @@ public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewHolder> {
                 Navigation.findNavController(view).navigate(R.id.action_navigation_account_to_navigation_order_details);
             }
         });
-
-        holder.itemName.setText(orderDetails);
     }
 
 

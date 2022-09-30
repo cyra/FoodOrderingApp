@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import edu.curtin.foodapp.database.DBSchema.OrdersTable;
@@ -45,6 +46,18 @@ public class OrderList {
 
 
     public int getSize() { return orders.size(); }
+
+    public ArrayList<Order> getAllOrdersByUserID(int userID) {
+        ArrayList<Order> userOrders = new ArrayList<Order>();
+
+        for (Order order : orders) {
+            if (order.userID == userID) {
+                userOrders.add(order);
+            }
+        }
+
+        return userOrders;
+    }
 
     public ArrayList<Order> getAllOrders() {
         Cursor cursor = db.query(OrdersTable.NAME, null, null, null, null, null, null);

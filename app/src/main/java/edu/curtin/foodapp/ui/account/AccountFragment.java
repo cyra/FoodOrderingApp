@@ -106,6 +106,8 @@ public class AccountFragment extends Fragment {
             accountViewModel.setEmail(currentUser.getEmail());
             accountViewModel.setAddress(currentUser.getAddress());
             accountViewModel.setPhone(currentUser.getPhone());
+
+            ((MainActivity) getActivity()).refreshOrderListFragment();
         }
     }
 }
