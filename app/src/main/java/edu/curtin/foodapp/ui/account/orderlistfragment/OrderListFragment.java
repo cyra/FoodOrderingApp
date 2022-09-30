@@ -11,59 +11,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edu.curtin.foodapp.databinding.ListOrdersBinding;
-import edu.curtin.foodapp.model.orders.Orders;
+import edu.curtin.foodapp.model.cart.CartItemList;
+import edu.curtin.foodapp.model.orders.Order;
+import edu.curtin.foodapp.model.orders.OrderList;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link edu.curtin.foodapp.ui.browse.restaurantfragment.RestaurantListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class OrderListFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private ListOrdersBinding binding;
-    ArrayList<Orders> orders;
 
-    public OrderListFragment() {
-        // Required empty public constructor
-    }
-
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RecyclerFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static OrderListFragment newInstance(String param1, String param2) {
-        OrderListFragment fragment = new OrderListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private OrderList orders;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+
+        orders = new OrderList();
+        orders.load(getContext());
     }
 
     @Override
@@ -75,21 +39,10 @@ public class OrderListFragment extends Fragment {
 
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        prepareData();
-        OrderViewAdapter rvAdapter = new OrderViewAdapter(getContext(), prepareData());
+        OrderViewAdapter rvAdapter = new OrderViewAdapter(getContext(), orders.getAllOrders());
         rv.setAdapter(rvAdapter);
         return root;
 
-    }
-
-    private ArrayList prepareData() {
-        orders = new ArrayList<>();
-
-        // No images yet
-        orders.add(new Orders(1,"","2022/10/9",""));
-        orders.add(new Orders(2,"","2022/10/8",""));
-
-        return orders;
     }
 
     @Override

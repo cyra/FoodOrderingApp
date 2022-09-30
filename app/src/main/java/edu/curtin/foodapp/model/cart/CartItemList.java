@@ -23,7 +23,7 @@ public class CartItemList {
     private SQLiteDatabase db;
 
     public CartItemList() {
-        cartItems = new ArrayList<>();
+        cartItems = new ArrayList<CartItem>();
     }
 
     // Load items from the database
@@ -31,7 +31,7 @@ public class CartItemList {
         // Open database
         this.db = new CartItemsDBHelper(context.getApplicationContext())
                 .getWritableDatabase();
-        // Read database contents into foodItems
+        // Read database contents into cartItems
         cartItems = getAllCartItems();
     }
 
@@ -65,7 +65,7 @@ public class CartItemList {
     public ArrayList<CartItem> getAllCartItems() {
         Cursor cursor = db.query(CartItemsTable.NAME, null, null, null, null, null, null);
         CartItemsDBCursor cartItemsDBCursor = new CartItemsDBCursor(cursor);
-        ArrayList<CartItem> temp = new ArrayList<>();
+        ArrayList<CartItem> temp = new ArrayList<CartItem>();
         try {
             cartItemsDBCursor.moveToFirst();
             while (!cartItemsDBCursor.isAfterLast()) {

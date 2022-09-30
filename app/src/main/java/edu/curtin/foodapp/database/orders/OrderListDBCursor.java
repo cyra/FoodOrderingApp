@@ -4,17 +4,18 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 
 import edu.curtin.foodapp.database.DBSchema.OrdersTable;
-import edu.curtin.foodapp.model.orders.Orders;
+import edu.curtin.foodapp.model.orders.Order;
+import edu.curtin.foodapp.model.orders.OrderList;
 
-public class OrdersDBCursor extends CursorWrapper {
-    public OrdersDBCursor(Cursor cursor) { super(cursor); }
+public class OrderListDBCursor extends CursorWrapper {
+    public OrderListDBCursor(Cursor cursor) { super(cursor); }
 
-    public Orders getOrders() {
+    public Order getOrder() {
         int id = getInt(getColumnIndex(OrdersTable.Cols.ID));
-        String userId = getString(getColumnIndex(OrdersTable.Cols.USERID));
+        int userId = getInt(getColumnIndex(OrdersTable.Cols.USERID));
         String date = getString(getColumnIndex(OrdersTable.Cols.DATE));
         String description = getString(getColumnIndex(OrdersTable.Cols.DESCRIPTION));
 
-        return new Orders(id, userId, date, description);
+        return new Order(id, userId, date, description);
     }
 }

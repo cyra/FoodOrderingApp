@@ -10,14 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import edu.curtin.foodapp.databinding.SingleOrderhistoryitemBinding;
-import edu.curtin.foodapp.model.orders.Orders;
+import edu.curtin.foodapp.model.orders.Order;
+import edu.curtin.foodapp.model.orders.OrderList;
 
 public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     private final Context context;
     private SingleOrderhistoryitemBinding binding;
-    ArrayList<Orders> orders;
 
-    public OrderViewAdapter(Context context, ArrayList<Orders> orders){
+    private ArrayList<Order> orders;
+
+    public OrderViewAdapter(Context context, ArrayList<Order> orders){
         this.context = context;
         this.orders = orders;
     }
@@ -32,10 +34,9 @@ public class OrderViewAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
-        Orders currentOrder = orders.get(position);
-        String orderDetails = "Order # " + currentOrder.getOrderID()+ " - " +  currentOrder.getDate();
+        Order currentOrder = orders.get(position);
+        String orderDetails = "Order #" + currentOrder.getOrderID()+ " - " +  currentOrder.getDate();
         holder.itemName.setText(orderDetails);
-
     }
 
     @Override

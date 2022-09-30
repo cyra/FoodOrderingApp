@@ -6,17 +6,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import edu.curtin.foodapp.database.DBSchema.OrdersTable;
 
-public class OrdersDBHelper extends SQLiteOpenHelper {
+public class OrderListDBHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "orders.db";
 
-    public OrdersDBHelper(Context context) { super(context, DATABASE_NAME, null, VERSION); }
+    public OrderListDBHelper(Context context) { super(context, DATABASE_NAME, null, VERSION); }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + OrdersTable.NAME + "(" +
                 OrdersTable.Cols.ID + " INTEGER, " +
-                OrdersTable.Cols.USERID + " TEXT, " +
+                OrdersTable.Cols.USERID + " INTEGER, " +
                 OrdersTable.Cols.DATE + " TEXT, " +
                 OrdersTable.Cols.DESCRIPTION + "TEXT) "
         );
