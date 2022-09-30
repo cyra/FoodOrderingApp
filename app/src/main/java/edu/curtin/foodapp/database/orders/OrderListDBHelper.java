@@ -18,7 +18,7 @@ public class OrderListDBHelper extends SQLiteOpenHelper {
                 OrdersTable.Cols.ID + " INTEGER, " +
                 OrdersTable.Cols.USERID + " INTEGER, " +
                 OrdersTable.Cols.DATE + " TEXT, " +
-                OrdersTable.Cols.DESCRIPTION + "TEXT) "
+                OrdersTable.Cols.DESCRIPTION + " TEXT)"
         );
     }
 

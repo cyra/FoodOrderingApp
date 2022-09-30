@@ -8,11 +8,11 @@ public class Order {
     String date;
     String description;
 
-    public Order(int orderID, int userID) {
+    public Order(int orderID, int userID, String description) {
         this.orderID = orderID;
         this.userID = userID;
         this.date = LocalDate.now().toString();
-        // Set description somehow????
+        this.description = description;
     }
 
     // Constructor for database helper

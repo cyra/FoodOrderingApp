@@ -1,5 +1,6 @@
 package edu.curtin.foodapp.model.order;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -27,6 +28,23 @@ public class OrderList {
         // Read database contents into orders
         orders = getAllOrders();
     }
+
+
+    public void addOrder(Order newOrder) {
+        // Add order to list
+        this.orders.add(newOrder);
+        // Add order to database
+        ContentValues cv = new ContentValues();
+        cv.put(OrdersTable.Cols.ID, newOrder.getOrderID());
+        cv.put(OrdersTable.Cols.USERID, newOrder.getUserID());
+        cv.put(OrdersTable.Cols.DATE, newOrder.getDate());
+        cv.put(OrdersTable.Cols.DESCRIPTION, newOrder.getDescription());
+
+        db.insert(OrdersTable.NAME, null, cv);
+    }
+
+
+    public int getSize() { return orders.size(); }
 
     public ArrayList<Order> getAllOrders() {
         Cursor cursor = db.query(OrdersTable.NAME, null, null, null, null, null, null);

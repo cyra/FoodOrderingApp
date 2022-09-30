@@ -107,5 +107,14 @@ public class CartItemList {
         String[] whereID = { String.valueOf(id) };
         db.delete(CartItemsTable.NAME, CartItemsTable.Cols.ID + " = ?", whereID);
     }
+
+    public void removeAllCartItems() {
+        // Remove items from database
+        for (int index = cartItems.size() - 1; index >= 0; index--) {
+            removeCartItemByID(cartItems.get(index).getID());
+        }
+        // Remove items from list
+        cartItems.clear();
+    }
 }
 
